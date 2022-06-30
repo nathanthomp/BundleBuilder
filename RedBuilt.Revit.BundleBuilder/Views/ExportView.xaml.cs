@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RedBuilt.Revit.BundleBuilder
+namespace RedBuilt.Revit.BundleBuilder.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ExportView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ExportView : UserControl
     {
-        public MainWindow()
+        public ExportView()
         {
             InitializeComponent();
         }
