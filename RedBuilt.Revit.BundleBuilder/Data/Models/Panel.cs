@@ -14,7 +14,6 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         public double Height { get; set; }
         public double Weight { get; set; }
         public Plate Plate { get; set; }
-        // heads up
         public Type Type { get; set; }
         public Truck Truck { get; set; }
         public Bundle Bundle { get; set; }

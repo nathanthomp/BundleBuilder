@@ -5,15 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RedBuilt.Revit.BundleBuilder.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" 
-             d:DesignWidth="800">
+             Height="450" 
+             Width="800">
     <Grid Margin="10">
-        <TextBlock Text="Settings"/>
+
+        <!-- Main Content -->
         <StackPanel Margin="0,50,0,70">
             
         </StackPanel>
+
+        <!-- Header -->
+        <Label Content="Customize Settings" Style="{StaticResource title-left}"/>
+
         <!-- Buttons -->
-        <Button Content="Save" Command="{Binding NavigateBundleViewCommand}" Margin="0,0,0,23" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="308"/>
-        <Button Content="Cancel" Command="{Binding NavigateBundleViewCommand}" Margin="0,0,0,23" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="308"/>
+        <Button Content="Save" Style="{StaticResource button-right}" Command="{Binding SaveAndNavigateCommand}"/>
+        <Button Content="Cancel" Style="{StaticResource button-left}" Command="{Binding NavigateBundleViewCommand}"/>
+        
     </Grid>
 </UserControl>

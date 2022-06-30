@@ -6,9 +6,10 @@
         xmlns:viewModels="clr-namespace:RedBuilt.Revit.BundleBuilder.ViewModels"
         xmlns:views="clr-namespace:RedBuilt.Revit.BundleBuilder.Views"
         mc:Ignorable="d"
-        Title="BundleBuilder" 
+        Title="BundleBuilder"
+        ResizeMode="NoResize"
         Height="500" 
-        Width="800">
+        Width="815">
     <ContentControl Content="{Binding CurrentViewModel}">
         <ContentControl.Resources>
             <DataTemplate DataType="{x:Type viewModels:BundleViewModel}">

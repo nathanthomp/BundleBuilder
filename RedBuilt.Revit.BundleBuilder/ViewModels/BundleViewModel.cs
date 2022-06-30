@@ -10,14 +10,18 @@ namespace RedBuilt.Revit.BundleBuilder.ViewModels
     public class BundleViewModel : ViewModel
     {
         public Command NavigateSettingsCommand { get; }
-        public Command NavigateExportCommand { get; }
+        public Command BundleAndNavigateCommand { get; }
 
-        // Constructor
         public BundleViewModel(NavigationState navigationState)
         {
             NavigateSettingsCommand = new NavigateCommand<SettingsViewModel>(navigationState, () => new SettingsViewModel(navigationState));
-            NavigateExportCommand = new NavigateCommand<ExportViewModel>(navigationState, () => new ExportViewModel(navigationState));
+            BundleAndNavigateCommand = new BundleAndNavigateCommand<ExportViewModel>(navigationState, () => new ExportViewModel(navigationState));
         }
 
+
+
+        // TODO:
+        // List of panels
+        // Project Title
     }
 }

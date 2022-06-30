@@ -8,7 +8,6 @@ namespace RedBuilt.Revit.BundleBuilder.ViewModels
 {
     public class MainWindowViewModel : ViewModel
     {
-        #region Navigation
         private NavigationState _navigationState;
 
         public ViewModel CurrentViewModel => _navigationState.CurrentViewModel;
@@ -23,7 +22,16 @@ namespace RedBuilt.Revit.BundleBuilder.ViewModels
         {
             NotifyPropertyChanged(nameof(CurrentViewModel));
         }
-        #endregion Navigation
+
+
+
+
+
+
+
+
+
+
 
     }
 }

@@ -15,6 +15,9 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
             // This will be where the Data goes back into Revit 
             //
             MessageBox.Show("Exported!");
+            //
+            // Close the Application
+            //
         }
     }
 }

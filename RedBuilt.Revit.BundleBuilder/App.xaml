@@ -3,10 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Application.Resources>
         
+        <!-- Title Styling -->
+        <Style TargetType="Label" x:Key="title-left">
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Width" Value="200"/>
+        </Style>
+        <Style TargetType="Label" x:Key="title-right">
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Width" Value="200"/>
+        </Style>
+
         <!-- Button Styling -->
-        <Style TargetType="Button">
+        <Style TargetType="Button" x:Key="button-right">
             <Setter Property="Width" Value="308"/>
             <Setter Property="Height" Value="36"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
         </Style>
+        <Style TargetType="Button" x:Key="button-left">
+            <Setter Property="Width" Value="308"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        
+        <!-- Main Content Styling -->
+
     </Application.Resources>
 </Application>

@@ -18,8 +18,8 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         public static double MaxTruckHeight => 96.0;
         public static double MaxTruckWidth => 288.0;
         // Project Settings
-        // public static Panel StartingPanel;
-        // public static string StartingDirection;
+        public static Panel StartingPanel;
+        public static string StartingDirection;
 
 
     }

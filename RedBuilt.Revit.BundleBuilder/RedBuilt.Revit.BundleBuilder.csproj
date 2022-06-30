@@ -64,10 +64,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\BundleAndNavigateCommand.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\ExportCommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
-    <Compile Include="Commands\SaveSettingsCommand.cs" />
+    <Compile Include="Commands\RestartAndNavigateCommand.cs" />
+    <Compile Include="Commands\SaveAndNavigateCommand.cs" />
     <Compile Include="Data\Models\Bundle.cs" />
     <Compile Include="Data\Models\Level.cs" />
     <Compile Include="Data\Models\Panel.cs" />
@@ -76,6 +78,8 @@
     <Compile Include="Data\Models\Settings.cs" />
     <Compile Include="Data\Models\Truck.cs" />
     <Compile Include="Data\Models\Type.cs" />
+    <Compile Include="Data\Services\RevitExport.cs" />
+    <Compile Include="Data\Services\RevitImport.cs" />
     <Compile Include="Data\States\NavigationState.cs" />
     <Compile Include="ViewModels\ExportViewModel.cs" />
     <Compile Include="Views\ExportView.xaml.cs">
@@ -145,7 +149,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\Services\" />
+    <Folder Include="Application\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
