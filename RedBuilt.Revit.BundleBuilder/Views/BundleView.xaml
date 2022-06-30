@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RedBuilt.Revit.BundleBuilder.Views"
         mc:Ignorable="d"
-        Height="447" 
-        Width="716.333">
+        Height="450" 
+        Width="800">
     <Grid Margin="10">
         
         <!-- ListView -->

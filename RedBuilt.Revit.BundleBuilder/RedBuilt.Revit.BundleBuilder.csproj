@@ -35,6 +35,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RevitAPI">
+      <HintPath>..\..\..\..\Program Files\Autodesk\Revit 2021\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>..\..\..\..\Program Files\Autodesk\Revit 2021\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -59,6 +67,15 @@
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\ExportCommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
+    <Compile Include="Commands\SaveSettingsCommand.cs" />
+    <Compile Include="Data\Models\Bundle.cs" />
+    <Compile Include="Data\Models\Level.cs" />
+    <Compile Include="Data\Models\Panel.cs" />
+    <Compile Include="Data\Models\Plate.cs" />
+    <Compile Include="Data\Models\Project.cs" />
+    <Compile Include="Data\Models\Settings.cs" />
+    <Compile Include="Data\Models\Truck.cs" />
+    <Compile Include="Data\Models\Type.cs" />
     <Compile Include="Data\States\NavigationState.cs" />
     <Compile Include="ViewModels\ExportViewModel.cs" />
     <Compile Include="Views\ExportView.xaml.cs">
@@ -128,7 +145,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\Models\" />
+    <Folder Include="Data\Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
