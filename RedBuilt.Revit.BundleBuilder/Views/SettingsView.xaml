@@ -10,16 +10,19 @@
     <Grid Margin="10">
 
         <!-- Main Content -->
-        <StackPanel Margin="0,50,0,70">
-            
+        <StackPanel Margin="0,50,0,70" Orientation="Vertical">
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
         </StackPanel>
 
         <!-- Header -->
-        <Label Content="Customize Settings" Style="{StaticResource title-left}"/>
+        <Label Content="Customize Settings" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Margin="10,18,0,0"/>
 
         <!-- Buttons -->
-        <Button Content="Save" Style="{StaticResource button-right}" Command="{Binding SaveAndNavigateCommand}"/>
-        <Button Content="Cancel" Style="{StaticResource button-left}" Command="{Binding NavigateBundleViewCommand}"/>
+        <Button Content="Save" Command="{Binding SaveAndNavigateCommand}" Width="308" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+        <Button Content="Cancel" Command="{Binding NavigateBundleViewCommand}" Width="308" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
         
     </Grid>
 </UserControl>

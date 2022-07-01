@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{A4C7739C-EBD3-4DCF-8C44-4121973FC9F0}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>RedBuilt.Revit.BundleBuilder</RootNamespace>
     <AssemblyName>RedBuilt.Revit.BundleBuilder</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="RevitAPI">
       <HintPath>..\..\..\..\Program Files\Autodesk\Revit 2021\RevitAPI.dll</HintPath>
@@ -60,10 +63,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
     <Compile Include="Commands\BundleAndNavigateCommand.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\ExportCommand.cs" />
@@ -81,6 +80,7 @@
     <Compile Include="Data\Services\RevitExport.cs" />
     <Compile Include="Data\Services\RevitImport.cs" />
     <Compile Include="Data\States\NavigationState.cs" />
+    <Compile Include="RevitApp.cs" />
     <Compile Include="ViewModels\ExportViewModel.cs" />
     <Compile Include="Views\ExportView.xaml.cs">
       <DependentUpon>ExportView.xaml</DependentUpon>
@@ -101,10 +101,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Commands\ActionCommand.cs" />
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="ViewModels\ObservableObject.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
@@ -150,6 +146,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Application\" />
+    <Folder Include="Documents\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BundleBuilder.Addin" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

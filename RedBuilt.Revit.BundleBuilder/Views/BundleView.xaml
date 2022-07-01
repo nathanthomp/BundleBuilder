@@ -11,14 +11,23 @@
         
         <!-- Main Content -->
         <ListView x:Name="panels" Margin="0,50,0,70">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Type" Width="150"/>
+                    <GridViewColumn Header="Plate" Width="100"/>
+                    <GridViewColumn Header="Panel" Width="100"/>
+                    <GridViewColumn Header="Height" Width="150"/>
+                    <GridViewColumn Header="Width" Width="150"/>
+                </GridView>
+            </ListView.View>
         </ListView>
 
         <!-- Header -->
-        <Label Content="Select Panels To Bundle" Style="{StaticResource title-left}"/>
+        <Label Content="Select Panels To Bundle" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Margin="10,18,0,0"/>
 
         <!-- Buttons -->
-        <Button Content="Bundle" Style="{StaticResource button-right}" Command="{Binding BundleAndNavigateCommand}"/>
-        <Button Content="Settings" Style="{StaticResource button-left}" Command="{Binding NavigateSettingsCommand}"/>
+        <Button Content="Bundle" Command="{Binding BundleAndNavigateCommand}" Width="308" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+        <Button Content="Settings" Command="{Binding NavigateSettingsCommand}" Width="308" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
 
     </Grid>
 </UserControl>

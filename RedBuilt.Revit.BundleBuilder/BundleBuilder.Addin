@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+	<AddIn Type="Command">
+		<Assembly>RedBuilt.Revit.BundleBuilder.dll</Assembly>
+		<FullClassName>RedBuilt.Revit.BundleBuilder.Views.RevitCommand</FullClassName>
+		<AddInId>502fe383-2648-4f98-bdf8-5e6047f9dd30</AddInId>
+		<Text>BundleBuilder</Text>
+		<VendorId>RedBuilt</VendorId>
+		<Description>Auto Bundling Tool</Description>
+		<VisibilityMode>AlwaysVisible</VisibilityMode>
+	</AddIn>
+</RevitAddIns>
