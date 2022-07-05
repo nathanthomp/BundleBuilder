@@ -6,20 +6,21 @@ using System.Threading.Tasks;
 
 namespace RedBuilt.Revit.BundleBuilder.Data.Models
 {
-    public static class Settings
+    public static class Settings // : INotifyPropertyChanged
     {
+        // Project Settings
+        public static Panel StartingPanel;
+        public static string StartingDirection;
+        // Truck Settings
+        public static double MaxTruckHeight => 96.0;
+        public static double MaxTruckWidth => 288.0;
         // Bundle Settings
         public static double WidthMargins => .33;
         public static double LengthMargins => .33;
         public static double MaxBundleWidth => 102.0;
         public static double MaxBundleLength => 288.0;
+        // Level Settings
         public static int MaxPanelsPerLevel => 1000;
-        // Truck Settings
-        public static double MaxTruckHeight => 96.0;
-        public static double MaxTruckWidth => 288.0;
-        // Project Settings
-        public static Panel StartingPanel;
-        public static string StartingDirection;
 
 
     }

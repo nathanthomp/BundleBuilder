@@ -5,24 +5,80 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RedBuilt.Revit.BundleBuilder.Views"
              mc:Ignorable="d" 
-             Height="450" 
+             Height="450" Background="White"
              Width="800">
     <Grid Margin="10">
 
         <!-- Main Content -->
-        <StackPanel Margin="0,50,0,70" Orientation="Vertical">
-            <TextBlock Text="test"/>
-            <TextBlock Text="test"/>
-            <TextBlock Text="test"/>
-            <TextBlock Text="test"/>
-        </StackPanel>
+        <ScrollViewer Margin="0,50,0,70">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Project Settings -->
+                <TextBlock Text="Project Settings:" Grid.Column="0" Grid.Row="0" TextAlignment="Right" />
+                <!-- Starting Panel -->
+                <TextBlock Text="Starting Panel" Grid.Column="1" Grid.Row="1" Margin="10" TextAlignment="Right"/>
+                <ComboBox x:Name="startingPanel" Grid.Column="2" Grid.Row="1" Margin="20,10"/>
+                <!-- Starting Direction -->
+                <TextBlock Text="Starting Direction" Grid.Column="1" Grid.Row="2" Margin="10" TextAlignment="Right"/>
+                <ComboBox x:Name="startingDirection" Grid.Column="2" Grid.Row="2" Margin="20,10"/>
+
+
+                <!-- BundleSettings -->
+                <TextBlock Text="Bundle Settings:" Grid.Column="0" Grid.Row="3" TextAlignment="Right" Margin="0,30,0,0"/>
+                <!-- Width Margin Percent -->
+                <TextBlock Text="Width Margin Percent" Grid.Column="1" Grid.Row="4" Margin="10" TextAlignment="Right"/>
+                <TextBox x:Name="widthMarginPercent" Grid.Column="2" Grid.Row="4" MinWidth="110" Margin="20,10" Text="{Binding WidthMargins}"/>
+                <!-- Width Margin Percent -->
+                <TextBlock Text="Length Margin Percent" Grid.Column="1" Grid.Row="5" Margin="10" TextAlignment="Right"/>
+                <TextBox x:Name="lengthMarginPercent" Grid.Column="2" Grid.Row="5" Margin="20,10" Text="{Binding LengthMargins}"/>
+                <!-- Max Bundle Width -->
+                <TextBlock Text="Max Bundle Width" Grid.Column="1" Grid.Row="6" Margin="10" TextAlignment="Right"/>
+                <TextBox x:Name="maxBundleWidth" Grid.Column="2" Grid.Row="6" Margin="20,10" Text="{Binding MaxBundleWidth}"/>
+                <!-- Max Bundle Length -->
+                <TextBlock Text="Max Bundle Length" Grid.Column="1" Grid.Row="7" Margin="10" TextAlignment="Right"/>
+                <TextBox x:Name="maxBundleLength" Grid.Column="2" Grid.Row="7" Margin="20,10" Text="{Binding MaxBundleLength}"/>
+
+
+                <!-- Level Settings -->
+                <TextBlock Text="Level Settings:" Grid.Column="0" Grid.Row="8" TextAlignment="Right" Margin="0,30,0,0"/>
+                <!-- Max Number of Panels In a Level -->
+                <TextBlock Text="Max Number of Panels in a Level" Grid.Column="1" Grid.Row="9" Margin="10" TextAlignment="Right"/>
+                <TextBox x:Name="numberOfPanelsInLevel" Grid.Column="2" Grid.Row="9" Margin="20,10" Text="{Binding MaxPanelsPerLevel}"/>
+
+
+
+            </Grid>
+        </ScrollViewer>
+
 
         <!-- Header -->
-        <Label Content="Customize Settings" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Margin="10,18,0,0"/>
+        <Label Content="Settings" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Margin="10,18,0,0"/>
 
         <!-- Buttons -->
         <Button Content="Save" Command="{Binding SaveAndNavigateCommand}" Width="308" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
         <Button Content="Cancel" Command="{Binding NavigateBundleViewCommand}" Width="308" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-        
+
     </Grid>
 </UserControl>

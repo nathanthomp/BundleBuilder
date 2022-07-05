@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="BundleBuilder"
         ResizeMode="NoResize"
-        Height="500" 
+        Height="490" 
         Width="815">
     <ContentControl Content="{Binding CurrentViewModel}">
         <ContentControl.Resources>

@@ -22,16 +22,5 @@ namespace RedBuilt.Revit.BundleBuilder.ViewModels
         {
             NotifyPropertyChanged(nameof(CurrentViewModel));
         }
-
-
-
-
-
-
-
-
-
-
-
     }
 }

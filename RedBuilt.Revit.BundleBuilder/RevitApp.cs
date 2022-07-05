@@ -23,9 +23,15 @@ namespace RedBuilt.Revit.BundleBuilder
 
         public void AddMenu(UIControlledApplication app)
         {
-            app.CreateRibbonPanel("RedBuilt", "BundleBuilder");
+            
             string assemblyPath = Assembly.GetExecutingAssembly().Location;
-            string commandPath = typeof(RevitApp).Namespace + "." + nameof(RevitApp);
+            //string commandPath = typeof(RevitApp).Namespace + "." + nameof(RevitCommand);
+            string commandPath = "RedBuilt.Revit.BundleBuilder.RevitCommand";
+
+            PushButtonData pushButtonData = new PushButtonData("BundleButton", "BundleBuilder", assemblyPath, commandPath);
+            RibbonPanel ribbonPanel = app.CreateRibbonPanel("RedBuilt", "BundleBuilder");
+
+            PushButton pushButton = ribbonPanel.AddItem(pushButtonData) as PushButton;
         }
     }
 }

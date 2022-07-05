@@ -9,11 +9,12 @@ using System.Collections.ObjectModel;
 
 namespace RedBuilt.Revit.BundleBuilder
 {
+    // Implement INotifyPropertyChanged, IDataErrorInfo
     public abstract class ViewModel : ObservableObject, IDataErrorInfo
     {
-        public string this[string columnName]
+        public string this[string propertyName]
         {
-            get { return OnValidate(columnName); }
+            get { return OnValidate(propertyName); }
         }
 
         public string Error 

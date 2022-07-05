@@ -10,12 +10,11 @@
     <Grid Margin="10">
         
         <!-- Main Content -->
-        <WebBrowser x:Name="bundles" Margin="0,50,0,70">
+        <WebBrowser x:Name="createdBundles" Margin="0,50,0,70" Loaded="createdBundles_Loaded">
         </WebBrowser>
         
         <!-- Header -->
-        <Label Content="{Binding Header}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Margin="10,18,0,0"/>
-        <Label Content="Export Bundles" VerticalAlignment="Top" HorizontalAlignment="Right" Width="200" Margin="10,18,0,0"/>
+        <Label Content="Export Bundles" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Margin="10,18,0,0"/>
 
         <!-- Buttons -->
         <Button Content="Export" Command="{Binding ExportCommand}" Width="308" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>

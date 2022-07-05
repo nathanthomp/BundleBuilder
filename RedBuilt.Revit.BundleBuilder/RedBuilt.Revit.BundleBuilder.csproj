@@ -78,9 +78,11 @@
     <Compile Include="Data\Models\Truck.cs" />
     <Compile Include="Data\Models\Type.cs" />
     <Compile Include="Data\Services\RevitExport.cs" />
-    <Compile Include="Data\Services\RevitImport.cs" />
+    <Compile Include="Data\Services\RevitPanelImport.cs" />
+    <Compile Include="Data\Services\RevitProjectImport.cs" />
     <Compile Include="Data\States\NavigationState.cs" />
     <Compile Include="RevitApp.cs" />
+    <Compile Include="RevitCommand.cs" />
     <Compile Include="ViewModels\ExportViewModel.cs" />
     <Compile Include="Views\ExportView.xaml.cs">
       <DependentUpon>ExportView.xaml</DependentUpon>
@@ -146,10 +148,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Application\" />
-    <Folder Include="Documents\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BundleBuilder.Addin" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Documents\test.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

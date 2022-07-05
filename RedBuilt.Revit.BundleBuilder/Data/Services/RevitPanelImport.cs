@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace RedBuilt.Revit.BundleBuilder.Data.Services
 {
-    public class RevitImport
+    public class RevitPanelImport
     {
-        
-
 
     }
 }
