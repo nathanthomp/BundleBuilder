@@ -7,6 +7,7 @@ using Autodesk.Revit.DB;
 using RedBuilt.Revit.BundleBuilder.Commands;
 using RedBuilt.Revit.BundleBuilder.Data.Models;
 using RedBuilt.Revit.BundleBuilder.Data.Services;
+using RedBuilt.Revit.BundleBuilder.Data.States;
 using Panel = RedBuilt.Revit.BundleBuilder.Data.Models.Panel;
 
 namespace RedBuilt.Revit.BundleBuilder.ViewModels
@@ -15,12 +16,15 @@ namespace RedBuilt.Revit.BundleBuilder.ViewModels
     {
         public Command NavigateSettingsCommand { get; }
         public Command BundleAndNavigateCommand { get; }
+        public Command UpdateToBundleCommand { get; }
 
         public BundleViewModel(NavigationState navigationState)
         {
             NavigateSettingsCommand = new NavigateCommand<SettingsViewModel>(navigationState, () => new SettingsViewModel(navigationState));
             BundleAndNavigateCommand = new BundleAndNavigateCommand<ExportViewModel>(navigationState, () => new ExportViewModel(navigationState));
+            UpdateToBundleCommand = new UpdateToBundleCommand();
 
+            Panels = RevitImportService.GetPanels(ProjectState.Doc);
         }
 
         public IEnumerable<Panel> Panels { get; }

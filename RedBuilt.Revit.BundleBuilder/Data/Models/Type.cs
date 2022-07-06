@@ -8,12 +8,34 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
 {
     public class Type
     {
-        public string Name { get; set; }
-        public string Symbol { get; set; }
+        public string Name { get; }
+        public string Symbol { get; }
 
         public Type(string panelName)
         {
             Symbol = panelName[0].ToString();
+            
+            switch (Symbol)
+            {
+                case "E":
+                    Name = "Exterior";
+                    break;
+                case "I":
+                    Name = "Interior";
+                    break;
+                case "S":
+                    Name = "Steel";
+                    break;
+                case "P":
+                    Name = "Parapet";
+                    break;
+                case "F":
+                    Name = "Furring";
+                    break;
+                default:
+                    Name = "miscellaneous";
+                    break;
+            }
         }
     }
 }

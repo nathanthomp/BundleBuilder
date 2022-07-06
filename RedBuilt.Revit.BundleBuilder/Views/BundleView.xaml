@@ -10,14 +10,21 @@
     <Grid Margin="10">
         
         <!-- Main Content -->
-        <ListView x:Name="panels" Margin="0,50,0,70">
+        <ListView x:Name="panels" Margin="0,50,0,70" ItemsSource="{Binding Panels}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Type" Width="150"/>
-                    <GridViewColumn Header="Plate" Width="100"/>
-                    <GridViewColumn Header="Panel" Width="100"/>
-                    <GridViewColumn Header="Height" Width="150"/>
-                    <GridViewColumn Header="Width" Width="150"/>
+                    <GridViewColumn Header="Type" Width="150" DisplayMemberBinding="{Binding Path=Type.Name}"/>
+                    <GridViewColumn Header="Plate" Width="100" DisplayMemberBinding="{Binding Path=Plate.WidthString}"/>
+                    <GridViewColumn Header="Panel" Width="100" DisplayMemberBinding="{Binding Path=Name}"/>
+                    <GridViewColumn Header="Height" Width="150" DisplayMemberBinding="{Binding Path=Height.AsString}"/>
+                    <GridViewColumn Header="Width" Width="150" DisplayMemberBinding="{Binding Path=Width.AsString}"/>
+                    <GridViewColumn Header="Bundle" Width="50">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding ToBundle}" Unchecked="{Binding UpdateToBundleCommand}" Checked="{Binding UpdateToBundleCommand}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

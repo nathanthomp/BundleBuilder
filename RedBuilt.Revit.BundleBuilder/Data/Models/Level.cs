@@ -26,10 +26,10 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
             if (!Panels.Contains(panel))
             {
                 Panels.Add(panel);
-                Width += panel.Width;
-                if (panel.Height > Length)
+                Width += panel.Width.AsDouble;
+                if (panel.Height.AsDouble > Length)
                 {
-                    Length = panel.Height;
+                    Length = panel.Height.AsDouble;
                 }
                 Weight += panel.Weight;
                 panel.Level = this;
@@ -41,7 +41,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
             if (Panels.Contains(panel))
             {
                 Panels.Remove(panel);
-                Width -= panel.Width;
+                Width -= panel.Width.AsDouble;
                 // Get Height of new longest panel in level
                 Weight -= panel.Weight;
             }

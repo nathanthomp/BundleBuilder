@@ -10,8 +10,8 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
     public class Panel
     {
         public string Name { get; set; }
-        public double Width { get; set; }
-        public double Height { get; set; }
+        public Width Width { get; set; }
+        public Height Height { get; set; }
         public double Weight { get; set; }
         public Plate Plate { get; set; }
         public Type Type { get; set; }
@@ -19,17 +19,19 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         public Bundle Bundle { get; set; }
         public Level Level { get; set; }
         public Element Element { get; set; }
+        public bool ToBundle { get; set; }
 
         public Panel(Element element)
         {
             Element = element;
-            Name = element.Name;
+            Name = Element.Name;
+            ToBundle = true;
         }
 
         public bool IsWithinBounds(double[] widthBounds, double[] lengthBounds)
         {
-            return (this.Height > lengthBounds[0] && this.Height < lengthBounds[1])
-                && (this.Width > widthBounds[0] && this.Width < widthBounds[1]);
+            return (Height.AsDouble > lengthBounds[0] && Height.AsDouble < lengthBounds[1])
+                && (Width.AsDouble > widthBounds[0] && Width.AsDouble < widthBounds[1]);
         }
     }
 }

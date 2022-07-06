@@ -1,6 +1,7 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using RedBuilt.Revit.BundleBuilder.Data.States;
 using RedBuilt.Revit.BundleBuilder.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -24,11 +25,9 @@ namespace RedBuilt.Revit.BundleBuilder.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        Document _doc;
-
         public MainWindow(Document doc)
         {
-            _doc = doc;
+            ProjectState.Doc = doc;
 
             NavigationState navigationState = new NavigationState();
             navigationState.CurrentViewModel = new BundleViewModel(navigationState);

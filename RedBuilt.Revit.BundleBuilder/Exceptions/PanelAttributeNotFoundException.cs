@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RedBuilt.Revit.BundleBuilder.Data.Services
+namespace RedBuilt.Revit.BundleBuilder.Exceptions
 {
-    public class RevitProjectImport
+    public class PanelAttributeNotFoundException
     {
-        
-
-
     }
 }

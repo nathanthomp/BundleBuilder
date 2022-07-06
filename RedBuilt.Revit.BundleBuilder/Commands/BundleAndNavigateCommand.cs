@@ -21,10 +21,14 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
 
         public override void Execute(object parameter)
         {
-
             // This is where we will start the bundle process
+
+            // PanelPreferenceSort
+            // Solve
+
             MessageBox.Show("Bundled!");
 
+            // Update current view
             _navigationState.CurrentViewModel = _createViewModel();
         }
     }

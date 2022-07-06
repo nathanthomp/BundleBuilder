@@ -23,5 +23,45 @@ namespace RedBuilt.Revit.BundleBuilder.Views
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// Changes this panel ToBundle property to false
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PanelCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            // get panel of checkbox
+            // change that panel property to false
+        }
+
+        /// <summary>
+        /// Changes this panel ToBundle property to true
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PanelCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            string panelName = "";
+            System.Windows.Controls.CheckBox checkBox = sender as System.Windows.Controls.CheckBox;
+            WrapPanel wrapPanel = (WrapPanel)checkBox.Parent;
+            TextBlock _TextBlock = new TextBlock();
+            foreach (var child in wrapPanel.Children)
+            {
+                if (child.GetType().ToString() == "System.Windows.Controls.TextBlock")
+                {
+                    _TextBlock = (TextBlock)child;
+                    panelName = _TextBlock.Text;
+                }
+            }
+            foreach (Panel panel in Panels)
+            {
+                if (panel.Name == panelName)
+                {
+                    panel.ToBundle = true;
+                    break;
+                }
+            }
+        }
     }
 }
