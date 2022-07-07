@@ -64,9 +64,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\Reports\TestReport.cs" />
+    <Compile Include="Application\Solve\BundleSolve.cs" />
     <Compile Include="Application\Sort\PanelNameSort.cs" />
     <Compile Include="Application\Sort\PanelPreferenceSort.cs" />
+    <Compile Include="Application\Sort\PanelTypeAndPlateSort.cs" />
+    <Compile Include="Application\Tools\BundleTools.cs" />
     <Compile Include="Application\Tools\DimensionTool.cs" />
+    <Compile Include="Application\Tools\PanelTools.cs" />
     <Compile Include="Commands\BundleAndNavigateCommand.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\ExportCommand.cs" />
@@ -153,9 +157,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Application\Solve\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="BundleBuilder.Addin" />
   </ItemGroup>

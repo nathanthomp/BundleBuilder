@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RedBuilt.Revit.BundleBuilder.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,11 +22,20 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
 
         public override void Execute(object parameter)
         {
-            // This is where we will start the bundle process
+            // Assign panels to project panels only if the ToBundle property is true
+            Project.Panels = Project.Panels.Where(x => x.ToBundle = true).ToList();
 
-            // Project.Panels = Project.Panels.where(x is ToBundle)
-            // PanelPreferenceSort
+            // Sort exterior panels by user preference
+            string startPanelType = Application.Tools.PanelTools.GetPanelFromName(Settings.StartingPanel).Type.Name;
+            string startPanelPlate = Application.Tools.PanelTools.GetPanelFromName(Settings.StartingPanel).Plate.Description;
+            Project.Panels = Application.Sort.PanelPreferenceSort.Sort(Project.Panels);
+
+            // Sort panels by type then plate
+            Dictionary<string, Dictionary<string, List<Panel>>> panelsByTypeThenPlate = Application.Sort.PanelTypeAndPlateSort.Sort();
+
             // Solve
+            // send list of panels that includes the starting panel
+            // send the rest of the panels
 
             MessageBox.Show("Bundled!");
             Application.Reports.TestReport.Export();

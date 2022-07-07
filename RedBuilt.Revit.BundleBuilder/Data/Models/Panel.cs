@@ -13,6 +13,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         public Width Width { get; set; }
         public Height Height { get; set; }
         public double Weight { get; set; }
+        public double Area { get; set; }
         public Plate Plate { get; set; }
         public Type Type { get; set; }
         public Truck Truck { get; set; }

@@ -12,7 +12,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         public static string Number { get; set; }
         public static List<Truck> Trucks { get; set; } = new List<Truck>();
         public static List<Bundle> Bundles { get; set; } = new List<Bundle>();
-        public static IEnumerable<Panel> Panels { get; set; } = new List<Panel>();
+        public static List<Panel> Panels { get; set; } = new List<Panel>();
 
     }
 }

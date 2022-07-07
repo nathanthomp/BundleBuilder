@@ -24,7 +24,7 @@ namespace RedBuilt.Revit.BundleBuilder.ViewModels
             BundleAndNavigateCommand = new BundleAndNavigateCommand<ExportViewModel>(navigationState, () => new ExportViewModel(navigationState));
         }
 
-        public IEnumerable<Panel> Panels
+        public List<Panel> Panels
         {
             get { return Project.Panels; }
             set

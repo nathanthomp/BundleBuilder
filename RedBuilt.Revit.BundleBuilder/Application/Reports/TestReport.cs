@@ -12,20 +12,18 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
     {
         public static void Export()
         {
-            StreamWriter sw = new StreamWriter("C:\\RedBuilt\\Revit\\BundleBuilder\\RedBuilt.Revit.BundleBuilder\\Documents\\TestReport.html");
+            StreamWriter sw = new StreamWriter(@"C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Documents\TestReport.html");
             PrintHeader(sw);
             
             sw.WriteLine("<p>" + Settings.StartingPanel + "</p>");
             sw.WriteLine("<p>" + Settings.StartingDirection + "</p>");
 
             List<Panel> panelList = new List<Panel>(Project.Panels);
-            foreach(Panel panel in panelList)
-            {
-                if (panel.ToBundle)
-                {
-                    sw.WriteLine("<p>" + panel.Name + "</p>");
-                }
-            }
+            //foreach(Panel panel in panelList)
+            //{
+            //    sw.WriteLine("<p>" + panel.Name + "</p>");
+            //}
+            sw.WriteLine("<p>" + Project.Bundles.Count + "</p>");
 
             PrintFooter(sw);
             sw.Close();

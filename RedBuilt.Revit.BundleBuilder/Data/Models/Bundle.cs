@@ -11,6 +11,12 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         public int Number { get; set; }
         public int NumberOfLevels { get; set; }
         public double Weight { get; set; }
+
+        // ???
+        public string Type { get; set; }
+        
+        // ???
+        public string Plate { get; set; }
         public List<Level> Levels { get; set; } = new List<Level>();
 
         public Bundle(int bundleNumber, int bundleNumberOfLevels)

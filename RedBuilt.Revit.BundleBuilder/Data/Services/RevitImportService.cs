@@ -51,7 +51,8 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
             { "Assembly Height", "be9990f3-9c7f-4732-a147-c6bf839f92bf"},
             { "Assembly Length", "f35bfde6-7ea9-4cf2-b07d-a06d9c98a572" },
             { "Assembly Depth", "381d4274-c8f0-4b79-ba9b-683f7aab0e21" },
-            { "Framing Member Mass", "70be58b1-bbbc-4199-9d16-d0af4969f2af" }
+            { "Framing Member Mass", "70be58b1-bbbc-4199-9d16-d0af4969f2af" },
+            { "Assembly Area", "99a0d818-1d3b-4954-a777-e87ab3f3d5c8" }
         };
 
         /// <summary>
@@ -64,7 +65,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
         /// </summary>
         /// <param name="doc">revit document</param>
         /// <returns>list of sorted panels</returns>
-        public static IEnumerable<Panel> GetPanels(Document doc)
+        public static List<Panel> GetPanels(Document doc)
         {
             List<Panel> panels = new List<Panel>();
 
@@ -112,6 +113,8 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                     if (p == null)
                         throw new Exception(); // PanelAttributeNotFoundException(panelId, parameterNameGuidPair.Key)
 
+                    panel.Type = new Models.Type(panel.Name);
+
                     switch (parameterNameGuidPair.Key)
                     {
                         case "Assembly Height":
@@ -121,14 +124,16 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                             panel.Width = new Width(Math.Round(p.AsDouble() * 12, 3));
                             break;
                         case "Assembly Depth":
-                            panel.Plate = new Plate(Math.Round(p.AsDouble() * 12, 3));
+                            panel.Plate = new Plate(Math.Round(p.AsDouble() * 12, 3), panel.Type.Name);
                             break;
                         case "Framing Member Mass":
                             panel.Weight = Math.Round(p.AsDouble());
                             break;
+                        case "Assembly Area":
+                            panel.Area = Math.Round(p.AsDouble());
+                            break;
                     }
 
-                    panel.Type = new Models.Type(panel.Name);
                 }
 
                 // Switch width and height if the panel is sideways
