@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using Autodesk.Revit.DB;
 using RedBuilt.Revit.BundleBuilder.Commands;
 using RedBuilt.Revit.BundleBuilder.Data.Models;
@@ -23,12 +24,17 @@ namespace RedBuilt.Revit.BundleBuilder.ViewModels
             NavigateSettingsCommand = new NavigateCommand<SettingsViewModel>(navigationState, () => new SettingsViewModel(navigationState));
             BundleAndNavigateCommand = new BundleAndNavigateCommand<ExportViewModel>(navigationState, () => new ExportViewModel(navigationState));
             UpdateToBundleCommand = new UpdateToBundleCommand();
-
-            Panels = RevitImportService.GetPanels(ProjectState.Doc);
         }
 
-        public IEnumerable<Panel> Panels { get; }
+        public IEnumerable<Panel> Panels
+        {
+            get { return Project.Panels; }
+            set
+            {
+                Project.Panels = value;
+                NotifyPropertyChanged();
+            }
+        }
 
-        public string Title { get; set; }
     }
 }

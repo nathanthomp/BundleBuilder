@@ -1,6 +1,8 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using RedBuilt.Revit.BundleBuilder.Data.Models;
+using RedBuilt.Revit.BundleBuilder.Data.Services;
 using RedBuilt.Revit.BundleBuilder.Data.States;
 using RedBuilt.Revit.BundleBuilder.ViewModels;
 using System;
@@ -33,6 +35,8 @@ namespace RedBuilt.Revit.BundleBuilder.Views
             navigationState.CurrentViewModel = new BundleViewModel(navigationState);
 
             DataContext = new MainWindowViewModel(navigationState);
+
+            Project.Panels = RevitImportService.GetPanels(ProjectState.Doc);
 
             InitializeComponent();
         }

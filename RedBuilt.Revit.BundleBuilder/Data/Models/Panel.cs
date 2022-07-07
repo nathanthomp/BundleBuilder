@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RedBuilt.Revit.BundleBuilder.Data.Models
 {
-    public class Panel
+    public class Panel : ObservableObject
     {
         public string Name { get; set; }
         public Width Width { get; set; }
@@ -19,13 +19,24 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         public Bundle Bundle { get; set; }
         public Level Level { get; set; }
         public Element Element { get; set; }
-        public bool ToBundle { get; set; }
+        //public bool ToBundle { get; set; }
+
+        private bool _toBundle;
+        public bool ToBundle
+        {
+            get { return _toBundle; }
+            set
+            {
+                _toBundle = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public Panel(Element element)
         {
             Element = element;
             Name = Element.Name;
-            ToBundle = true;
+            _toBundle = true;
         }
 
         public bool IsWithinBounds(double[] widthBounds, double[] lengthBounds)

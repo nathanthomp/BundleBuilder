@@ -23,6 +23,7 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
         {
             // This is where we will start the bundle process
 
+            // Project.Panels = Project.Panels.where(x is ToBundle)
             // PanelPreferenceSort
             // Solve
 

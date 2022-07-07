@@ -11,33 +11,109 @@ namespace RedBuilt.Revit.BundleBuilder.ViewModels
     public class SettingsViewModel : ViewModel
     {
         public Command NavigateBundleViewCommand { get; }
-        public Command SaveAndNavigateCommand { get; }
 
         public SettingsViewModel(NavigationState navigationState)
         {
             NavigateBundleViewCommand = new NavigateCommand<BundleViewModel>(navigationState, () => new BundleViewModel(navigationState));
-            SaveAndNavigateCommand = new SaveAndNavigateCommand<BundleViewModel>(navigationState, () => new BundleViewModel(navigationState));
         }
 
-        // TODO:
-        // Add a reference to the Settings Model, try to implement OnPropertyChanged to update the Model automatically
+        // Project Settings //
 
-        // Project Settings
-        public static Panel StartingPanel;
-        public static string StartingDirection;
+        public Panel StartingPanel
+        {
+            get { return Settings.StartingPanel; }
+            set
+            {
+                Settings.StartingPanel = value;
+                NotifyPropertyChanged();
+            }
+        }
 
-        //// Truck Settings
-        //public static double MaxTruckHeight => 96.0;
-        //public static double MaxTruckWidth => 288.0;
+        public string StartingDirection
+        {
+            get { return Settings.StartingDirection; }
+            set
+            {
+                Settings.StartingDirection = value;
+                NotifyPropertyChanged();
+            }
+        }
 
-        // Bundle Settings
-        public static double WidthMargins { get; set; } = .33;
-        public static double LengthMargins { get; set; } = .33;
-        public static double MaxBundleWidth { get; set; } = 102.0;
-        public static double MaxBundleLength { get; set; } = 288.0;
+        // Truck Settings //
 
-        // Level Settings
-        public static int MaxPanelsPerLevel { get; set; } = 1000;
+        //public double MaxTruckHeight
+        //{
+        //    get { return Settings.MaxTruckHeight; }
+        //    set
+        //    {
+        //        Settings.MaxTruckHeight = value;
+        //        NotifyPropertyChanged();
+        //    }
+        //}
+
+        //public double MaxTruckWidth
+        //{
+        //    get { return Settings.MaxTruckWidth; }
+        //    set
+        //    {
+        //        Settings.MaxTruckWidth = value;
+        //        NotifyPropertyChanged();
+        //    }
+        //}
+
+        // Bundle Settings //
+
+        public double WidthMargin
+        {
+            get { return Settings.WidthMargin; }
+            set
+            {
+                Settings.WidthMargin = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public double LengthMargin
+        {
+            get { return Settings.LengthMargin; }
+            set
+            {
+                Settings.LengthMargin = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public double MaxBundleWidth
+        {
+            get { return Settings.MaxBundleWidth; }
+            set
+            {
+                Settings.MaxBundleWidth = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public double MaxBundleLength
+        {
+            get { return Settings.MaxBundleLength; }
+            set
+            {
+                Settings.MaxBundleLength = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        // Level Settings //
+
+        public int MaxPanelsPerLevel
+        {
+            get { return Settings.MaxPanelsPerLevel; }
+            set
+            {
+                Settings.MaxPanelsPerLevel = value;
+                NotifyPropertyChanged();
+            }
+        }
 
     }
 }

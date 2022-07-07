@@ -49,10 +49,10 @@
                 <TextBlock Text="Bundle Settings:" Grid.Column="0" Grid.Row="3" TextAlignment="Right" Margin="0,30,0,0"/>
                 <!-- Width Margin Percent -->
                 <TextBlock Text="Width Margin Percent" Grid.Column="1" Grid.Row="4" Margin="10" TextAlignment="Right"/>
-                <TextBox x:Name="widthMarginPercent" Grid.Column="2" Grid.Row="4" MinWidth="110" Margin="20,10" Text="{Binding WidthMargins}"/>
+                <TextBox x:Name="widthMarginPercent" Grid.Column="2" Grid.Row="4" MinWidth="110" Margin="20,10" Text="{Binding WidthMargin}"/>
                 <!-- Width Margin Percent -->
                 <TextBlock Text="Length Margin Percent" Grid.Column="1" Grid.Row="5" Margin="10" TextAlignment="Right"/>
-                <TextBox x:Name="lengthMarginPercent" Grid.Column="2" Grid.Row="5" Margin="20,10" Text="{Binding LengthMargins}"/>
+                <TextBox x:Name="lengthMarginPercent" Grid.Column="2" Grid.Row="5" Margin="20,10" Text="{Binding LengthMargin}"/>
                 <!-- Max Bundle Width -->
                 <TextBlock Text="Max Bundle Width" Grid.Column="1" Grid.Row="6" Margin="10" TextAlignment="Right"/>
                 <TextBox x:Name="maxBundleWidth" Grid.Column="2" Grid.Row="6" Margin="20,10" Text="{Binding MaxBundleWidth}"/>
@@ -77,8 +77,7 @@
         <Label Content="Settings" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Margin="10,18,0,0"/>
 
         <!-- Buttons -->
-        <Button Content="Save" Command="{Binding SaveAndNavigateCommand}" Width="308" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-        <Button Content="Cancel" Command="{Binding NavigateBundleViewCommand}" Width="308" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+        <Button Content="Back" Command="{Binding NavigateBundleViewCommand}" Width="308" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
 
     </Grid>
 </UserControl>

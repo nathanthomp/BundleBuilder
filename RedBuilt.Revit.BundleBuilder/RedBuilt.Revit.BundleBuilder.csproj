@@ -71,7 +71,6 @@
     <Compile Include="Commands\ExportCommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Commands\RestartAndNavigateCommand.cs" />
-    <Compile Include="Commands\SaveAndNavigateCommand.cs" />
     <Compile Include="Commands\UpdateToBundleCommand.cs" />
     <Compile Include="Data\Models\Bundle.cs" />
     <Compile Include="Data\Models\Height.cs" />

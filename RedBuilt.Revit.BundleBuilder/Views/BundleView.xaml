@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Height="450" 
         Width="800">
+    <!--<UserControl.Resources>
+        <CollectionViewSource x:Key="panels" Source="{Binding Panels}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Type"/>
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>-->
     <Grid Margin="10">
         
         <!-- Main Content -->
@@ -21,7 +28,7 @@
                     <GridViewColumn Header="Bundle" Width="50">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox IsChecked="{Binding ToBundle}" Unchecked="{Binding UpdateToBundleCommand}" Checked="{Binding UpdateToBundleCommand}"/>
+                                <CheckBox IsChecked="{Binding ToBundle}" /> <!--Unchecked="PanelCheckBox_Checked" Checked="PanelCheckBox_Unchecked"-->
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

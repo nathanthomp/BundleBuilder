@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using RedBuilt.Revit.BundleBuilder.Data.Models;
+using RedBuilt.Revit.BundleBuilder.ViewModels;
+using Panel = RedBuilt.Revit.BundleBuilder.Data.Models.Panel;
 
 namespace RedBuilt.Revit.BundleBuilder.Views
 {
@@ -31,8 +34,26 @@ namespace RedBuilt.Revit.BundleBuilder.Views
         /// <param name="e"></param>
         private void PanelCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            // get panel of checkbox
-            // change that panel property to false
+            string panelName = "";
+            System.Windows.Controls.CheckBox checkBox = sender as System.Windows.Controls.CheckBox;
+            WrapPanel wrapPanel = (WrapPanel)checkBox.Parent;
+            TextBlock _TextBlock = new TextBlock();
+            foreach (var child in wrapPanel.Children)
+            {
+                if (child.GetType().ToString() == "System.Windows.Controls.TextBlock")
+                {
+                    _TextBlock = (TextBlock)child;
+                    panelName = _TextBlock.Text;
+                }
+            }
+            foreach (Panel panel in Project.Panels)
+            {
+                if (panel.Name == panelName)
+                {
+                    panel.ToBundle = false;
+                    break;
+                }
+            }
         }
 
         /// <summary>
@@ -54,7 +75,7 @@ namespace RedBuilt.Revit.BundleBuilder.Views
                     panelName = _TextBlock.Text;
                 }
             }
-            foreach (Panel panel in Panels)
+            foreach (Panel panel in Project.Panels)
             {
                 if (panel.Name == panelName)
                 {
