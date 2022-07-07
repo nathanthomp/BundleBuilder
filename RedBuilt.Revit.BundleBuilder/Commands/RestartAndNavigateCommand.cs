@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RedBuilt.Revit.BundleBuilder.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,8 +22,9 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
 
         public override void Execute(object parameter)
         {
+            // Clear Bundles
+            Project.Bundles.Clear();
 
-            // This is where we will clear the data
             MessageBox.Show("Data Cleared!");
 
             _navigationState.CurrentViewModel = _createViewModel();

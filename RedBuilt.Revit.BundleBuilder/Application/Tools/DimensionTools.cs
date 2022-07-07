@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RedBuilt.Revit.BundleBuilder.Application.Tools
 {
-    public class DimensionTool
+    public class DimensionTools
     {
         public static string AsString(double dimension)
         {

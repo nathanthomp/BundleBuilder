@@ -19,6 +19,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         public Level(int levelNumber)
         {
             Number = levelNumber;
+            Panels = new List<Panel>();
         }
 
         public void Add(Panel panel)

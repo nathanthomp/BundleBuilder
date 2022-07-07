@@ -16,8 +16,8 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         public Height(double height)
         {
             AsDouble = height;
-            AsString = DimensionTool.AsString(height);
-            AsInt = DimensionTool.AsInt(height);
+            AsString = DimensionTools.AsString(height);
+            AsInt = DimensionTools.AsInt(height);
         }
     }
 }

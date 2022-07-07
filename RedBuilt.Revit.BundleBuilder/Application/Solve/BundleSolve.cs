@@ -18,7 +18,7 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
         /// <param name="type"></param>
         /// <param name="plate"></param>
         /// <param name="panelList"></param>
-        public static void SolveBundle(string type, string plate, List<Panel> panelList)
+        public static void Solve(string type, string plate, List<Panel> panelList)
         {
             List<Panel> panelListCopy = new List<Panel>(panelList);
             int numberOfLevels = BundleTools.GetNumberOfLevels(plate);

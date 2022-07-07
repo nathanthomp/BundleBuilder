@@ -23,7 +23,7 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             //{
             //    sw.WriteLine("<p>" + panel.Name + "</p>");
             //}
-            sw.WriteLine("<p>" + Project.Bundles.Count + "</p>");
+            sw.WriteLine("<p>Number of Bundles:" + Project.Bundles.Count + "</p>");
 
             PrintFooter(sw);
             sw.Close();

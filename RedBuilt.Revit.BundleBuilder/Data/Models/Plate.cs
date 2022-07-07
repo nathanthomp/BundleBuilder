@@ -17,7 +17,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         public Plate(double plateWidth, string plateMaterial)
         {
             Width = plateWidth;
-            WidthString = DimensionTool.AsString(Width);
+            WidthString = DimensionTools.AsString(Width);
             PlateMaterial = plateMaterial;
 
             if (PlateMaterial.Equals("Steel"))

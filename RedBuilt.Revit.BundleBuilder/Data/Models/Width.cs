@@ -16,8 +16,8 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         public Width(double width)
         {
             AsDouble = width;
-            AsString = DimensionTool.AsString(width);
-            AsInt = DimensionTool.AsInt(width);
+            AsString = DimensionTools.AsString(width);
+            AsInt = DimensionTools.AsInt(width);
         }
     }
 }
