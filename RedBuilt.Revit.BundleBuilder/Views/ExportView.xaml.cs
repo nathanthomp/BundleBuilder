@@ -27,7 +27,7 @@ namespace RedBuilt.Revit.BundleBuilder.Views
 
         private void createdBundles_Loaded(object sender, RoutedEventArgs e)
         {
-            createdBundles.Navigate(new Uri("C:\\RedBuilt\\Revit\\BundleBuilder\\RedBuilt.Revit.BundleBuilder\\Documents\\test.html"));
+            createdBundles.Navigate(new Uri("C:\\RedBuilt\\Revit\\BundleBuilder\\RedBuilt.Revit.BundleBuilder\\Documents\\TestReport.html"));
         }
     }
 }

@@ -63,6 +63,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\Reports\TestReport.cs" />
     <Compile Include="Application\Sort\PanelNameSort.cs" />
     <Compile Include="Application\Sort\PanelPreferenceSort.cs" />
     <Compile Include="Application\Tools\DimensionTool.cs" />
@@ -71,7 +72,6 @@
     <Compile Include="Commands\ExportCommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Commands\RestartAndNavigateCommand.cs" />
-    <Compile Include="Commands\UpdateToBundleCommand.cs" />
     <Compile Include="Data\Models\Bundle.cs" />
     <Compile Include="Data\Models\Height.cs" />
     <Compile Include="Data\Models\Level.cs" />

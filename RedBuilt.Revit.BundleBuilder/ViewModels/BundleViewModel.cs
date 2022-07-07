@@ -17,13 +17,11 @@ namespace RedBuilt.Revit.BundleBuilder.ViewModels
     {
         public Command NavigateSettingsCommand { get; }
         public Command BundleAndNavigateCommand { get; }
-        public Command UpdateToBundleCommand { get; }
 
         public BundleViewModel(NavigationState navigationState)
         {
             NavigateSettingsCommand = new NavigateCommand<SettingsViewModel>(navigationState, () => new SettingsViewModel(navigationState));
             BundleAndNavigateCommand = new BundleAndNavigateCommand<ExportViewModel>(navigationState, () => new ExportViewModel(navigationState));
-            UpdateToBundleCommand = new UpdateToBundleCommand();
         }
 
         public IEnumerable<Panel> Panels

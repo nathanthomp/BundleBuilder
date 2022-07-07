@@ -19,12 +19,22 @@ namespace RedBuilt.Revit.BundleBuilder.ViewModels
 
         // Project Settings //
 
-        public Panel StartingPanel
+        public string StartingPanel
         {
             get { return Settings.StartingPanel; }
             set
             {
                 Settings.StartingPanel = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public List<string> StartingPanels
+        {
+            get { return Settings.StartingPanels; }
+            set
+            {
+                Settings.StartingPanels = value;
                 NotifyPropertyChanged();
             }
         }
@@ -35,6 +45,16 @@ namespace RedBuilt.Revit.BundleBuilder.ViewModels
             set
             {
                 Settings.StartingDirection = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public List<string> StartingDirections
+        {
+            get { return Settings.StartingDirections; }
+            set
+            {
+                Settings.StartingDirections = value;
                 NotifyPropertyChanged();
             }
         }

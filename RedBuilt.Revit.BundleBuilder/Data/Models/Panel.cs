@@ -19,7 +19,6 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         public Bundle Bundle { get; set; }
         public Level Level { get; set; }
         public Element Element { get; set; }
-        //public bool ToBundle { get; set; }
 
         private bool _toBundle;
         public bool ToBundle
@@ -43,6 +42,11 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         {
             return (Height.AsDouble > lengthBounds[0] && Height.AsDouble < lengthBounds[1])
                 && (Width.AsDouble > widthBounds[0] && Width.AsDouble < widthBounds[1]);
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

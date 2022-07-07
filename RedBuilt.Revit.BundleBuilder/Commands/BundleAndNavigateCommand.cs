@@ -28,6 +28,7 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
             // Solve
 
             MessageBox.Show("Bundled!");
+            Application.Reports.TestReport.Export();
 
             // Update current view
             _navigationState.CurrentViewModel = _createViewModel();

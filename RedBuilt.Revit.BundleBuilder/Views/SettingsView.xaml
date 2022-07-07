@@ -39,10 +39,10 @@
                 <TextBlock Text="Project Settings:" Grid.Column="0" Grid.Row="0" TextAlignment="Right" />
                 <!-- Starting Panel -->
                 <TextBlock Text="Starting Panel" Grid.Column="1" Grid.Row="1" Margin="10" TextAlignment="Right"/>
-                <ComboBox x:Name="startingPanel" Grid.Column="2" Grid.Row="1" Margin="20,10"/>
+                <ComboBox x:Name="startingPanel" Grid.Column="2" Grid.Row="1" Margin="20,10" SelectedItem="{Binding StartingPanel}" ItemsSource="{Binding StartingPanels}"/>
                 <!-- Starting Direction -->
                 <TextBlock Text="Starting Direction" Grid.Column="1" Grid.Row="2" Margin="10" TextAlignment="Right"/>
-                <ComboBox x:Name="startingDirection" Grid.Column="2" Grid.Row="2" Margin="20,10"/>
+                <ComboBox x:Name="startingDirection" Grid.Column="2" Grid.Row="2" Margin="20,10" SelectedItem="{Binding StartingDirection}" ItemsSource="{Binding StartingDirections}"/>
 
 
                 <!-- BundleSettings -->
