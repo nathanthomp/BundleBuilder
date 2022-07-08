@@ -24,6 +24,11 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
 
         public void Add(Panel panel)
         {
+            if (Height == 0)
+            {
+                Height = panel.Plate.Width;
+            }
+
             if (!Panels.Contains(panel))
             {
                 Panels.Add(panel);

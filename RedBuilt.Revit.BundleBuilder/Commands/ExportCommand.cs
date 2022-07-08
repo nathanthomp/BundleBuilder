@@ -11,9 +11,9 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
     {
         public override void Execute(object parameter)
         {
-            //
-            // This will be where the Data goes back into Revit 
-            //
+            // Export bundle data to revit
+            // Data.Services.RevitExportService.Export();
+
             MessageBox.Show("Exported!");
             //
             // Close the Application

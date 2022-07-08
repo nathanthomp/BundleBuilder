@@ -63,6 +63,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\Reports\BundleReport.cs" />
     <Compile Include="Application\Reports\TestReport.cs" />
     <Compile Include="Application\Solve\BundleSolve.cs" />
     <Compile Include="Application\Sort\PanelNameSort.cs" />

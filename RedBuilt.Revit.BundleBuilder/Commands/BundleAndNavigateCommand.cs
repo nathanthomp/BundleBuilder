@@ -48,9 +48,11 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
             foreach (KeyValuePair<string, Dictionary<string, List<Panel>>> typePlateDict in panelsByTypeThenPlate)
                 foreach (KeyValuePair<string, List<Panel>> platePanelsDict in typePlateDict.Value)
                     Application.Solve.BundleSolve.Solve(typePlateDict.Key, platePanelsDict.Key, platePanelsDict.Value);
+
+
                 
             MessageBox.Show("Bundled!");
-            Application.Reports.TestReport.Export();
+            Application.Reports.BundleReport.Export();
 
             // Update current view
             _navigationState.CurrentViewModel = _createViewModel();
