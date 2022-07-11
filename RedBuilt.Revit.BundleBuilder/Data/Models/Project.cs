@@ -13,6 +13,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         public static List<Truck> Trucks { get; set; } = new List<Truck>();
         public static List<Bundle> Bundles { get; set; } = new List<Bundle>();
         public static List<Panel> Panels { get; set; } = new List<Panel>();
+        public static int CurrentBundleNumber { get; set; } = 1;
 
     }
 }

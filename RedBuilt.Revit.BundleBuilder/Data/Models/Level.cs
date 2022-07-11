@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RedBuilt.Revit.BundleBuilder.Application.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
             Panels = new List<Panel>();
         }
 
+        // return boolean to ensure that add was successful
         public void Add(Panel panel)
         {
             if (Height == 0)
@@ -33,24 +35,36 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
             {
                 Panels.Add(panel);
                 Width += panel.Width.AsDouble;
-                if (panel.Height.AsDouble > Length)
-                {
-                    Length = panel.Height.AsDouble;
-                }
+                //if (panel.Height.AsDouble > Length)
+                //{
+                //    Length = panel.Height.AsDouble;
+                //}
+                Length = Panels.Max(x => x.Height.AsDouble);
                 Weight += panel.Weight;
                 panel.Level = this;
                 panel.Bundle = Bundle;
             }
         }
+
+        // return boolean to ensure that add was successful
         public void Remove(Panel panel)
         {
             if (Panels.Contains(panel))
             {
                 Panels.Remove(panel);
                 Width -= panel.Width.AsDouble;
-                // Get Height of new longest panel in level
                 Weight -= panel.Weight;
+
+                if (Panels.Count > 0)
+                    Length = Panels.Max(x => x.Height.AsDouble);
+                else
+                    Length = 0;
             }
+        }
+
+        public override string ToString()
+        {
+            return Number.ToString();
         }
     }
 }

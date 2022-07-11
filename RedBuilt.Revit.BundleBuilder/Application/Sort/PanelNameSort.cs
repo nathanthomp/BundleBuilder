@@ -11,7 +11,7 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Sort
     {
         public static List<Panel> Sort(List<Panel> panels)
         {
-            return panels.OrderBy(x => x.Name).ToList();
+            return panels.OrderBy(x => x.Name.Symbol).ThenBy(x => x.Name.Instance).ThenBy(x => x.Name.InstanceAndVersion).ToList();
         } 
 
 

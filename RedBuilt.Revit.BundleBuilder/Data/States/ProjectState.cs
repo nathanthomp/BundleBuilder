@@ -11,7 +11,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.States
     {
         public static Document Doc;
 
-        public static int NumberOfBundles;
+        public static int CurrentBundleNumber { get; set; } = 1;
 
     }
 }

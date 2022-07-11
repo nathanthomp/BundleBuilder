@@ -19,12 +19,30 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Tools
             Panel result = null;
             foreach (Panel panel in Project.Panels)
             {
-                if (panel.Name.Equals(panelName))
+                if (panel.Name.FullName.Equals(panelName))
                 {
                     result = panel;
                     break;
                 }
             }
+            return result;
+        }
+
+        public static Panel GetLargestHeightPanelInLevel(List<Panel> panelList)
+        {
+            Panel result = null;
+
+            double maxHeight = 0;
+
+            foreach (Panel panel in panelList)
+            {
+                if (panel.Height.AsDouble > maxHeight)
+                {
+                    maxHeight = panel.Height.AsDouble;
+                    result = panel;
+                }
+            }
+
             return result;
         }
     }

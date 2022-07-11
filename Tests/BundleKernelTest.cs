@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RedBuilt.Revit.BundleBuilder.Exceptions
+namespace Tests
 {
-    public class PanelAttributeNotFoundException
+    public class BundleKernelTest
     {
     }
 }

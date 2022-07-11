@@ -81,7 +81,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
 
             // Exceptions
             if (panelElements.Count == 0)
-                throw new Exception(); // PanelsNotFoundException()
+                throw new Exception("No \"Structural Framing Assembly\" elements found.");
 
             // Create parameters
             //foreach (string parameterName in ParameterNames)
@@ -92,9 +92,9 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
             {
                 // Exceptions
                 if (panelElement == null)
-                    throw new Exception(); // PanelNotFoundException(panelId)
+                    throw new Exception("Panel not found");
                 if (String.IsNullOrEmpty(panelElement.Name))
-                    throw new Exception(); // PanelAttributeNotFoundException(panelId, name)
+                    throw new Exception("Panel name not found on element: " + panelElement.Id);
 
                 // Create the panel
                 Panel panel = new Panel(panelElement);
@@ -103,7 +103,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                 foreach (KeyValuePair<string, string> parameterNameGuidPair in ParameterNameAndGuid)
                 {
                     // Find the revit parameter
-                    Autodesk.Revit.DB.Parameter p;
+                    Parameter p;
                     if (String.IsNullOrEmpty(parameterNameGuidPair.Value))
                         p = panel.Element.LookupParameter(parameterNameGuidPair.Key);
                     else
@@ -111,9 +111,11 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
 
                     // Exception
                     if (p == null)
-                        throw new Exception(); // PanelAttributeNotFoundException(panelId, parameterNameGuidPair.Key)
+                        throw new Exception("Panel attribute " + parameterNameGuidPair.Key + " not found on element: " + panelElement.Id);
+                    if (HasDuplicatePanel(panel, panels))
+                        throw new Exception("There are panel elements that have the same name");
 
-                    panel.Type = new Models.Type(panel.Name);
+                    panel.Type = new Models.Type(panel.Name.FullName);
 
                     switch (parameterNameGuidPair.Key)
                     {
@@ -152,5 +154,19 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
 
             return panels;
         }
+
+        public static bool HasDuplicatePanel(Panel panel, List<Panel> panels)
+        {
+            bool result = false;
+            foreach (Panel p in panels)
+                if (panel.Name.FullName.Equals(p.Name.FullName))
+                    result = true;
+            return result;
+        }
+
+        // There cannot be 2 panels with the same name
+        // all fields must be filled in
+        // 
+
     }
 }

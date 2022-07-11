@@ -28,18 +28,30 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
                 sw.WriteLine("<div class=\"length-side\">");
                 foreach (Level level in bundle.Levels)
                 {
-                    sw.WriteLine("<div class=\"panel\" style=\"width: " + level.Length * 1.75 + "px; height: " + level.Height * 1.75 + "px\"></div>");
+                    sw.WriteLine("<div class=\"panel\" style=\"width: " + level.Length * 1.75 + "px; height: " + level.Height * 1.75 + "px\"><p class=\"label\">");
+                    foreach (Panel panel in level.Panels)
+                    {
+                        sw.Write(panel.Name + " ");
+                    }
+
+                    sw.Write("</div>");
                 }
-                sw.WriteLine("</div>");
+                sw.WriteLine("</p></div>");
 
                 sw.WriteLine("<div class=\"width-side\">");
                 foreach (Level level in bundle.Levels)
                 {
-                    sw.WriteLine("<div class=\"panel\" style=\"width: " + level.Width * 1.75 + "px; height: " + level.Height * 1.75 + "px\"></div>");
+                    sw.WriteLine("<div class=\"panel\" style=\"width: " + level.Width * 1.75 + "px; height: " + level.Height * 1.75 + "px\"><p class=\"label\">");
+                    foreach (Panel panel in level.Panels)
+                    {
+                        sw.Write(panel.Name + " ");
+                    }
+
+                    sw.Write("</p></div>");
                 }
                 sw.WriteLine("</div>");
 
-                for (int i = 0; i < bundle.Levels.Count; i++)
+                for (int i = 0; i < bundle.Levels.Count * 2; i++)
                 {
                     sw.WriteLine("<br/>");
                 }
@@ -59,7 +71,8 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             sw.WriteLine(".width-side{ float: right; }");
             sw.WriteLine(".panel{ border: 1px solid; margin: 1px; }");
             sw.WriteLine(".bundle{ margin-bottom: 10px; }");
-            sw.WriteLine(".header{ font-size: 12px; }");
+            sw.WriteLine(".header{ font-size: 12px; margin-bottom: 1px; }");
+            sw.WriteLine(".label{ font-size: 10px; margin: 0px; }");
             sw.WriteLine("</style></head><body>");
         }
 

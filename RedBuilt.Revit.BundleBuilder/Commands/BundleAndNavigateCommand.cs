@@ -1,4 +1,6 @@
-﻿using RedBuilt.Revit.BundleBuilder.Data.Models;
+﻿using RedBuilt.Revit.BundleBuilder.Application.Tools;
+using RedBuilt.Revit.BundleBuilder.Data.Models;
+using RedBuilt.Revit.BundleBuilder.Data.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,8 +34,8 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
             Dictionary<string, Dictionary<string, List<Panel>>> panelsByTypeThenPlate = Application.Sort.PanelTypeAndPlateSort.Sort();
 
             // Solve list of panels that includes the starting panel
-            string startPanelType = Application.Tools.PanelTools.GetPanelFromName(Settings.StartingPanel).Type.Name;
-            string startPanelPlate = Application.Tools.PanelTools.GetPanelFromName(Settings.StartingPanel).Plate.Description;
+            string startPanelType = PanelTools.GetPanelFromName(Settings.StartingPanel).Type.Name;
+            string startPanelPlate = PanelTools.GetPanelFromName(Settings.StartingPanel).Plate.Description;
             foreach (KeyValuePair<string, Dictionary<string, List<Panel>>> typePlateDict in panelsByTypeThenPlate)
                 if (typePlateDict.Key.Equals(startPanelType))
                     foreach (KeyValuePair<string, List<Panel>> platePanelsDict in typePlateDict.Value)
@@ -49,8 +51,36 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
                 foreach (KeyValuePair<string, List<Panel>> platePanelsDict in typePlateDict.Value)
                     Application.Solve.BundleSolve.Solve(typePlateDict.Key, platePanelsDict.Key, platePanelsDict.Value);
 
+            // Remove empty levels in bundle
+            for (int i = 0; i < Project.Bundles.Count; i++)
+            {
+                Bundle bundle = Project.Bundles[i];
+                while (BundleTools.NumberOfEmptyLevels(bundle) > 0)
+                {
+                    for (int j = 0; j < bundle.Levels.Count; j++)
+                    {
+                        Level level = bundle.Levels[j];
+                        if (level.Panels.Count < 1)
+                        {
+                            bundle.Remove(level);
+                        }
+                    }
+                }
+            }
 
-                
+            // Corrent the bundle numbers
+            for (int i = 0; i < Project.Bundles.Count; i++)
+            {
+                Bundle bundle = Project.Bundles[i];
+
+                int counter = 1;
+                for (int j = bundle.NumberOfLevels - 1; j >= 0; j--)
+                {
+                    bundle.Levels[j].Number = counter;
+                    counter++;
+                }
+            }
+
             MessageBox.Show("Bundled!");
             Application.Reports.BundleReport.Export();
 

@@ -1,4 +1,5 @@
 ﻿using RedBuilt.Revit.BundleBuilder.Data.Models;
+using RedBuilt.Revit.BundleBuilder.Data.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +23,11 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
 
         public override void Execute(object parameter)
         {
-            // Clear Bundles
+            // Clear bundles
             Project.Bundles.Clear();
+
+            // Reset current bundle number TODO: Find number of bundles already in the document
+            Project.CurrentBundleNumber = 1;
 
             MessageBox.Show("Data Cleared!");
 

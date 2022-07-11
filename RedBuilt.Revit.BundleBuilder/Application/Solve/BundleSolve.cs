@@ -1,5 +1,6 @@
 ﻿using RedBuilt.Revit.BundleBuilder.Application.Tools;
 using RedBuilt.Revit.BundleBuilder.Data.Models;
+using RedBuilt.Revit.BundleBuilder.Data.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,6 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
 {
     public class BundleSolve
     {
-        private static int CurrentBundleNumber = 1;
-
         /// <summary>
         /// 
         /// </summary>
@@ -26,9 +25,11 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
             while (panelListCopy.Count > 0)
             {
                 // Establish Bundle
-                Bundle bundle = new Bundle(CurrentBundleNumber, numberOfLevels);
-                bundle.Type = type;
-                bundle.Plate = plate;
+                Bundle bundle = new Bundle(Project.CurrentBundleNumber, numberOfLevels)
+                {
+                    Type = type,
+                    Plate = plate
+                };
                 double[] bundleWidthBounds = new double[2];
                 double[] bundleLengthBounds = new double[2];
 
@@ -183,9 +184,8 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
                         }
                     }
                 }
-
                 Project.Bundles.Add(bundle);
-                CurrentBundleNumber++;
+                Project.CurrentBundleNumber++;
             }
         }
     }

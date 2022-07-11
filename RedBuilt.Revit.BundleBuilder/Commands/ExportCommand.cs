@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RedBuilt.Revit.BundleBuilder.Data.States;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,10 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
         public override void Execute(object parameter)
         {
             // Export bundle data to revit
-            // Data.Services.RevitExportService.Export();
+            Data.Services.RevitExportService.Export(ProjectState.Doc);
 
             MessageBox.Show("Exported!");
+
             //
             // Close the Application
             //

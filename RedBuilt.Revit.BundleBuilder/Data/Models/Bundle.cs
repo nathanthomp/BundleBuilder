@@ -34,6 +34,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
             }
             level.Bundle = this;
         }
+
         public void Remove(Level level)
         {
             if (Levels.Contains(level))
@@ -42,6 +43,11 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
                 Weight -= level.Weight;
                 NumberOfLevels--;
             }
+        }
+
+        public override string ToString()
+        {
+            return Number.ToString();
         }
 
     }

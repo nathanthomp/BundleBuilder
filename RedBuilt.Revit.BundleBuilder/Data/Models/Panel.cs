@@ -9,7 +9,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
 {
     public class Panel : ObservableObject
     {
-        public string Name { get; set; }
+        public Name Name { get; set; }
         public Width Width { get; set; }
         public Height Height { get; set; }
         public double Weight { get; set; }
@@ -35,7 +35,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         public Panel(Element element)
         {
             Element = element;
-            Name = Element.Name;
+            Name = new Name(Element.Name);
             _toBundle = true;
         }
 
@@ -47,7 +47,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
 
         public override string ToString()
         {
-            return Name;
+            return Name.FullName;
         }
     }
 }

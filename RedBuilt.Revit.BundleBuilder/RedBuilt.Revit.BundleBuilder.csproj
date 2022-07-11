@@ -80,6 +80,7 @@
     <Compile Include="Data\Models\Bundle.cs" />
     <Compile Include="Data\Models\Height.cs" />
     <Compile Include="Data\Models\Level.cs" />
+    <Compile Include="Data\Models\Name.cs" />
     <Compile Include="Data\Models\Panel.cs" />
     <Compile Include="Data\Models\Plate.cs" />
     <Compile Include="Data\Models\Project.cs" />
@@ -91,8 +92,6 @@
     <Compile Include="Data\Services\RevitImportService.cs" />
     <Compile Include="Data\States\NavigationState.cs" />
     <Compile Include="Data\States\ProjectState.cs" />
-    <Compile Include="Exceptions\PanelAttributeNotFoundException.cs" />
-    <Compile Include="Exceptions\PanelNotFoundException.cs" />
     <Compile Include="RevitApp.cs" />
     <Compile Include="RevitCommand.cs" />
     <Compile Include="ViewModels\ExportViewModel.cs" />
