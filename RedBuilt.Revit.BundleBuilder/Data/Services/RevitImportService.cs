@@ -112,8 +112,10 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                     // Exception
                     if (p == null)
                         throw new Exception("Panel attribute " + parameterNameGuidPair.Key + " not found on element: " + panelElement.Id);
+                    if (p.AsDouble() <= 0)
+                        throw new Exception("Panel element: " + panelElement.Id + " with attribute " + p.Definition + " is not defined.");
                     if (HasDuplicatePanel(panel, panels))
-                        throw new Exception("There are panel elements that have the same name");
+                        throw new Exception("Panel element: " + panelElement.Id + " has duplicate names");
 
                     panel.Type = new Models.Type(panel.Name.FullName);
 
@@ -137,6 +139,10 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                     }
 
                 }
+
+                // Exceptions
+                if (panel.Plate.Description == null)
+                    throw new Exception("Panel element: " + panelElement.Id + " with attribute Assembly Depth is not accurate.");
 
                 // Switch width and height if the panel is sideways
                 if (panel.Width.AsDouble > panel.Height.AsDouble)

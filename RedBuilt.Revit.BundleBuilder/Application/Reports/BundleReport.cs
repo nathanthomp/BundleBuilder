@@ -12,6 +12,7 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
     {
         public static void Export()
         {
+
             StreamWriter sw = new StreamWriter(@"C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Documents\BundleReport.html");
             PrintHeader(sw);
 
@@ -23,7 +24,7 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
                 {
                     sw.Write("0");
                 }
-                sw.Write(bundle.Number + "</p>");
+                sw.Write(bundle.Number + " - " + bundle.Type + " " + bundle.Plate + "</p>");
 
                 sw.WriteLine("<div class=\"length-side\">");
                 foreach (Level level in bundle.Levels)

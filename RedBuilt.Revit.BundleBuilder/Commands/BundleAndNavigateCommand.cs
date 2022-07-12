@@ -81,7 +81,6 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
                 }
             }
 
-            MessageBox.Show("Bundled!");
             Application.Reports.BundleReport.Export();
 
             // Update current view

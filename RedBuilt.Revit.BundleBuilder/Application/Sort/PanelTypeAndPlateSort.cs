@@ -49,7 +49,7 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Sort
                     List<Panel> panels = new List<Panel>();
                     foreach (Panel panel in Project.Panels)
                     {
-                        if (panel.Plate.Description.Equals(plate))
+                        if (panel.Plate.Description.Equals(plate) && panel.Type.Name.Equals(type))
                         {
                             panels.Add(panel);
                         }

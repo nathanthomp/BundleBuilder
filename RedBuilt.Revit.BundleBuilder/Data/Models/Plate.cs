@@ -46,6 +46,10 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
                 {
                     Description = "1200";
                 }
+                else
+                {
+                    Description = null;
+                }
             }
             else
             {
@@ -68,6 +72,10 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
                 else if (Width < 13.25)
                 {
                     Description = "2x12";
+                }
+                else
+                {
+                    Description = null;
                 }
             }
 

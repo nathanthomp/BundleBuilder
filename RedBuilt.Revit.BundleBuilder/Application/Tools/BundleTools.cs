@@ -71,34 +71,41 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Tools
         /// </summary>
         /// <param name="plate"></param>
         /// <returns></returns>
-        public static int GetNumberOfLevels(string plate)
+        public static int GetNumberOfLevels(string type, string plate)
         {
-            switch (plate)
+            if (type.Equals("Parapet"))
             {
-                case "2x4":
-                    return 6;
-                case "400":
-                    return 6;
-                case "2x6":
-                    return 4;
-                case "550":
-                    return 4;
-                case "600":
-                    return 4;
-                case "2x8":
-                    return 3;
-                case "800":
-                    return 3;
-                case "2x10":
-                    return 2;
-                case "1000":
-                    return 2;
-                case "2x12":
-                    return 2;
-                case "1200":
-                    return 2;
-                default:
-                    return 1;
+                return 6;
+            }
+            else
+            {
+                switch (plate)
+                {
+                    case "2x4":
+                        return 6;
+                    case "400":
+                        return 6;
+                    case "2x6":
+                        return 4;
+                    case "550":
+                        return 4;
+                    case "600":
+                        return 4;
+                    case "2x8":
+                        return 3;
+                    case "800":
+                        return 3;
+                    case "2x10":
+                        return 2;
+                    case "1000":
+                        return 2;
+                    case "2x12":
+                        return 2;
+                    case "1200":
+                        return 2;
+                    default:
+                        return 1;
+                }
             }
         }
 
