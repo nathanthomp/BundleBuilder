@@ -1,4 +1,7 @@
-﻿using System;
+﻿using RedBuilt.Revit.BundleBuilder.Data.Models;
+using RedBuilt.Revit.BundleBuilder.Data.States;
+using RedBuilt.Revit.BundleBuilder.Modals;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,12 +25,25 @@ namespace RedBuilt.Revit.BundleBuilder.Views
     {
         public ExportView()
         {
+            ProjectState.ExportView = this;
             InitializeComponent();
         }
 
-        private void createdBundles_Loaded(object sender, RoutedEventArgs e)
+        private void CreatedBundles_Loaded(object sender, RoutedEventArgs e)
         {
             createdBundles.Navigate(new Uri(@"C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Documents\BundleReport.html"));
+        }
+
+        private void Modify_Click(object sender, RoutedEventArgs e)
+        {
+            ModifyModal mm = new ModifyModal();
+            mm.Panels.ItemsSource = Project.Panels;
+            mm.ShowDialog();
+        }
+
+        private void ViewOnWeb_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(@"C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Documents\BundleReport.html");
         }
     }
 }

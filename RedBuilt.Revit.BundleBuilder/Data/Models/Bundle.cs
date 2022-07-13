@@ -31,8 +31,8 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
             {
                 Levels.Add(level);
                 Weight += level.Weight;
+                level.Bundle = this;
             }
-            level.Bundle = this;
         }
 
         public void Remove(Level level)

@@ -127,26 +127,6 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Tools
             return result;
         }
 
-        // warning
-        /// <summary>
-        /// 
-        /// </summary>
-        public static void RemoveEmptyLevelsInBundle()
-        {
-            for (int i = 0; i < Project.Bundles.Count; i++)
-            {
-                Bundle bundle = Project.Bundles[i];
-                for (int j = 0; j < bundle.Levels.Count; j++)
-                {
-                    Level level = bundle.Levels[j];
-                    if (level.Panels.Count < 1)
-                    {
-                        bundle.Remove(level);
-                    }
-                }
-            }
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -162,6 +142,20 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Tools
                     bundle.Levels[j].Number = counter;
                     counter++;
                 }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static void CorrectBundleNumbers()
+        {
+            int counter = 1;
+            for (int i = 0; i < Project.Bundles.Count; i++)
+            {
+                Bundle bundle = Project.Bundles[i];
+                bundle.Number = counter;
+                counter++;
             }
         }
     }

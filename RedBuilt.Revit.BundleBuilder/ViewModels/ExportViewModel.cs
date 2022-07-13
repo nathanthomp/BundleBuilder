@@ -1,4 +1,5 @@
 ﻿using RedBuilt.Revit.BundleBuilder.Commands;
+using RedBuilt.Revit.BundleBuilder.Data.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,6 @@ namespace RedBuilt.Revit.BundleBuilder.ViewModels
         {
             RestartAndNavigateCommand = new RestartAndNavigateCommand<BundleViewModel>(navigationState, () => new BundleViewModel(navigationState));
             ExportCommand = new ExportCommand();
-
         }
     }
 }

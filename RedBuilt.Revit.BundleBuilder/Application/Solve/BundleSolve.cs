@@ -147,10 +147,13 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
                         panelListCopy = Sort.PanelNameSort.Sort(panelListCopy);
 
                         // pick largest panel remaining and remove it
-                        List<Panel> panelListCopyReversed = new List<Panel>(panelListCopy);
-                        panelListCopyReversed.Reverse();
-                        Panel maxPanel = panelListCopyReversed.OrderByDescending(x => x.Area).First();
+                        Panel maxPanel = panelListCopy.OrderByDescending(x => x.Area).First();
                         panelListCopy.Remove(maxPanel);
+                        #region Test Reversed OrderByDescending
+                        //List<Panel> panelListCopyReversed = new List<Panel>(panelListCopy);
+                        //panelListCopyReversed.Reverse();
+                        //Panel maxPanel = panelListCopyReversed.OrderByDescending(x => x.Area).First();
+                        #endregion
 
                         // place largest panel at the bottom of the bundle
                         bundle.Levels[numberOfLevels - 1].Add(maxPanel);
@@ -171,48 +174,75 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
 
                                     if (level.Panels.Count < Settings.MaxPanelsPerLevel)
                                     {
-                                        // Prefer to place panel that is within both bounds, but if not possible place panel less than upperbounds
-                                        if (((panel.Width.AsDouble + level.Width) < bundleWidthBounds[1] && (panel.Width.AsDouble + level.Width) > bundleWidthBounds[0]) && (panel.Height.AsDouble < bundleLengthBounds[1] && panel.Height.AsDouble > bundleLengthBounds[0]))
+                                        if ((panel.Width.AsDouble + level.Width) < bundleWidthBounds[1]  && panel.Height.AsDouble < bundleLengthBounds[1])
                                         {
                                             level.Add(panel);
                                             panelListCopy.RemoveAt(j);
                                         }
-                                        if (level.Panels.Count == 0)
-                                        {
-                                            for (int k = panelListCopy.Count - 1; k >= 0; k--)
-                                            {
-                                                if (panelListCopy.Count != 0)
-                                                {
-                                                    panel = panelListCopy[k];
-                                                    if ((panel.Width.AsDouble + level.Width) < bundleWidthBounds[1] && panel.Height.AsDouble < bundleLengthBounds[1])
-                                                    {
-                                                        level.Add(panel);
-                                                        panelListCopy.RemoveAt(k);
-                                                        j--;
-                                                    }
-                                                }
-                                            }
-                                                
-                                        }
+                                        #region Test Bound Preference
+                                        // Prefer to place panel that is within both bounds, but if not possible place panel less than upperbounds
+                                        //if (((panel.Width.AsDouble + level.Width) < bundleWidthBounds[1] && (panel.Width.AsDouble + level.Width) > bundleWidthBounds[0]) && (panel.Height.AsDouble < bundleLengthBounds[1] && panel.Height.AsDouble > bundleLengthBounds[0]))
+                                        //{
+                                        //    level.Add(panel);
+                                        //    panelListCopy.RemoveAt(j);
+                                        //}
+                                        //if (level.Panels.Count == 0)
+                                        //{
+                                        //    for (int k = panelListCopy.Count - 1; k >= 0; k--)
+                                        //    {
+                                        //        if (panelListCopy.Count != 0)
+                                        //        {
+                                        //            panel = panelListCopy[k];
+                                        //            if ((panel.Width.AsDouble + level.Width) < bundleWidthBounds[1] && panel.Height.AsDouble < bundleLengthBounds[1])
+                                        //            {
+                                        //                level.Add(panel);
+                                        //                panelListCopy.RemoveAt(k);
+                                        //                j--;
+                                        //            }
+                                        //        }
+                                        //    }
 
+                                        //}
+                                        #endregion
                                     }
                                 }
                             }
-                            // update bounds for the top most level
-                            
-                            bundleWidthBounds = BundleTools.CreateWidthBounds(level);
-                            bundleLengthBounds = BundleTools.CreateLengthBounds(level);
+                            // We already have a bottom panel
 
-                            // update the upperbound for the top most level
-                            //bundleLengthBounds[1] = level.Length + (level.Length * Settings.LengthMargin);
-                            //if (bundleLengthBounds[1] > Settings.MaxBundleLength)
-                            //    bundleLengthBounds[1] = Settings.MaxBundleLength;
+                            // Keep track of level length and width before the additions
+                            double originalLength = level.Length;
+                            double originalWidth = level.Width;
 
-                            //if ((level.Width + (level.Width * Settings.WidthMargin)) > Settings.MaxBundleWidth)
-                            //    bundleWidthBounds[1] = Settings.MaxBundleWidth;
-                            //else
-                            //    bundleWidthBounds[1] = level.Width + (level.Width * Settings.WidthMargin);
+                            // This will be used to add to the originalLength to get the overall level length
+                            double currentLength = 0;
+                            double currentWidth = 0;
 
+                            // Find how much length area is remaining [level.length - bundleLengthBound[1]]
+                            double lengthRemaining = bundleLengthBounds[1] - level.Length;
+
+                            for (int j = panelListCopy.Count - 1; j >= 0; j--)
+                            {
+                                Panel panel = panelListCopy[j];
+                                if (panel.Height.AsDouble < lengthRemaining && (panel.Width.AsDouble + currentWidth) < bundleWidthBounds[1])
+                                {
+                                    // We can place the panel long ways with level
+                                    level.Add(panel);
+                                    panelListCopy.RemoveAt(j);
+
+                                    // keep track of largest panel height and width
+                                    if (panel.Height.AsDouble > currentLength)
+                                        currentLength = panel.Height.AsDouble;
+
+                                    currentWidth += panel.Width.AsDouble;
+                                }
+
+                                level.Length = originalLength + currentLength;
+                                level.Width = originalWidth;
+                            }
+
+                            // update bounds
+                            //bundleWidthBounds = BundleTools.CreateWidthBounds(level);
+                            //bundleLengthBounds = BundleTools.CreateLengthBounds(level);
                         }
                     }
                 }

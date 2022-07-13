@@ -15,11 +15,11 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
             // Export bundle data to revit
             Data.Services.RevitExportService.Export(ProjectState.Doc);
 
+            // Show proof of export
             MessageBox.Show("Exported!");
 
-            //
-            // Close the Application
-            //
+            // Close application
+            ProjectState.MainWindow.Close();
         }
     }
 }

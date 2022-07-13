@@ -68,7 +68,7 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
                 }
             }
 
-            // Corrent the bundle numbers
+            // Correct the bundle numbers
             for (int i = 0; i < Project.Bundles.Count; i++)
             {
                 Bundle bundle = Project.Bundles[i];

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RedBuilt.Revit.BundleBuilder.Data.States;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace RedBuilt.Revit.BundleBuilder.ViewModels
         public MainWindowViewModel(NavigationState navigationState)
         {
             _navigationState = navigationState;
+
             _navigationState.CurrentViewModelChanged += OnCurrentViewModelChanged;
         }
 

@@ -10,14 +10,15 @@
     <Grid Margin="10">
         
         <!-- Main Content -->
-        <WebBrowser x:Name="createdBundles" Margin="0,50,0,70" Loaded="createdBundles_Loaded">
+        <WebBrowser x:Name="createdBundles" Margin="0,50,0,70" Loaded="CreatedBundles_Loaded">
         </WebBrowser>
         
         <!-- Header -->
         <Label Content="Export Bundles" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Margin="10,18,0,0"/>
 
         <!-- Buttons -->
-        <Button Content="Modify" Command="{Binding ModifyCommand}" Width="308" Height="36" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+        <Button Content="Modify" Click="Modify_Click" Width="149" Height="36" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,159,0"/>
+        <Button Content="View On Web" Click="ViewOnWeb_Click" Width="149" Height="36" VerticalAlignment="Top" HorizontalAlignment="Right" />
         <Button Content="Export" Command="{Binding ExportCommand}" Width="308" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
         <Button Content="Cancel" Command="{Binding RestartAndNavigateCommand}" Width="308" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
 

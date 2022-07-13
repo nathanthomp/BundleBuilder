@@ -88,10 +88,14 @@
     <Compile Include="Data\Models\Truck.cs" />
     <Compile Include="Data\Models\Type.cs" />
     <Compile Include="Data\Models\Width.cs" />
+    <Compile Include="Data\Services\DataService.cs" />
     <Compile Include="Data\Services\RevitExportService.cs" />
     <Compile Include="Data\Services\RevitImportService.cs" />
     <Compile Include="Data\States\NavigationState.cs" />
     <Compile Include="Data\States\ProjectState.cs" />
+    <Compile Include="Modals\ModifyModal.xaml.cs">
+      <DependentUpon>ModifyModal.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RevitApp.cs" />
     <Compile Include="RevitCommand.cs" />
     <Compile Include="ViewModels\ExportViewModel.cs" />
@@ -101,6 +105,10 @@
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Modals\ModifyModal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\BundleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

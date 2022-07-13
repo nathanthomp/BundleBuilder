@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:RedBuilt.Revit.BundleBuilder.ViewModels"
-        xmlns:views="clr-namespace:RedBuilt.Revit.BundleBuilder.Views"
+        xmlns:views="clr-namespace:RedBuilt.Revit.BundleBuilder.Views" 
+        xmlns:modals="clr-namespace:RedBuilt.Revit.BundleBuilder.Modals"
         mc:Ignorable="d"
         Title="BundleBuilder"
         ResizeMode="NoResize"
@@ -22,6 +23,6 @@
                 <views:ExportView/>
             </DataTemplate>
         </ContentControl.Resources>
-        
+
     </ContentControl>
 </Window>

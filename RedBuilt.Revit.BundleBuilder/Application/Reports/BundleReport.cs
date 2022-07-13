@@ -16,8 +16,9 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             StreamWriter sw = new StreamWriter(@"C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Documents\BundleReport.html");
             PrintHeader(sw);
 
-            foreach (Bundle bundle in Project.Bundles)
+            for (int i = 0; i < Project.Bundles.Count; i++)
             {
+                Bundle bundle = Project.Bundles[i];
                 sw.WriteLine("<div class=\"bundle\">");
                 sw.WriteLine("<p class=\"header\">B");
                 if (bundle.Number < 10)
@@ -27,8 +28,9 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
                 sw.Write(bundle.Number + " - " + bundle.Type + " " + bundle.Plate + "</p>");
 
                 sw.WriteLine("<div class=\"length-side\">");
-                foreach (Level level in bundle.Levels)
+                for (int j = bundle.Levels.Count; j > 0; j--)
                 {
+                    Level level = bundle.Levels.Where(x => x.Number == j).FirstOrDefault();
                     sw.WriteLine("<div class=\"panel\" style=\"width: " + level.Length * 1.75 + "px; height: " + level.Height * 1.75 + "px\"><p class=\"label\">");
                     foreach (Panel panel in level.Panels)
                     {
@@ -40,19 +42,14 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
                 sw.WriteLine("</p></div>");
 
                 sw.WriteLine("<div class=\"width-side\">");
-                foreach (Level level in bundle.Levels)
+                for (int j = bundle.Levels.Count; j > 0; j--)
                 {
-                    sw.WriteLine("<div class=\"panel\" style=\"width: " + level.Width * 1.75 + "px; height: " + level.Height * 1.75 + "px\"><p class=\"label\">");
-                    foreach (Panel panel in level.Panels)
-                    {
-                        sw.Write(panel.Name + " ");
-                    }
-
-                    sw.Write("</p></div>");
+                    Level level = bundle.Levels.Where(x => x.Number == j).FirstOrDefault();
+                    sw.WriteLine("<div class=\"panel\" style=\"width: " + level.Width * 1.75 + "px; height: " + level.Height * 1.75 + "px\"></div>");
                 }
                 sw.WriteLine("</div>");
 
-                for (int i = 0; i < bundle.Levels.Count * 2; i++)
+                for (int k = 0; k < bundle.Levels.Count * 2; k++)
                 {
                     sw.WriteLine("<br/>");
                 }

@@ -1,4 +1,5 @@
 ﻿using Autodesk.Revit.DB;
+using RedBuilt.Revit.BundleBuilder.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,10 @@ namespace RedBuilt.Revit.BundleBuilder.Data.States
         public static Document Doc;
 
         public static int CurrentBundleNumber { get; set; } = 1;
+
+        public static ExportView ExportView;
+
+        public static MainWindow MainWindow;
 
     }
 }
