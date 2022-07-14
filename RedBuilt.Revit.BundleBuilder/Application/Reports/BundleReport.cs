@@ -16,6 +16,8 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             StreamWriter sw = new StreamWriter(@"C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Documents\BundleReport.html");
             PrintHeader(sw);
 
+            // PrintTable(sw);
+
             for (int i = 0; i < Project.Bundles.Count; i++)
             {
                 Bundle bundle = Project.Bundles[i];
@@ -71,7 +73,39 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             sw.WriteLine(".bundle{ margin-bottom: 10px; }");
             sw.WriteLine(".header{ font-size: 12px; margin-bottom: 1px; }");
             sw.WriteLine(".label{ font-size: 10px; margin: 0px; }");
+            sw.WriteLine("th, td{ padding-right: 10px; padding-left: 10px; text-align: center; }");
             sw.WriteLine("</style></head><body>");
+        }
+
+        private static void PrintTable(StreamWriter sw)
+        {
+            sw.WriteLine("<div><table>");
+
+            // Table headers
+            sw.WriteLine("<tr><th>Bundle</th><th>Type</th><th>Plate</th><th>Levels</th><th>Height</th><th>Width</th><th>Length</th><th>Weight</th></tr>");
+
+            foreach (Bundle bundle in Project.Bundles)
+            {
+                sw.WriteLine("<tr>");
+                sw.Write("<td>" + bundle.Number + "</td>");
+                sw.Write("<td>" + bundle.Type +"</td>");
+                sw.Write("<td>" + bundle.Plate + "</td>");
+                sw.Write("<td>" + bundle.Levels.Count +"</td>");
+                sw.Write("<td>" + bundle.Height +"</td>");
+                sw.Write("<td>" + bundle.Width +"</td>");
+                sw.Write("<td>" + bundle.Length +"</td>");
+                sw.Write("<td>" + bundle.Weight +"</td>");
+                sw.WriteLine("</tr>");
+            }
+
+            
+            sw.WriteLine("</table></div>");
+            sw.WriteLine("</br>");
+            sw.WriteLine("</br>");
+            sw.WriteLine("</br>");
+            sw.WriteLine("</br>");
+            sw.WriteLine("</br>");
+            sw.WriteLine("</br>");
         }
 
         private static void PrintFooter(StreamWriter sw)

@@ -26,9 +26,6 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         // return boolean to ensure that add was successful
         public void Add(Panel panel)
         {
-            if (Height == 0)
-                Height = panel.Plate.Width;
-
             if (!Panels.Contains(panel))
             {
                 Panels.Add(panel);
@@ -37,6 +34,8 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
                 Weight += panel.Weight;
                 panel.Level = this;
                 panel.Bundle = Bundle;
+                if (Height == 0)
+                    Height = panel.Plate.Width;
             }
         }
 
@@ -48,6 +47,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
                 Panels.Remove(panel);
                 Width -= panel.Width.AsDouble;
                 Weight -= panel.Weight;
+
 
                 if (Panels.Count > 0)
                     Length = Panels.Max(x => x.Height.AsDouble);

@@ -37,5 +37,10 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
                     break;
             }
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

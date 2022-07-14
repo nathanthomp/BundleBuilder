@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,15 @@ namespace RedBuilt.Revit.BundleBuilder.Views
         public BundleView()
         {
             InitializeComponent();
+
+            // Assign data to xaml element
+            panels.ItemsSource = Project.Panels;
+
+            // Assign data to collection view source
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(panels.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Type");
+            view.GroupDescriptions.Add(groupDescription);
+
         }
     }
 }

@@ -3,21 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RedBuilt.Revit.BundleBuilder.Views"
+        xmlns:local="clr-namespace:RedBuilt.Revit.BundleBuilder.Views" 
+        xmlns:local1="clr-namespace:RedBuilt.Revit.BundleBuilder.Data.Models"
         mc:Ignorable="d"
         Height="450" 
         Width="800">
-    <!--<UserControl.Resources>
-        <CollectionViewSource x:Key="panels" Source="{Binding Panels}">
-            <CollectionViewSource.GroupDescriptions>
-                <PropertyGroupDescription PropertyName="Type"/>
-            </CollectionViewSource.GroupDescriptions>
-        </CollectionViewSource>
-    </UserControl.Resources>-->
     <Grid Margin="10">
         
         <!-- Main Content -->
-        <ListView x:Name="panels" Margin="0,50,0,70" ItemsSource="{Binding Panels}">
+        <ListView x:Name="panels" Margin="0,50,0,70">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Type" Width="150" DisplayMemberBinding="{Binding Path=Type.Name}"/>
@@ -28,7 +22,7 @@
                     <GridViewColumn Header="Bundle" Width="50">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox IsChecked="{Binding ToBundle}" /> <!--Unchecked="PanelCheckBox_Checked" Checked="PanelCheckBox_Unchecked"-->
+                                <CheckBox IsChecked="{Binding ToBundle}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

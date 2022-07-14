@@ -10,6 +10,9 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
     {
         public int Number { get; set; }
         public int NumberOfLevels { get; set; }
+        public double Height { get; set; }
+        public double Width { get; set; }
+        public double Length { get; set; }
         public double Weight { get; set; }
 
         // ???
@@ -32,6 +35,11 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
                 Levels.Add(level);
                 Weight += level.Weight;
                 level.Bundle = this;
+                if (level.Length > Length)
+                    Length = level.Length;
+                Height += level.Height;
+                if (level.Width > Width)
+                    Width = level.Width;
             }
         }
 
@@ -42,6 +50,15 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
                 Levels.Remove(level);
                 Weight -= level.Weight;
                 NumberOfLevels--;
+                if (Levels.Count > 0)
+                    Length = Levels.Max(x => x.Length);
+                else
+                    Length = 0;
+                Height -= level.Height;
+                if (Levels.Count > 0)
+                    Width = Levels.Max(x => x.Width);
+                else
+                    Width = 0;
             }
         }
 
