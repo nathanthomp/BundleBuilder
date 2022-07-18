@@ -38,6 +38,7 @@ namespace RedBuilt.Revit.BundleBuilder.Views
             DataContext = new MainWindowViewModel(navigationState);
 
             Project.Panels = RevitImportService.GetPanels(ProjectState.Doc);
+            RevitImportService.GetProject(ProjectState.Doc);
 
             InitializeComponent();
         }

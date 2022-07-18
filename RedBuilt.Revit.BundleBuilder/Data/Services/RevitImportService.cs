@@ -161,6 +161,12 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
             return panels;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="panel"></param>
+        /// <param name="panels"></param>
+        /// <returns></returns>
         public static bool HasDuplicatePanel(Panel panel, List<Panel> panels)
         {
             bool result = false;
@@ -170,9 +176,21 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
             return result;
         }
 
-        // There cannot be 2 panels with the same name
-        // all fields must be filled in
-        // 
+        /// <summary>
+        /// 
+        /// </summary>
+        public static void GetProject(Document doc)
+        {
+            if (doc.Title == null || doc.Title.Trim(' ').Length == 0)
+                throw new Exception("Document title is missing");
+            else
+                Project.Name = doc.Title;
+
+            if (doc.ProjectInformation.Number == null || doc.ProjectInformation.Number.Trim(' ').Length == 0)
+                throw new Exception("Project number is missing");
+            else
+                Project.Number = doc.ProjectInformation.Number;
+        }
 
     }
 }

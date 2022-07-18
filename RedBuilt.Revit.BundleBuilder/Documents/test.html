@@ -2,124 +2,26 @@
 
 <html>
     <head>
-        <title>BundleReport</title>
+        <title>BundlePrint</title>
         <style>
-            .length-side{
-                float: left;
-                background-color:aquamarine;
+            .page {
+                page-break-after: always;
+                border: 1px solid black;
             }
-            .width-side{
-                float: right;
-                background-color:bisque;
-            }
-            .panel{
-                border: 1px solid;
-                margin: 1px;
-            }
-            .bundle {
-                margin-bottom: 10px;
-            }
-            .header {
-                font-size: 12px;
-                margin-bottom: 1px;
-            }
-            .label{
-                margin: 0px;
-                font-size: 10px;
-            }
-            tr{
-                text-align: center;
-            }
-
-
         </style>
     </head>
     <body>
-        <div class="report">
-            <table>
-                <tr>
-                    <th>Bundle</th>
-                    <th>Type</th>
-                    <th>Levels</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Exterior</td>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Exterior</td>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Exterior</td>
-                    <td>4</td>
-                </tr>
-            </table>
+        <div class="page" id="1">
+            <p>Page 1</p>
+
         </div>
+        <div class="page" id="2">
+            <p>Page 2</p>
 
-
-        <div class="bundle">
-            <p class="header">B1</p>
-            <div class="length-side">
-                <div class="panel" style="width: 504px; height: 10.5px "></div>
-                <div class="panel" style="width: 504px; height: 10.5px"></div>
-                <div class="panel" style="width: 504px; height: 10.5px "></div>
-                <div class="panel" style="width: 504px; height: 10.5px "></div>
-            </div>
-            <div class="width-side">
-                <div class="panel" style="width: 178.5px; height: 10.5px "></div>
-                <div class="panel" style="width: 178.5px; height: 10.5px "></div>
-                <div class="panel" style="width: 178.5px; height: 10.5px "></div>
-                <div class="panel" style="width: 178.5px; height: 10.5px "></div>
-            </div>
-            <br />
-            <br />
-            <br />
-            <br />
         </div>
+        <div class="page" id="3">
+            <p>Page 3</p>
 
-
-        <div class="bundle">
-            <p class="header">B2</p>
-            <div class="length-side">
-                <div class="panel" style="width: 504px; height: 10.5px "><p class="label">E1</p></div>
-                <div class="panel" style="width: 504px; height: 10.5px"></div>
-                <div class="panel" style="width: 504px; height: 10.5px "></div>
-            </div>
-            <div class="width-side">
-                <div class="panel" style="width: 178.5px; height: 10.5px "></div>
-                <div class="panel" style="width: 178.5px; height: 10.5px "></div>
-                <div class="panel" style="width: 178.5px; height: 10.5px "></div>
-            </div>
-            <br />
-            <br />
-            <br />
         </div>
-
-
-        <div class="bundle">
-            <p class="header">B03</p>
-            <div class="length-side">
-                <div class="panel" style="width: 504px; height: 10.5px "></div>
-                <div class="panel" style="width: 504px; height: 10.5px"></div>
-                <div class="panel" style="width: 504px; height: 10.5px "></div>
-                <div class="panel" style="width: 504px; height: 10.5px "></div>
-            </div>
-            <div class="width-side">
-                <div class="panel" style="width: 178.5px; height: 10.5px "></div>
-                <div class="panel" style="width: 178.5px; height: 10.5px "></div>
-                <div class="panel" style="width: 178.5px; height: 10.5px "></div>
-                <div class="panel" style="width: 178.5px; height: 10.5px "></div>
-            </div>
-            <br />
-            <br />
-            <br />
-            <br />
-        </div>
-
-
     </body>
 </html>

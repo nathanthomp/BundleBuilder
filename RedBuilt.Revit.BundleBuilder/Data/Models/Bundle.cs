@@ -64,7 +64,13 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
 
         public override string ToString()
         {
-            return Number.ToString();
+            string properNumber = string.Empty;
+            if (Number < 10)
+                properNumber = String.Format("0{0}", Number.ToString());
+            else
+                properNumber = Number.ToString();
+
+            return String.Format("B{0} {1} - {2}", properNumber, Type, Plate);
         }
 
     }

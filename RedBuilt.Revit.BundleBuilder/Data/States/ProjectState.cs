@@ -18,5 +18,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.States
 
         public static MainWindow MainWindow;
 
+        public static readonly string Version = "1.0";
+
     }
 }
