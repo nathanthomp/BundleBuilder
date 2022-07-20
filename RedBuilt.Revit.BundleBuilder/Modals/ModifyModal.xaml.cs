@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using RedBuilt.Revit.BundleBuilder.Application.Tools;
 using RedBuilt.Revit.BundleBuilder.Data.Models;
 using RedBuilt.Revit.BundleBuilder.Data.Services;
 using RedBuilt.Revit.BundleBuilder.Data.States;
@@ -35,32 +36,27 @@ namespace RedBuilt.Revit.BundleBuilder.Modals
             // Use DataService to add either: panel to level, level to bundle, bundle to project, or all
             // Use DataService to remove either: panel from level, level from bundle, bundle from project, or all
 
-            // Assume that panel is not empty, level number is [1 - bundle.level.count + 1]
+            // Assume that panel is not empty, level number is [1 , bundle.level.count + 1]
 
-            // Get Panel to move
-            Panel panel = Application.Tools.PanelTools.GetPanelFromName(this.Panels.Text);
+            // Get Level to move
+            Level level = LevelTools.GetLevelFromName(this.Levels.Text);
+
             // Get bundle number Destination
-            if (Int32.TryParse(this.BundleLocation.Text, out int bundle)) { }
+            if (Int32.TryParse(this.BundleLocation.Text, out int destBundleNumber)) { }
+
             // Get level number
-            if (Int32.TryParse(this.LevelLocation.Text, out int level)) { }
+            if (Int32.TryParse(this.LevelLocation.Text, out int destLevelNumber)) { }
 
+            // Process the resquested modification
+            DataService.ProcessModification(level, destBundleNumber, destLevelNumber);
 
-            // Make sure that the destination is a valid move
-
-            DataService.Delete(panel);
-            if (bundle != 0)
-            {
-                DataService.Create(panel, bundle, level);
-            }
-            
-            DataService.Update();
-
-
-            
+            // Close the popup
+            this.Close();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
+            // Close the popup
             this.Close();
         }
     }

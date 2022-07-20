@@ -24,6 +24,8 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
 
             while (panelListCopy.Count > 0)
             {
+                #region Establish Bundle
+
                 // Establish Bundle
                 Bundle bundle = new Bundle(Project.CurrentBundleNumber, numberOfLevels)
                 {
@@ -40,6 +42,10 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
                     bundle.Add(level);
                     level.Bundle = bundle;
                 }
+
+                #endregion
+
+                #region Bundle Top Down
 
                 // For each level in the Bundle, look at each Panel in List to see if it will fit within the Level
                 // then remove the Panel from the List if it does fit. Does not look for another Panel if the List
@@ -62,8 +68,10 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
                                 {
                                     if ((panel.Width.AsDouble + level.Width) < Settings.MaxBundleWidth)
                                     {
-                                        level.Add(panel);
-                                        panelListCopy.RemoveAt(j);
+                                        if (level.Add(panel))
+                                            panelListCopy.RemoveAt(j);
+                                        else
+                                            throw new Exception("Cannot add panel to level");
                                     }
                                 }
                             }
@@ -93,8 +101,10 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
                                             &&
                                             (panel.Height.AsDouble + level.Length) < bundleLengthBounds[1])
                                         {
-                                            level.Add(panel);
-                                            panelListCopy.RemoveAt(j);
+                                            if (level.Add(panel))
+                                                panelListCopy.RemoveAt(j);
+                                            else
+                                                throw new Exception("Cannot add panel to level");
                                         }
                                     }
                                 }
@@ -114,8 +124,11 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
 
                                 if (panel.IsWithinBounds(bundleWidthBounds, bundleLengthBounds))
                                 {
-                                    level.Add(panel);
-                                    panelListCopy.RemoveAt(j);
+                                    if (level.Add(panel))
+                                        panelListCopy.RemoveAt(j);
+                                    else
+                                        throw new Exception("Cannot add panel to level");
+
                                     break;
                                 }
                             }
@@ -123,6 +136,10 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
                     }
 
                 } // bundle is complete
+
+                #endregion
+
+                #region Bundle Bottom Up
 
                 // bundle has empty levels
                 if (BundleTools.NumberOfEmptyLevels(bundle) > 0)
@@ -139,8 +156,11 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
                             for (int j = 0; j < level.Panels.Count; j++)
                             {
                                 Panel panel = level.Panels[j];
-                                level.Remove(panel);
-                                panelListCopy.Add(panel);
+
+                                if (level.Remove(panel))
+                                    panelListCopy.Add(panel);
+                                else
+                                    throw new Exception("Could not remove panel from level");
                             }
                         }
                         // correct the order of panels in panel list
@@ -157,6 +177,7 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
 
                         // place largest panel at the bottom of the bundle
                         bundle.Levels[numberOfLevels - 1].Add(maxPanel);
+
 
                         // update bounds for bottom most level
                         bundleWidthBounds = BundleTools.CreateWidthBounds(bundle.Levels[numberOfLevels - 1]);
@@ -176,8 +197,10 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
                                     {
                                         if ((panel.Width.AsDouble + level.Width) < bundleWidthBounds[1]  && panel.Height.AsDouble < bundleLengthBounds[1])
                                         {
-                                            level.Add(panel);
-                                            panelListCopy.RemoveAt(j);
+                                            if (level.Add(panel))
+                                                panelListCopy.RemoveAt(j);
+                                            else
+                                                throw new Exception("Cannot add panel to level");
                                         }
                                         #region Test Bound Preference
                                         // Prefer to place panel that is within both bounds, but if not possible place panel less than upperbounds
@@ -226,8 +249,10 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
                                 if (panel.Height.AsDouble < lengthRemaining && (panel.Width.AsDouble + currentWidth) < bundleWidthBounds[1])
                                 {
                                     // We can place the panel long ways with level
-                                    level.Add(panel);
-                                    panelListCopy.RemoveAt(j);
+                                    if (level.Add(panel))
+                                        panelListCopy.RemoveAt(j);
+                                    else
+                                        throw new Exception("Cannot add panel to level");
 
                                     // keep track of largest panel height and width
                                     if (panel.Height.AsDouble > currentLength)
@@ -246,8 +271,30 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
                         }
                     }
                 }
+
+                #endregion
+
+                #region Fill In Bundle Information
+
+                // Fill in bundle information
+                double height = 0, weight = 0;
+                foreach (Level levelInBundle in bundle.Levels)
+                {
+                    height += levelInBundle.Height;
+                    // Add sticker
+                    height += 3;
+                    weight += levelInBundle.Weight;
+                }
+                bundle.Height = height;
+                bundle.Weight = weight;
+                bundle.Width = bundle.Levels.Max(x => x.Width);
+                bundle.Length = bundle.Levels.Max(x => x.Length);
+                bundle.NumberOfLevels = bundle.Levels.Count;
+
                 Project.Bundles.Add(bundle);
                 Project.CurrentBundleNumber++;
+
+                #endregion
             }
         }
     }

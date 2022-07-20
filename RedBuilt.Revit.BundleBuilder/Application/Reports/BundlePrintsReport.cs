@@ -1,4 +1,5 @@
 ﻿using iText.Html2pdf;
+using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using RedBuilt.Revit.BundleBuilder.Data.Models;
@@ -16,10 +17,18 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
     public class BundlePrintsReport
     {
         private static readonly string localFile = @"C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Documents\BundlePrints.html";
-        private static readonly string imageFile = @"C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\Built.svg";
+        private static readonly string imageFile = @"C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg";
 
         public static void CreatePdf(string fileName)
         {
+
+            if (File.Exists(fileName))
+                File.Delete(fileName);
+            if (File.Exists(localFile))
+                File.Delete(localFile);
+
+            CreateHtml();
+
             #region Convert HTML to PDF
             try
             {
@@ -48,146 +57,155 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             foreach (Bundle bundle in Project.Bundles)
             {
                 CreatePage(bundle, sw);
-
-                // Remove after test //
-                break;
             }
+                
 
             CreateFileFooter(sw);
+
+            sw.Close();
         }
 
         private static void CreateFileHeader(StreamWriter sw)
         {
-            sw.WriteLine("<html>");
-            sw.WriteLine("<head>");
-            sw.WriteLine("<title>BundlePrints</title>");
-            sw.WriteLine("<style>");
+            sw.WriteLine("<!DOCTYPE html>");
+            sw.WriteLine("<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">");
+            sw.WriteLine("\t<head>");
+            sw.WriteLine("\t\t<meta charset=\"utf-8\"/>");
+            sw.WriteLine("\t\t<title>BundlePrints</title>");
 
-            sw.WriteLine("body{ margin-top: 0px; }");
-            sw.WriteLine(".page{ font-size: 18px;}");
+            #region css
+            sw.WriteLine("\t\t<style type=\"text/css\">");
+            sw.WriteLine("\t\t\tbody{ margin: 0px; }");
+            sw.WriteLine("\t\t\t.page{ page-break-after: always; }");
 
             // Header
-            sw.WriteLine("header{ column-count: 2; }");
-            sw.WriteLine("img{ width: 240px; height: 72px; }");
-            sw.WriteLine(".version{ padding-top: 30px; text-align: right; }");
+            sw.WriteLine("\t\t\t.header{ height: 100px; }");
+            sw.WriteLine("\t\t\timg{ width: 240px; height: 72px; float: left; }");
+            sw.WriteLine("\t\t\t.version{ float: right; padding-top: 30px; }");
 
             // Bundle Info
-            sw.WriteLine(".bundle_info{ display: grid; padding-top: 40px; padding-bottom: 60px; }");
-            sw.WriteLine(".bundle_info-left-side-title{ grid-column-start: 1; }");
-            sw.WriteLine(".bundle_info-left-side-data{ grid-column-start: 2; }");
-            sw.WriteLine(".bundle_info-right-side-title{ grid-column-start: 3; }");
-            sw.WriteLine(".bundle_info-right-side-data{ grid-column-start: 4; }");
-            sw.WriteLine(".row{ padding: 5px; }");
-            sw.WriteLine(".row-1{ grid-row-start: 1; }");
-            sw.WriteLine(".row-2{ grid-row-start: 2; }");
-            sw.WriteLine(".row-3{ grid-row-start: 3; }");
-            sw.WriteLine(".row-4{ grid-row-start: 4; }");
+            sw.WriteLine("\t\t\t.bundle-info{ height: 200px; }");
+            sw.WriteLine("\t\t\t.bundle-info-left-side{ float: left; }");
+            sw.WriteLine("\t\t\t.bundle-info-right-side{ float: right; }");
+            sw.WriteLine("\t\t\t.title{ float: left; }");
+            sw.WriteLine("\t\t\t.data{ float: right; }");
+            sw.WriteLine("\t\t\tul{ list-style-type: none; padding-left: 0px; padding-right: 50px; }");
+            sw.WriteLine("\t\t\tli{ padding-top: 8px; }");
 
             // Views
-            sw.WriteLine(".length-view{ padding-bottom: 40px; height: 250px; }");
-            sw.WriteLine(".width-view{ padding-bottom: 20px; height: 250px; }");
-            sw.WriteLine(".view-title{ text-align: center; padding-bottom: 20px; }");
-            sw.WriteLine(".panel{ border: 1px solid black; }");
-            sw.WriteLine(".sticker{ height: 6px; }");
+            sw.WriteLine("\t\t\t.length-view{ height: 250px; }");
+            sw.WriteLine("\t\t\t.width-view{ height: 250px; }");
+            sw.WriteLine("\t\t\t.view-title{ text-align: center; padding-bottom: 30px; }");
+            sw.WriteLine("\t\t\t.panel{ border: 1px solid black; }");
+            sw.WriteLine("\t\t\t.sticker{ height: 6px; }");
 
             // Footer
-            sw.WriteLine("footer{ column-count: 3; text-align: center; padding-top: 90px; }");
-            sw.WriteLine(".footer-project{ text-align: left; }");
-            sw.WriteLine(".footer-date_created{ text-align: center; }");
-            sw.WriteLine(".footer-page_index{ text-align: right; }");
+            sw.WriteLine("\t\t\t.footer{ padding-top: 200px; }");
+            sw.WriteLine("\t\t\t.footer-project{ display: inline-block; width: 310px; float: left; }");
+            sw.WriteLine("\t\t\t.footer-date-created{ display: inline-block; width: 100px; }");
+            sw.WriteLine("\t\t\t.footer-page-index{ display: inline-block; width: 200px; float: right; text-align: right; }");
 
-            sw.WriteLine("</style>");
-            sw.WriteLine("</head>");
-            sw.WriteLine("<body>");
+            sw.WriteLine("\t\t</style>");
+            #endregion
+
+            sw.WriteLine("\t</head>");
+            sw.WriteLine("\t<body>");
         }
 
         private static void CreatePage(Bundle bundle, StreamWriter sw)
         {
-            sw.WriteLine("<div class=\"page\">");
+            sw.WriteLine("\t\t<div class=\"page\">");
 
             // Header
-            sw.WriteLine("\t<header><img src=\"" + imageFile + "\"/><div> class=\"version\">BundleBuilder v" + ProjectState.Version + "</div></header>");
+            sw.WriteLine(String.Format("\t\t\t<div class=\"header\"><img src=\"{0}\"/><div class=\"version\">BundleBuilder v{1}</div></div>", imageFile, ProjectState.Version));
 
             // Bundle Info
-            sw.WriteLine("\t<div class=\"bundle_info\">");
-            sw.WriteLine("\t\t<div class=\"col bundle_info-left-side-title\">");
-            sw.WriteLine("\t\t\t<div class=\"row row-1\">Project Name</div>");
-            sw.WriteLine("\t\t\t<div class=\"row row-2\">Project Number</div>");
-            sw.WriteLine("\t\t\t<div class=\"row row-3\">Project Location</div>");
-            sw.WriteLine("\t\t\t<div class=\"row row-4\">Bundle</div>");
-            sw.WriteLine("\t\t</div>");
-
-            sw.WriteLine("\t\t<div class=\"col bundle_info-left-side-data\">");
-            sw.WriteLine("\t\t\t<div class=\"row row-1\">" + Project.Name + "</div>");
-            sw.WriteLine("\t\t\t<div class=\"row row-2\">" + Project.Number + "</div>");
-            sw.WriteLine("\t\t\t<div class=\"row row-3\">" + Project.Location + "</div>");
-            sw.WriteLine("\t\t\t<div class=\"row row-4\">" + bundle.ToString() + "</div>");
-            sw.WriteLine("\t\t</div>");
-
-            sw.WriteLine("\t\t<div class=\"col bundle_info-right-side-Title\">");
-            sw.WriteLine("\t\t\t<div class=\"row row-1\">Bundle Length</div>");
-            sw.WriteLine("\t\t\t<div class=\"row row-2\">Bundle Width</div>");
-            sw.WriteLine("\t\t\t<div class=\"row row-3\">Bundle Height</div>");
-            sw.WriteLine("\t\t\t<div class=\"row row-4\">Bundle Weight</div>");
-            sw.WriteLine("\t\t</div>");
-
-            sw.WriteLine("\t\t<div class=\"col bundle_info-left-side-data\">");
-            sw.WriteLine("\t\t\t<div class=\"row row-1\">" + bundle.Length + "</div>");
-            sw.WriteLine("\t\t\t<div class=\"row row-2\">" + bundle.Width + "</div>");
-            sw.WriteLine("\t\t\t<div class=\"row row-3\">" + bundle.Height + "</div>");
-            sw.WriteLine("\t\t\t<div class=\"row row-4\">" + bundle.Weight + "</div>");
-            sw.WriteLine("\t\t</div>");
-
-            sw.WriteLine("\t</div>");
+            sw.WriteLine("\t\t\t<div class=\"bundle-info\">");
+            sw.WriteLine("\t\t\t\t<div class=\"bundle-info-left-side\">");
+            sw.WriteLine("\t\t\t\t\t<div class=\"title\">");
+            sw.WriteLine("\t\t\t\t\t\t<ul>");
+            sw.WriteLine("\t\t\t\t\t\t\t<li>Project Name</li>");
+            sw.WriteLine("\t\t\t\t\t\t\t<li>Project Number</li>");
+            sw.WriteLine("\t\t\t\t\t\t\t<li>Project Location</li>");
+            sw.WriteLine("\t\t\t\t\t\t\t<li>Bundle</li>");
+            sw.WriteLine("\t\t\t\t\t\t</ul>");
+            sw.WriteLine("\t\t\t\t\t</div>");
+            sw.WriteLine("\t\t\t\t\t<div class=\"data\">");
+            sw.WriteLine("\t\t\t\t\t\t<ul>");
+            sw.WriteLine(String.Format("\t\t\t\t\t\t\t<li>{0}</li>", Project.Name));
+            sw.WriteLine(String.Format("\t\t\t\t\t\t\t<li>{0}</li>", Project.Number)); 
+            sw.WriteLine(String.Format("\t\t\t\t\t\t\t<li>{0}</li>", Project.Location));
+            sw.WriteLine(String.Format("\t\t\t\t\t\t\t<li>{0}</li>", bundle.ToString()));
+            sw.WriteLine("\t\t\t\t\t\t</ul>");
+            sw.WriteLine("\t\t\t\t\t</div>");
+            sw.WriteLine("\t\t\t\t</div>");
+            sw.WriteLine("\t\t\t\t<div class=\"bundle-info-right-side\">");
+            sw.WriteLine("\t\t\t\t\t<div class=\"title\">");
+            sw.WriteLine("\t\t\t\t\t\t<ul>");
+            sw.WriteLine("\t\t\t\t\t\t\t<li>Bundle Length</li>");
+            sw.WriteLine("\t\t\t\t\t\t\t<li>Bundle Width</li>");
+            sw.WriteLine("\t\t\t\t\t\t\t<li>Bundle Height</li>");
+            sw.WriteLine("\t\t\t\t\t\t\t<li>Bundle Weight</li>");
+            sw.WriteLine("\t\t\t\t\t\t</ul>");
+            sw.WriteLine("\t\t\t\t\t</div>");
+            sw.WriteLine("\t\t\t\t\t<div class=\"data\">");
+            sw.WriteLine("\t\t\t\t\t\t<ul>");
+            sw.WriteLine(String.Format("\t\t\t\t\t\t\t<li>{0}</li>", Tools.DimensionTools.AsString(bundle.Length))); 
+            sw.WriteLine(String.Format("\t\t\t\t\t\t\t<li>{0}</li>", Tools.DimensionTools.AsString(bundle.Width))); 
+            sw.WriteLine(String.Format("\t\t\t\t\t\t\t<li>{0}</li>", Tools.DimensionTools.AsString(bundle.Height))); 
+            sw.WriteLine(String.Format("\t\t\t\t\t\t\t<li>{0} lbs.</li>", bundle.Weight)); 
+            sw.WriteLine("\t\t\t\t\t\t</ul>");
+            sw.WriteLine("\t\t\t\t\t</div>");
+            sw.WriteLine("\t\t\t\t</div>");
+            sw.WriteLine("\t\t\t</div>");
 
             // Length View
-            sw.WriteLine("\t<div class=\"length-view\">");
-            sw.WriteLine("\t\t<div class=\"view-title\">Length View</div>");
-            sw.WriteLine("\t\t<div class=\"view-bundle\">");
+            sw.WriteLine("\t\t\t<div class=\"length-view\">");
+            sw.WriteLine("\t\t\t\t<div class=\"view-title\">Length View</div>");
+            sw.WriteLine("\t\t\t\t<div class=\"view-bundle\">");
 
             foreach (Level level in bundle.Levels)
             {
-
-                sw.WriteLine("\t\t\t<div class=\"panel\" style=\"width: " + (level.Length * 2.25) + 6 + "px; height: " + (level.Height) + 6 + "px;\">");
+                sw.WriteLine();
+                sw.Write(String.Format("\t\t\t\t\t<div class=\"panel\" style=\"width: {0}px; height: {1}px;\">", (level.Length * 2.25) + 6, (level.Height * 2.25) + 6));
 
                 foreach (Panel panel in level.Panels)
-                {
                     sw.Write(panel.Name.FullName + " ");
-                }
 
                 sw.Write("</div>");
-                sw.WriteLine("\t\t\t<div class=\"sticker\"></div>");
+                sw.WriteLine("\t\t\t\t\t<div class=\"sticker\"></div>");
             }
-            sw.WriteLine("\t\t</div>");
-            sw.WriteLine("\t</div>");
+
+            sw.WriteLine("\t\t\t\t</div>");
+            sw.WriteLine("\t\t\t</div>");
 
             // Width View
-            sw.WriteLine("\t<div class=\"width-view\">");
-            sw.WriteLine("\t\t<div class=\"view-title\">Width View</div>");
-            sw.WriteLine("\t\t<div class=\"view-bundle\">");
+            sw.WriteLine("\t\t\t<div class=\"width-view\">");
+            sw.WriteLine("\t\t\t\t<div class=\"view-title\">Width View</div>");
+            sw.WriteLine("\t\t\t\t<div class=\"view-bundle\">");
 
             foreach (Level level in bundle.Levels)
             {
-                sw.WriteLine("\t\t\t<div class=\"panel\" style=\"width: " + (level.Width * 2.25) + 6 + "px; height: " + (level.Height) + 6 + "px;\"></div>");
-                sw.WriteLine("\t\t\t<div class=\"sticker\"></div>");
+                sw.WriteLine(String.Format("\t\t\t\t\t<div class=\"panel\" style=\"width: {0}px; height: {1}px;\"></div>", (level.Width * 2.25) + 6, (level.Height * 2.25) + 6));
+                sw.WriteLine("\t\t\t\t\t<div class=\"sticker\"></div>");
             }
 
-            sw.WriteLine("\t\t</div>");
-            sw.WriteLine("\t</div>");
+            sw.WriteLine("\t\t\t\t</div>");
+            sw.WriteLine("\t\t\t</div>");
 
             // Footer
-            sw.WriteLine("\t<footer>");
-            sw.WriteLine("\t\t<div class=\"footer-project\">" + Project.Number + "</div>");
-            sw.WriteLine("\t\t<div class=\"footer-date_created\">" + DateTime.Now.ToShortDateString() + "</div>");
-            sw.WriteLine("\t\t<div class=\"footer-page_index\">Bundle" + bundle.Number + "/" + Project.Bundles.Count + "</div>");
-            sw.WriteLine("\t</footer>");
+            sw.WriteLine("\t\t\t<div class=\"footer\">");
+            sw.WriteLine(String.Format("\t\t\t\t<div class=\"footer-project\">{0}</div>", Project.Number));
+            sw.WriteLine(String.Format("\t\t\t\t<div class=\"footer-date-created\">{0}</div>", DateTime.Now.ToShortDateString()));
+            sw.WriteLine(String.Format("\t\t\t\t<div class=\"footer-page-index\">Bundle {0}/{1}</div>", bundle.Number, Project.Bundles.Count));
+            sw.WriteLine("\t\t\t</div>");
 
-            sw.WriteLine("/<div>");
+            sw.WriteLine("\t\t</div>");
         }
 
         private static void CreateFileFooter(StreamWriter sw)
         {
-            sw.WriteLine("</body>");
+            sw.WriteLine("\t</body>");
             sw.WriteLine("</html>");
         }
     }

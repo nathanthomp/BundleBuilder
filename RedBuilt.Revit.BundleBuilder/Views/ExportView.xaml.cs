@@ -37,7 +37,14 @@ namespace RedBuilt.Revit.BundleBuilder.Views
         private void Modify_Click(object sender, RoutedEventArgs e)
         {
             ModifyModal mm = new ModifyModal();
-            mm.Panels.ItemsSource = Project.Panels;
+
+            // Create list of levels in project
+            List<string> levels = new List<string>();
+            foreach (Bundle bundle in Project.Bundles)
+                for (int i = bundle.Levels.Count; i > 0; i--)
+                    levels.Add(bundle.Levels.Where(x => x.Number == i).First().ToString());
+
+            mm.Levels.ItemsSource = levels;
             mm.ShowDialog();
         }
 

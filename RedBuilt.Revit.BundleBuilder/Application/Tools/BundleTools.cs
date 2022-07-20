@@ -127,27 +127,6 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Tools
             return result;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public static void CorrectBundleLevelNumbers()
-        {
-            for (int i = 0; i < Project.Bundles.Count; i++)
-            {
-                Bundle bundle = Project.Bundles[i];
-
-                int counter = 1;
-                for (int j = bundle.NumberOfLevels - 1; j >= 0; j--)
-                {
-                    bundle.Levels[j].Number = counter;
-                    counter++;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public static void CorrectBundleNumbers()
         {
             int counter = 1;
@@ -158,5 +137,48 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Tools
                 counter++;
             }
         }
+
+        public static void CorrectLevelNumbers()
+        {
+            // Increment through all of the bundles in Project.Bundles
+            for (int i = 0; i < Project.Bundles.Count; i++)
+            {
+                // Select a bundle
+                Bundle bundle = Project.Bundles[i];
+                List<Level> levelsCopy = new List<Level>(bundle.Levels);
+
+                // Increment for number of levels
+                for (int j = bundle.Levels.Count; j > 0; j--)
+                {
+                    // Get level with the largest number
+                    Level level = LevelTools.GetLevelFromNumberAndBundle(bundle, levelsCopy.Max(x => x.Number));
+
+                    // Remove the largest level from levelsCopy
+                    levelsCopy.Remove(level);
+
+                    // Change level number to the levels.count
+                    level.Number = j;
+                }
+            }
+        }
+
+        public static void CorrectLevelNumbers(Bundle bundle)
+        {
+            List<Level> levelsCopy = new List<Level>(bundle.Levels);
+
+            // Increment for number of levels
+            for (int j = bundle.Levels.Count; j > 0; j--)
+            {
+                // Get level with the largest number
+                Level level = LevelTools.GetLevelFromNumberAndBundle(bundle, levelsCopy.Max(x => x.Number));
+
+                // Remove the largest level from levelsCopy
+                levelsCopy.Remove(level);
+
+                // Change level number to the levels.count
+                level.Number = j;
+            }
+        }
+
     }
 }

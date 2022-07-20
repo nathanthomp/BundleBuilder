@@ -1,4 +1,7 @@
-﻿using RedBuilt.Revit.BundleBuilder.Application.Tools;
+﻿using RedBuilt.Revit.BundleBuilder.Application.Reports;
+using RedBuilt.Revit.BundleBuilder.Application.Solve;
+using RedBuilt.Revit.BundleBuilder.Application.Sort;
+using RedBuilt.Revit.BundleBuilder.Application.Tools;
 using RedBuilt.Revit.BundleBuilder.Data.Models;
 using RedBuilt.Revit.BundleBuilder.Data.States;
 using System;
@@ -28,10 +31,10 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
             Project.Panels = Project.Panels.Where(x => x.ToBundle = true).ToList();
 
             // Sort exterior panels by user preference
-            Project.Panels = Application.Sort.PanelPreferenceSort.Sort(Project.Panels);
+            Project.Panels = PanelPreferenceSort.Sort(Project.Panels);
 
             // Sort panels by type then plate
-            Dictionary<string, Dictionary<string, List<Panel>>> panelsByTypeThenPlate = Application.Sort.PanelTypeAndPlateSort.Sort();
+            Dictionary<string, Dictionary<string, List<Panel>>> panelsByTypeThenPlate = PanelTypeAndPlateSort.Sort();
 
             // Solve list of panels that includes the starting panel
             string startPanelType = PanelTools.GetPanelFromName(Settings.StartingPanel).Type.Name;
@@ -41,7 +44,7 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
                     foreach (KeyValuePair<string, List<Panel>> platePanelsDict in typePlateDict.Value)
                         if (platePanelsDict.Key.Equals(startPanelPlate))
                         {
-                            Application.Solve.BundleSolve.Solve(startPanelType, startPanelPlate, platePanelsDict.Value);
+                            BundleSolve.Solve(startPanelType, startPanelPlate, platePanelsDict.Value);
                             typePlateDict.Value.Remove(startPanelPlate);
                             break;
                         }
@@ -49,7 +52,7 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
             // Solve the rest of the list of panels
             foreach (KeyValuePair<string, Dictionary<string, List<Panel>>> typePlateDict in panelsByTypeThenPlate)
                 foreach (KeyValuePair<string, List<Panel>> platePanelsDict in typePlateDict.Value)
-                    Application.Solve.BundleSolve.Solve(typePlateDict.Key, platePanelsDict.Key, platePanelsDict.Value);
+                    BundleSolve.Solve(typePlateDict.Key, platePanelsDict.Key, platePanelsDict.Value);
 
             // Remove empty levels in bundle
             for (int i = 0; i < Project.Bundles.Count; i++)
@@ -81,7 +84,7 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
                 }
             }
 
-            Application.Reports.BundleReport.Export();
+            BundleReport.Export();
 
             // Update current view
             _navigationState.CurrentViewModel = _createViewModel();

@@ -155,6 +155,7 @@
     <Compile Include="Application\Sort\PanelTypeAndPlateSort.cs" />
     <Compile Include="Application\Tools\BundleTools.cs" />
     <Compile Include="Application\Tools\DimensionTools.cs" />
+    <Compile Include="Application\Tools\LevelTools.cs" />
     <Compile Include="Application\Tools\PanelTools.cs" />
     <Compile Include="Commands\BundleAndNavigateCommand.cs" />
     <Compile Include="Commands\Command.cs" />

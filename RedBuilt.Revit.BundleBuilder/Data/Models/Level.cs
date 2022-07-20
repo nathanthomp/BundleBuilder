@@ -23,8 +23,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
             Panels = new List<Panel>();
         }
 
-        // return boolean to ensure that add was successful
-        public void Add(Panel panel)
+        public bool Add(Panel panel)
         {
             if (!Panels.Contains(panel))
             {
@@ -36,11 +35,16 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
                 panel.Bundle = Bundle;
                 if (Height == 0)
                     Height = panel.Plate.Width;
+
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
-        // return boolean to ensure that add was successful
-        public void Remove(Panel panel)
+        public bool Remove(Panel panel)
         {
             if (Panels.Contains(panel))
             {
@@ -53,12 +57,18 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
                     Length = Panels.Max(x => x.Height.AsDouble);
                 else
                     Length = 0;
+
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
         public override string ToString()
         {
-            return Number.ToString();
+            return String.Format("Bundle {0} - Level {1}", Bundle.Number, Number);
         }
     }
 }

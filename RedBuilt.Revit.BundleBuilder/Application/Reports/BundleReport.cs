@@ -32,7 +32,7 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
                 sw.WriteLine("<div class=\"length-side\">");
                 for (int j = bundle.Levels.Count; j > 0; j--)
                 {
-                    Level level = bundle.Levels.Where(x => x.Number == j).FirstOrDefault();
+                    Level level = bundle.Levels.Where(x => x.Number == j).First();
                     sw.WriteLine("<div class=\"panel\" style=\"width: " + level.Length * 1.75 + "px; height: " + level.Height * 1.75 + "px\"><p class=\"label\">");
                     foreach (Panel panel in level.Panels)
                     {

@@ -181,6 +181,16 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
         /// </summary>
         public static void GetProject(Document doc)
         {
+            // Get the cover page
+
+            
+
+
+
+
+
+
+
             if (doc.Title == null || doc.Title.Trim(' ').Length == 0)
                 throw new Exception("Document title is missing");
             else
@@ -190,6 +200,31 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                 throw new Exception("Project number is missing");
             else
                 Project.Number = doc.ProjectInformation.Number;
+
+            if (doc.ProjectInformation.Location == null)
+                if (doc.ProjectInformation.Address == null)
+                    throw new Exception("No location data availible.");
+                else
+                    Project.Location = doc.ProjectInformation.Address;
+            else
+                Project.Location = doc.ProjectInformation.Location.ToString();
+                
+
+            if (Project.Name.Contains(Project.Number))
+            {
+                // Take project number out of project name
+                int indexOfNumber = Project.Name.IndexOf(Project.Number);
+                Project.Name = Project.Name.Remove(indexOfNumber, 6);
+            }
+
+            if (Project.Name.Length > 30)
+                // trim down the string
+                Project.Name = Project.Name.Substring(0, 30);
+
+            if (Project.Location.Length > 30)
+                // trim down the string
+                Project.Location = Project.Location.Substring(0, 30);
+            
         }
 
     }

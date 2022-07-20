@@ -28,6 +28,9 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Tools
             return result;
         }
 
+        //
+        // dead code
+        //
         public static Panel GetLargestHeightPanelInLevel(List<Panel> panelList)
         {
             Panel result = null;
