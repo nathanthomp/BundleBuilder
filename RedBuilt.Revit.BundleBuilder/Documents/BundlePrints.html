@@ -16,15 +16,22 @@
 			.data{ float: right; }
 			ul{ list-style-type: none; padding-left: 0px; padding-right: 50px; }
 			li{ padding-top: 8px; }
+			.additional-info{ font-size: 14px; padding-top: 2px; }
+			.sticker-info{ float: right; padding-right: 50px; }
 			.length-view{ height: 250px; }
 			.width-view{ height: 250px; }
 			.view-title{ text-align: center; padding-bottom: 30px; }
 			.panel{ border: 1px solid black; }
 			.sticker{ height: 6px; }
-			.footer{ padding-top: 200px; }
+			.comment{ padding-top: 140px; padding-left: 110px }
+			.footer{ padding-top: 50px; }
 			.footer-project{ display: inline-block; width: 310px; float: left; }
 			.footer-date-created{ display: inline-block; width: 100px; }
 			.footer-page-index{ display: inline-block; width: 200px; float: right; text-align: right; }
+			table{ margin-left: auto; margin-right: auto; border-collapse: collapse; text-align: center; padding-top: 100px; }
+			th{ padding-left: 40px; padding-right: 40px; padding-top: 100px; padding-bottom: 8px; }
+			tr{ border-bottom: 1px solid black; padding: 8px; }
+			td{ padding-top: 4px; padding-bottom: 4px; }
 		</style>
 	</head>
 	<body>
@@ -55,35 +62,38 @@ CITY, STATE ZIP</li>
 						<ul>
 							<li>Bundle Length</li>
 							<li>Bundle Width</li>
-							<li>Bundle Height</li>
 							<li>Bundle Weight</li>
+							<li>Bundle Height</li>
 						</ul>
 					</div>
 					<div class="data">
 						<ul>
 							<li>18' - 3"</li>
 							<li>8' - 0.25"</li>
-							<li>3' - 0"</li>
 							<li>1655 lbs.</li>
+							<li>3' - 0"</li>
 						</ul>
 					</div>
 				</div>
+				<div class="additional-info">
+					<div class="sticker-info">* Height assumes 3" stickers</div>
+				</div>
 			</div>
 			<div class="length-view">
-				<div class="view-title">Length View</div>
+				<div class="view-title">Length View - Allowable Overhang 33%</div>
 				<div class="view-bundle">
 
-					<div class="panel" style="width: 498.75px; height: 19.5px;">E1 </div>					<div class="sticker"></div>
+					<div class="panel" style="width: 498.75px; height: 19.5px;">Level 4: E1 </div>					<div class="sticker"></div>
 
-					<div class="panel" style="width: 498.75px; height: 19.5px;">E3 </div>					<div class="sticker"></div>
+					<div class="panel" style="width: 498.75px; height: 19.5px;">Level 3: E3 </div>					<div class="sticker"></div>
 
-					<div class="panel" style="width: 498.75px; height: 19.5px;">E4 </div>					<div class="sticker"></div>
+					<div class="panel" style="width: 498.75px; height: 19.5px;">Level 2: E4 </div>					<div class="sticker"></div>
 
-					<div class="panel" style="width: 498.75px; height: 19.5px;">E5 </div>					<div class="sticker"></div>
+					<div class="panel" style="width: 498.75px; height: 19.5px;">Level 1: E5 </div>					<div class="sticker"></div>
 				</div>
 			</div>
 			<div class="width-view">
-				<div class="view-title">Width View</div>
+				<div class="view-title">Width View - Allowable Overhang 33%</div>
 				<div class="view-bundle">
 					<div class="panel" style="width: 221.4375px; height: 19.5px;"></div>
 					<div class="sticker"></div>
@@ -95,11 +105,45 @@ CITY, STATE ZIP</li>
 					<div class="sticker"></div>
 				</div>
 			</div>
+			<div class="comment">
+				Comment: _________________________________________________
+			</div>
 			<div class="footer">
 				<div class="footer-project">000002</div>
-				<div class="footer-date-created">7/20/2022</div>
-				<div class="footer-page-index">Bundle 1/21</div>
+				<div class="footer-date-created">7/21/2022</div>
+				<div class="footer-page-index">Bundle 1/9</div>
 			</div>
+		</div>
+		<div class="page">
+			<table>
+				<tr>
+					<th>Panel</th><th>Height</th><th>Width</th><th>Weight</th>
+				</tr>
+				<tr>
+					<td>E1</td>
+					<td>18' - 3"</td>
+					<td>7' - 11.75"</td>
+					<td>446 lbs.</td>
+				</tr>
+				<tr>
+					<td>E3</td>
+					<td>18' - 3"</td>
+					<td>8' - 0.25"</td>
+					<td>388 lbs.</td>
+				</tr>
+				<tr>
+					<td>E4</td>
+					<td>18' - 3"</td>
+					<td>8' - 0.25"</td>
+					<td>388 lbs.</td>
+				</tr>
+				<tr>
+					<td>E5</td>
+					<td>18' - 3"</td>
+					<td>8' - 0.25"</td>
+					<td>433 lbs.</td>
+				</tr>
+			</table>
 		</div>
 		<div class="page">
 			<div class="header"><img src="C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg"/><div class="version">BundleBuilder v1.0</div></div>
@@ -128,35 +172,38 @@ CITY, STATE ZIP</li>
 						<ul>
 							<li>Bundle Length</li>
 							<li>Bundle Width</li>
-							<li>Bundle Height</li>
 							<li>Bundle Weight</li>
+							<li>Bundle Height</li>
 						</ul>
 					</div>
 					<div class="data">
 						<ul>
 							<li>18' - 3"</li>
 							<li>8' - 0.25"</li>
-							<li>3' - 0"</li>
 							<li>1166 lbs.</li>
+							<li>3' - 0"</li>
 						</ul>
 					</div>
 				</div>
+				<div class="additional-info">
+					<div class="sticker-info">* Height assumes 3" stickers</div>
+				</div>
 			</div>
 			<div class="length-view">
-				<div class="view-title">Length View</div>
+				<div class="view-title">Length View - Allowable Overhang 33%</div>
 				<div class="view-bundle">
 
-					<div class="panel" style="width: 498.75px; height: 19.5px;">E2 E6A E8 E9 </div>					<div class="sticker"></div>
+					<div class="panel" style="width: 498.75px; height: 19.5px;">Level 4: E2 E6A E8 E9 </div>					<div class="sticker"></div>
 
-					<div class="panel" style="width: 406.5px; height: 19.5px;">E10 </div>					<div class="sticker"></div>
+					<div class="panel" style="width: 406.5px; height: 19.5px;">Level 3: E10 </div>					<div class="sticker"></div>
 
-					<div class="panel" style="width: 406.5px; height: 19.5px;">E14 </div>					<div class="sticker"></div>
+					<div class="panel" style="width: 406.5px; height: 19.5px;">Level 2: E14 </div>					<div class="sticker"></div>
 
-					<div class="panel" style="width: 406.5px; height: 19.5px;">E20 </div>					<div class="sticker"></div>
+					<div class="panel" style="width: 406.5px; height: 19.5px;">Level 1: E20 </div>					<div class="sticker"></div>
 				</div>
 			</div>
 			<div class="width-view">
-				<div class="view-title">Width View</div>
+				<div class="view-title">Width View - Allowable Overhang 33%</div>
 				<div class="view-bundle">
 					<div class="panel" style="width: 220.03125px; height: 19.5px;"></div>
 					<div class="sticker"></div>
@@ -168,11 +215,63 @@ CITY, STATE ZIP</li>
 					<div class="sticker"></div>
 				</div>
 			</div>
+			<div class="comment">
+				Comment: _________________________________________________
+			</div>
 			<div class="footer">
 				<div class="footer-project">000002</div>
-				<div class="footer-date-created">7/20/2022</div>
-				<div class="footer-page-index">Bundle 2/21</div>
+				<div class="footer-date-created">7/21/2022</div>
+				<div class="footer-page-index">Bundle 2/9</div>
 			</div>
+		</div>
+		<div class="page">
+			<table>
+				<tr>
+					<th>Panel</th><th>Height</th><th>Width</th><th>Weight</th>
+				</tr>
+				<tr>
+					<td>E2</td>
+					<td>18' - 3"</td>
+					<td>1' - 6"</td>
+					<td>83 lbs.</td>
+				</tr>
+				<tr>
+					<td>E6A</td>
+					<td>3' - 4"</td>
+					<td>1' - 9.5"</td>
+					<td>16 lbs.</td>
+				</tr>
+				<tr>
+					<td>E8</td>
+					<td>8' - 0.25"</td>
+					<td>3' - 4"</td>
+					<td>56 lbs.</td>
+				</tr>
+				<tr>
+					<td>E9</td>
+					<td>14' - 10"</td>
+					<td>1' - 3.625"</td>
+					<td>97 lbs.</td>
+				</tr>
+				<tr>
+					<td>E10</td>
+					<td>14' - 10"</td>
+					<td>8' - 0.25"</td>
+					<td>358 lbs.</td>
+				</tr>
+				<tr>
+					<td>E14</td>
+					<td>14' - 10"</td>
+					<td>8' - 0.25"</td>
+					<td>237 lbs.</td>
+				</tr>
+				<tr>
+					<td>E20</td>
+					<td>14' - 10"</td>
+					<td>8' - 0.25"</td>
+					<td>319 lbs.</td>
+				</tr>
+			</table>
 		</div>
 		<div class="page">
 			<div class="header"><img src="C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg"/><div class="version">BundleBuilder v1.0</div></div>
@@ -201,43 +300,154 @@ CITY, STATE ZIP</li>
 						<ul>
 							<li>Bundle Length</li>
 							<li>Bundle Width</li>
-							<li>Bundle Height</li>
 							<li>Bundle Weight</li>
+							<li>Bundle Height</li>
 						</ul>
 					</div>
 					<div class="data">
 						<ul>
-							<li>18' - 3"</li>
-							<li>8' - 0.25"</li>
-							<li>2' - 0"</li>
-							<li>315 lbs.</li>
+							<li>21' - 7"</li>
+							<li>8' - 5.535"</li>
+							<li>1216 lbs.</li>
+							<li>3' - 0"</li>
 						</ul>
 					</div>
 				</div>
+				<div class="additional-info">
+					<div class="sticker-info">* Height assumes 3" stickers</div>
+				</div>
 			</div>
 			<div class="length-view">
-				<div class="view-title">Length View</div>
+				<div class="view-title">Length View - Allowable Overhang 33%</div>
 				<div class="view-bundle">
 
-					<div class="panel" style="width: 96px; height: 19.5px;">E8A E16A </div>					<div class="sticker"></div>
+					<div class="panel" style="width: 588.75px; height: 19.5px;">Level 4: E8A E16A E30 E23A E18A E13 E11A </div>					<div class="sticker"></div>
 
-					<div class="panel" style="width: 498.75px; height: 19.5px;">E31 </div>					<div class="sticker"></div>
+					<div class="panel" style="width: 481.3125px; height: 19.5px;">Level 3: E37 E36 E35 E29 </div>					<div class="sticker"></div>
+
+					<div class="panel" style="width: 573px; height: 19.5px;">Level 2: E41 E38 E28 </div>					<div class="sticker"></div>
+
+					<div class="panel" style="width: 498.75px; height: 19.5px;">Level 1: E31 </div>					<div class="sticker"></div>
 				</div>
 			</div>
 			<div class="width-view">
-				<div class="view-title">Width View</div>
+				<div class="view-title">Width View - Allowable Overhang 33%</div>
 				<div class="view-bundle">
-					<div class="panel" style="width: 88.96875px; height: 19.5px;"></div>
+					<div class="panel" style="width: 214.96875px; height: 19.5px;"></div>
+					<div class="sticker"></div>
+					<div class="panel" style="width: 234.45375px; height: 19.5px;"></div>
+					<div class="sticker"></div>
+					<div class="panel" style="width: 229.91325px; height: 19.5px;"></div>
 					<div class="sticker"></div>
 					<div class="panel" style="width: 222.5625px; height: 19.5px;"></div>
 					<div class="sticker"></div>
 				</div>
 			</div>
+			<div class="comment">
+				Comment: _________________________________________________
+			</div>
 			<div class="footer">
 				<div class="footer-project">000002</div>
-				<div class="footer-date-created">7/20/2022</div>
-				<div class="footer-page-index">Bundle 3/21</div>
+				<div class="footer-date-created">7/21/2022</div>
+				<div class="footer-page-index">Bundle 3/9</div>
 			</div>
+		</div>
+		<div class="page">
+			<table>
+				<tr>
+					<th>Panel</th><th>Height</th><th>Width</th><th>Weight</th>
+				</tr>
+				<tr>
+					<td>E8A</td>
+					<td>3' - 4"</td>
+					<td>2' - 0.375"</td>
+					<td>17 lbs.</td>
+				</tr>
+				<tr>
+					<td>E16A</td>
+					<td>3' - 4"</td>
+					<td>1' - 0.5"</td>
+					<td>9 lbs.</td>
+				</tr>
+				<tr>
+					<td>E30</td>
+					<td>18' - 3"</td>
+					<td>4' - 8"</td>
+					<td>286 lbs.</td>
+				</tr>
+				<tr>
+					<td>E23A</td>
+					<td>3' - 2"</td>
+					<td>1' - 0"</td>
+					<td>10 lbs.</td>
+				</tr>
+				<tr>
+					<td>E18A</td>
+					<td>3' - 4"</td>
+					<td>1' - 3.375"</td>
+					<td>10 lbs.</td>
+				</tr>
+				<tr>
+					<td>E13</td>
+					<td>3' - 4"</td>
+					<td>2' - 10.875"</td>
+					<td>24 lbs.</td>
+				</tr>
+				<tr>
+					<td>E11A</td>
+					<td>3' - 4"</td>
+					<td>1' - 0"</td>
+					<td>9 lbs.</td>
+				</tr>
+				<tr>
+					<td>E37</td>
+					<td>8' - 0.25"</td>
+					<td>4' - 3.759"</td>
+					<td>80 lbs.</td>
+				</tr>
+				<tr>
+					<td>E36</td>
+					<td>8' - 0.25"</td>
+					<td>4' - 1.776"</td>
+					<td>78 lbs.</td>
+				</tr>
+				<tr>
+					<td>E35</td>
+					<td>6' - 10.625"</td>
+					<td>4' - 0"</td>
+					<td>59 lbs.</td>
+				</tr>
+				<tr>
+					<td>E29</td>
+					<td>9' - 7"</td>
+					<td>4' - 3.375"</td>
+					<td>120 lbs.</td>
+				</tr>
+				<tr>
+					<td>E41</td>
+					<td>21' - 0"</td>
+					<td>7.75"</td>
+					<td>103 lbs.</td>
+				</tr>
+				<tr>
+					<td>E38</td>
+					<td>8' - 0.25"</td>
+					<td>4' - 5.767"</td>
+					<td>82 lbs.</td>
+				</tr>
+				<tr>
+					<td>E28</td>
+					<td>4' - 0.375"</td>
+					<td>3' - 2"</td>
+					<td>40 lbs.</td>
+				</tr>
+				<tr>
+					<td>E31</td>
+					<td>18' - 3"</td>
+					<td>8' - 0.25"</td>
+					<td>289 lbs.</td>
+				</tr>
+			</table>
 		</div>
 		<div class="page">
 			<div class="header"><img src="C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg"/><div class="version">BundleBuilder v1.0</div></div>
@@ -266,43 +476,100 @@ CITY, STATE ZIP</li>
 						<ul>
 							<li>Bundle Length</li>
 							<li>Bundle Width</li>
-							<li>Bundle Height</li>
 							<li>Bundle Weight</li>
+							<li>Bundle Height</li>
 						</ul>
 					</div>
 					<div class="data">
 						<ul>
 							<li>18' - 3"</li>
 							<li>8' - 0.25"</li>
-							<li>2' - 0"</li>
-							<li>415 lbs.</li>
+							<li>1230 lbs.</li>
+							<li>3' - 0"</li>
 						</ul>
 					</div>
 				</div>
+				<div class="additional-info">
+					<div class="sticker-info">* Height assumes 3" stickers</div>
+				</div>
 			</div>
 			<div class="length-view">
-				<div class="view-title">Length View</div>
+				<div class="view-title">Length View - Allowable Overhang 33%</div>
 				<div class="view-bundle">
 
-					<div class="panel" style="width: 212.15625px; height: 19.5px;">E11 </div>					<div class="sticker"></div>
+					<div class="panel" style="width: 498.75px; height: 19.5px;">Level 4: E11 E27 E24A </div>					<div class="sticker"></div>
 
-					<div class="panel" style="width: 498.75px; height: 19.5px;">E32 </div>					<div class="sticker"></div>
+					<div class="panel" style="width: 498.75px; height: 19.5px;">Level 3: E33 </div>					<div class="sticker"></div>
+
+					<div class="panel" style="width: 498.75px; height: 19.5px;">Level 2: E34 </div>					<div class="sticker"></div>
+
+					<div class="panel" style="width: 498.75px; height: 19.5px;">Level 1: E32 </div>					<div class="sticker"></div>
 				</div>
 			</div>
 			<div class="width-view">
-				<div class="view-title">Width View</div>
+				<div class="view-title">Width View - Allowable Overhang 33%</div>
 				<div class="view-bundle">
-					<div class="panel" style="width: 96px; height: 19.5px;"></div>
+					<div class="panel" style="width: 179.25px; height: 19.5px;"></div>
+					<div class="sticker"></div>
+					<div class="panel" style="width: 222.5625px; height: 19.5px;"></div>
+					<div class="sticker"></div>
+					<div class="panel" style="width: 219.25725px; height: 19.5px;"></div>
 					<div class="sticker"></div>
 					<div class="panel" style="width: 222.5625px; height: 19.5px;"></div>
 					<div class="sticker"></div>
 				</div>
 			</div>
+			<div class="comment">
+				Comment: _________________________________________________
+			</div>
 			<div class="footer">
 				<div class="footer-project">000002</div>
-				<div class="footer-date-created">7/20/2022</div>
-				<div class="footer-page-index">Bundle 4/21</div>
+				<div class="footer-date-created">7/21/2022</div>
+				<div class="footer-page-index">Bundle 4/9</div>
 			</div>
+		</div>
+		<div class="page">
+			<table>
+				<tr>
+					<th>Panel</th><th>Height</th><th>Width</th><th>Weight</th>
+				</tr>
+				<tr>
+					<td>E11</td>
+					<td>7' - 7.625"</td>
+					<td>3' - 4"</td>
+					<td>56 lbs.</td>
+				</tr>
+				<tr>
+					<td>E27</td>
+					<td>18' - 3"</td>
+					<td>2' - 1"</td>
+					<td>161 lbs.</td>
+				</tr>
+				<tr>
+					<td>E24A</td>
+					<td>9' - 7"</td>
+					<td>1' - 0"</td>
+					<td>29 lbs.</td>
+				</tr>
+				<tr>
+					<td>E33</td>
+					<td>18' - 3"</td>
+					<td>8' - 0.25"</td>
+					<td>289 lbs.</td>
+				</tr>
+				<tr>
+					<td>E34</td>
+					<td>18' - 3"</td>
+					<td>7' - 10.781"</td>
+					<td>336 lbs.</td>
+				</tr>
+				<tr>
+					<td>E32</td>
+					<td>18' - 3"</td>
+					<td>8' - 0.25"</td>
+					<td>359 lbs.</td>
+				</tr>
+			</table>
 		</div>
 		<div class="page">
 			<div class="header"><img src="C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg"/><div class="version">BundleBuilder v1.0</div></div>
@@ -331,43 +598,106 @@ CITY, STATE ZIP</li>
 						<ul>
 							<li>Bundle Length</li>
 							<li>Bundle Width</li>
-							<li>Bundle Height</li>
 							<li>Bundle Weight</li>
+							<li>Bundle Height</li>
 						</ul>
 					</div>
 					<div class="data">
 						<ul>
-							<li>18' - 3"</li>
-							<li>8' - 0.25"</li>
-							<li>2' - 0"</li>
-							<li>308 lbs.</li>
+							<li>22' - 10.25"</li>
+							<li>6' - 6"</li>
+							<li>1057 lbs.</li>
+							<li>3' - 0"</li>
 						</ul>
 					</div>
 				</div>
+				<div class="additional-info">
+					<div class="sticker-info">* Height assumes 3" stickers</div>
+				</div>
 			</div>
 			<div class="length-view">
-				<div class="view-title">Length View</div>
+				<div class="view-title">Length View - Allowable Overhang 33%</div>
 				<div class="view-bundle">
 
-					<div class="panel" style="width: 96px; height: 19.5px;">E11A E23A </div>					<div class="sticker"></div>
+					<div class="panel" style="width: 623.0625px; height: 19.5px;">Level 4: E12 E23 E19 E18 </div>					<div class="sticker"></div>
 
-					<div class="panel" style="width: 498.75px; height: 19.5px;">E33 </div>					<div class="sticker"></div>
+					<div class="panel" style="width: 498.75px; height: 19.5px;">Level 3: E25 </div>					<div class="sticker"></div>
+
+					<div class="panel" style="width: 498.75px; height: 19.5px;">Level 2: E26 </div>					<div class="sticker"></div>
+
+					<div class="panel" style="width: 498.75px; height: 19.5px;">Level 1: E21 </div>					<div class="sticker"></div>
 				</div>
 			</div>
 			<div class="width-view">
-				<div class="view-title">Width View</div>
+				<div class="view-title">Width View - Allowable Overhang 33%</div>
 				<div class="view-bundle">
-					<div class="panel" style="width: 60px; height: 19.5px;"></div>
+					<div class="panel" style="width: 181.5px; height: 19.5px;"></div>
 					<div class="sticker"></div>
-					<div class="panel" style="width: 222.5625px; height: 19.5px;"></div>
+					<div class="panel" style="width: 145.5px; height: 19.5px;"></div>
+					<div class="sticker"></div>
+					<div class="panel" style="width: 144.375px; height: 19.5px;"></div>
+					<div class="sticker"></div>
+					<div class="panel" style="width: 144.375px; height: 19.5px;"></div>
 					<div class="sticker"></div>
 				</div>
 			</div>
+			<div class="comment">
+				Comment: _________________________________________________
+			</div>
 			<div class="footer">
 				<div class="footer-project">000002</div>
-				<div class="footer-date-created">7/20/2022</div>
-				<div class="footer-page-index">Bundle 5/21</div>
+				<div class="footer-date-created">7/21/2022</div>
+				<div class="footer-page-index">Bundle 5/9</div>
 			</div>
+		</div>
+		<div class="page">
+			<table>
+				<tr>
+					<th>Panel</th><th>Height</th><th>Width</th><th>Weight</th>
+				</tr>
+				<tr>
+					<td>E12</td>
+					<td>8' - 0.25"</td>
+					<td>3' - 4"</td>
+					<td>58 lbs.</td>
+				</tr>
+				<tr>
+					<td>E23</td>
+					<td>7' - 8.75"</td>
+					<td>3' - 2"</td>
+					<td>66 lbs.</td>
+				</tr>
+				<tr>
+					<td>E19</td>
+					<td>14' - 10"</td>
+					<td>2' - 5.125"</td>
+					<td>145 lbs.</td>
+				</tr>
+				<tr>
+					<td>E18</td>
+					<td>8' - 0.25"</td>
+					<td>3' - 4"</td>
+					<td>56 lbs.</td>
+				</tr>
+				<tr>
+					<td>E25</td>
+					<td>18' - 3"</td>
+					<td>5' - 2"</td>
+					<td>297 lbs.</td>
+				</tr>
+				<tr>
+					<td>E26</td>
+					<td>18' - 3"</td>
+					<td>5' - 1.5"</td>
+					<td>204 lbs.</td>
+				</tr>
+				<tr>
+					<td>E21</td>
+					<td>18' - 3"</td>
+					<td>5' - 1.5"</td>
+					<td>231 lbs.</td>
+				</tr>
+			</table>
 		</div>
 		<div class="page">
 			<div class="header"><img src="C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg"/><div class="version">BundleBuilder v1.0</div></div>
@@ -396,43 +726,84 @@ CITY, STATE ZIP</li>
 						<ul>
 							<li>Bundle Length</li>
 							<li>Bundle Width</li>
-							<li>Bundle Height</li>
 							<li>Bundle Weight</li>
+							<li>Bundle Height</li>
 						</ul>
 					</div>
 					<div class="data">
 						<ul>
-							<li>18' - 3"</li>
-							<li>7' - 10.781"</li>
-							<li>2' - 0"</li>
-							<li>394 lbs.</li>
+							<li>14' - 10"</li>
+							<li>8' - 0.125"</li>
+							<li>435 lbs.</li>
+							<li>2' - 6"</li>
 						</ul>
 					</div>
 				</div>
+				<div class="additional-info">
+					<div class="sticker-info">* Height assumes 3" stickers</div>
+				</div>
 			</div>
 			<div class="length-view">
-				<div class="view-title">Length View</div>
+				<div class="view-title">Length View - Allowable Overhang 33%</div>
 				<div class="view-bundle">
 
-					<div class="panel" style="width: 222.5625px; height: 19.5px;">E12 </div>					<div class="sticker"></div>
+					<div class="panel" style="width: 406.5px; height: 19.5px;">Level 3: E15 </div>					<div class="sticker"></div>
 
-					<div class="panel" style="width: 498.75px; height: 19.5px;">E34 </div>					<div class="sticker"></div>
+					<div class="panel" style="width: 222.5625px; height: 19.5px;">Level 2: E16 E6 </div>					<div class="sticker"></div>
+
+					<div class="panel" style="width: 264.75px; height: 19.5px;">Level 1: E24 </div>					<div class="sticker"></div>
 				</div>
 			</div>
 			<div class="width-view">
-				<div class="view-title">Width View</div>
+				<div class="view-title">Width View - Allowable Overhang 33%</div>
 				<div class="view-bundle">
-					<div class="panel" style="width: 96px; height: 19.5px;"></div>
+					<div class="panel" style="width: 70.6875px; height: 19.5px;"></div>
 					<div class="sticker"></div>
-					<div class="panel" style="width: 219.25725px; height: 19.5px;"></div>
+					<div class="panel" style="width: 186px; height: 19.5px;"></div>
+					<div class="sticker"></div>
+					<div class="panel" style="width: 222.28125px; height: 19.5px;"></div>
 					<div class="sticker"></div>
 				</div>
 			</div>
+			<div class="comment">
+				Comment: _________________________________________________
+			</div>
 			<div class="footer">
 				<div class="footer-project">000002</div>
-				<div class="footer-date-created">7/20/2022</div>
-				<div class="footer-page-index">Bundle 6/21</div>
+				<div class="footer-date-created">7/21/2022</div>
+				<div class="footer-page-index">Bundle 6/9</div>
 			</div>
+		</div>
+		<div class="page">
+			<table>
+				<tr>
+					<th>Panel</th><th>Height</th><th>Width</th><th>Weight</th>
+				</tr>
+				<tr>
+					<td>E15</td>
+					<td>14' - 10"</td>
+					<td>2' - 4.75"</td>
+					<td>115 lbs.</td>
+				</tr>
+				<tr>
+					<td>E16</td>
+					<td>8' - 0.25"</td>
+					<td>3' - 4"</td>
+					<td>56 lbs.</td>
+				</tr>
+				<tr>
+					<td>E6</td>
+					<td>8' - 0.125"</td>
+					<td>3' - 4"</td>
+					<td>56 lbs.</td>
+				</tr>
+				<tr>
+					<td>E24</td>
+					<td>9' - 7"</td>
+					<td>8' - 0.125"</td>
+					<td>208 lbs.</td>
+				</tr>
+			</table>
 		</div>
 		<div class="page">
 			<div class="header"><img src="C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg"/><div class="version">BundleBuilder v1.0</div></div>
@@ -461,433 +832,78 @@ CITY, STATE ZIP</li>
 						<ul>
 							<li>Bundle Length</li>
 							<li>Bundle Width</li>
-							<li>Bundle Height</li>
 							<li>Bundle Weight</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>21' - 0"</li>
-							<li>5' - 1.5"</li>
-							<li>2' - 0"</li>
-							<li>358 lbs.</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="length-view">
-				<div class="view-title">Length View</div>
-				<div class="view-bundle">
-
-					<div class="panel" style="width: 573px; height: 19.5px;">E13 E41 </div>					<div class="sticker"></div>
-
-					<div class="panel" style="width: 498.75px; height: 19.5px;">E21 </div>					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="width-view">
-				<div class="view-title">Width View</div>
-				<div class="view-bundle">
-					<div class="panel" style="width: 101.90625px; height: 19.5px;"></div>
-					<div class="sticker"></div>
-					<div class="panel" style="width: 144.375px; height: 19.5px;"></div>
-					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="footer">
-				<div class="footer-project">000002</div>
-				<div class="footer-date-created">7/20/2022</div>
-				<div class="footer-page-index">Bundle 7/21</div>
-			</div>
-		</div>
-		<div class="page">
-			<div class="header"><img src="C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg"/><div class="version">BundleBuilder v1.0</div></div>
-			<div class="bundle-info">
-				<div class="bundle-info-left-side">
-					<div class="title">
-						<ul>
-							<li>Project Name</li>
-							<li>Project Number</li>
-							<li>Project Location</li>
-							<li>Bundle</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>Walls_Smart2.0-55_TemplateSpli</li>
-							<li>000002</li>
-							<li>ADDRESS
-CITY, STATE ZIP</li>
-							<li>B08 Exterior - 2x6</li>
-						</ul>
-					</div>
-				</div>
-				<div class="bundle-info-right-side">
-					<div class="title">
-						<ul>
-							<li>Bundle Length</li>
-							<li>Bundle Width</li>
 							<li>Bundle Height</li>
-							<li>Bundle Weight</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>18' - 3"</li>
-							<li>5' - 2"</li>
-							<li>2' - 0"</li>
-							<li>441 lbs.</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="length-view">
-				<div class="view-title">Length View</div>
-				<div class="view-bundle">
-
-					<div class="panel" style="width: 406.5px; height: 19.5px;">E15 E24A </div>					<div class="sticker"></div>
-
-					<div class="panel" style="width: 498.75px; height: 19.5px;">E25 </div>					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="width-view">
-				<div class="view-title">Width View</div>
-				<div class="view-bundle">
-					<div class="panel" style="width: 97.6875px; height: 19.5px;"></div>
-					<div class="sticker"></div>
-					<div class="panel" style="width: 145.5px; height: 19.5px;"></div>
-					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="footer">
-				<div class="footer-project">000002</div>
-				<div class="footer-date-created">7/20/2022</div>
-				<div class="footer-page-index">Bundle 8/21</div>
-			</div>
-		</div>
-		<div class="page">
-			<div class="header"><img src="C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg"/><div class="version">BundleBuilder v1.0</div></div>
-			<div class="bundle-info">
-				<div class="bundle-info-left-side">
-					<div class="title">
-						<ul>
-							<li>Project Name</li>
-							<li>Project Number</li>
-							<li>Project Location</li>
-							<li>Bundle</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>Walls_Smart2.0-55_TemplateSpli</li>
-							<li>000002</li>
-							<li>ADDRESS
-CITY, STATE ZIP</li>
-							<li>B09 Exterior - 2x6</li>
-						</ul>
-					</div>
-				</div>
-				<div class="bundle-info-right-side">
-					<div class="title">
-						<ul>
-							<li>Bundle Length</li>
-							<li>Bundle Width</li>
-							<li>Bundle Height</li>
-							<li>Bundle Weight</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>18' - 3"</li>
-							<li>5' - 1.5"</li>
-							<li>2' - 0"</li>
-							<li>260 lbs.</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="length-view">
-				<div class="view-title">Length View</div>
-				<div class="view-bundle">
-
-					<div class="panel" style="width: 222.5625px; height: 19.5px;">E16 </div>					<div class="sticker"></div>
-
-					<div class="panel" style="width: 498.75px; height: 19.5px;">E26 </div>					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="width-view">
-				<div class="view-title">Width View</div>
-				<div class="view-bundle">
-					<div class="panel" style="width: 96px; height: 19.5px;"></div>
-					<div class="sticker"></div>
-					<div class="panel" style="width: 144.375px; height: 19.5px;"></div>
-					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="footer">
-				<div class="footer-project">000002</div>
-				<div class="footer-date-created">7/20/2022</div>
-				<div class="footer-page-index">Bundle 9/21</div>
-			</div>
-		</div>
-		<div class="page">
-			<div class="header"><img src="C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg"/><div class="version">BundleBuilder v1.0</div></div>
-			<div class="bundle-info">
-				<div class="bundle-info-left-side">
-					<div class="title">
-						<ul>
-							<li>Project Name</li>
-							<li>Project Number</li>
-							<li>Project Location</li>
-							<li>Bundle</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>Walls_Smart2.0-55_TemplateSpli</li>
-							<li>000002</li>
-							<li>ADDRESS
-CITY, STATE ZIP</li>
-							<li>B10 Exterior - 2x6</li>
-						</ul>
-					</div>
-				</div>
-				<div class="bundle-info-right-side">
-					<div class="title">
-						<ul>
-							<li>Bundle Length</li>
-							<li>Bundle Width</li>
-							<li>Bundle Height</li>
-							<li>Bundle Weight</li>
 						</ul>
 					</div>
 					<div class="data">
 						<ul>
 							<li>18' - 3"</li>
 							<li>4' - 11"</li>
-							<li>2' - 0"</li>
-							<li>550 lbs.</li>
+							<li>767 lbs.</li>
+							<li>2' - 6"</li>
 						</ul>
 					</div>
+				</div>
+				<div class="additional-info">
+					<div class="sticker-info">* Height assumes 3" stickers</div>
 				</div>
 			</div>
 			<div class="length-view">
-				<div class="view-title">Length View</div>
+				<div class="view-title">Length View - Allowable Overhang 33%</div>
 				<div class="view-bundle">
 
-					<div class="panel" style="width: 406.5px; height: 19.5px;">E17 </div>					<div class="sticker"></div>
+					<div class="panel" style="width: 498.75px; height: 19.5px;">Level 3: E22 </div>					<div class="sticker"></div>
 
-					<div class="panel" style="width: 498.75px; height: 19.5px;">E30 </div>					<div class="sticker"></div>
+					<div class="panel" style="width: 406.5px; height: 19.5px;">Level 2: E7 </div>					<div class="sticker"></div>
+
+					<div class="panel" style="width: 406.5px; height: 19.5px;">Level 1: E17 </div>					<div class="sticker"></div>
 				</div>
 			</div>
 			<div class="width-view">
-				<div class="view-title">Width View</div>
-				<div class="view-bundle">
-					<div class="panel" style="width: 138.75px; height: 19.5px;"></div>
-					<div class="sticker"></div>
-					<div class="panel" style="width: 132px; height: 19.5px;"></div>
-					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="footer">
-				<div class="footer-project">000002</div>
-				<div class="footer-date-created">7/20/2022</div>
-				<div class="footer-page-index">Bundle 10/21</div>
-			</div>
-		</div>
-		<div class="page">
-			<div class="header"><img src="C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg"/><div class="version">BundleBuilder v1.0</div></div>
-			<div class="bundle-info">
-				<div class="bundle-info-left-side">
-					<div class="title">
-						<ul>
-							<li>Project Name</li>
-							<li>Project Number</li>
-							<li>Project Location</li>
-							<li>Bundle</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>Walls_Smart2.0-55_TemplateSpli</li>
-							<li>000002</li>
-							<li>ADDRESS
-CITY, STATE ZIP</li>
-							<li>B11 Exterior - 2x6</li>
-						</ul>
-					</div>
-				</div>
-				<div class="bundle-info-right-side">
-					<div class="title">
-						<ul>
-							<li>Bundle Length</li>
-							<li>Bundle Width</li>
-							<li>Bundle Height</li>
-							<li>Bundle Weight</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>9' - 7"</li>
-							<li>8' - 0.125"</li>
-							<li>2' - 0"</li>
-							<li>264 lbs.</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="length-view">
-				<div class="view-title">Length View</div>
-				<div class="view-bundle">
-
-					<div class="panel" style="width: 222.5625px; height: 19.5px;">E18 </div>					<div class="sticker"></div>
-
-					<div class="panel" style="width: 264.75px; height: 19.5px;">E24 </div>					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="width-view">
-				<div class="view-title">Width View</div>
-				<div class="view-bundle">
-					<div class="panel" style="width: 96px; height: 19.5px;"></div>
-					<div class="sticker"></div>
-					<div class="panel" style="width: 222.28125px; height: 19.5px;"></div>
-					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="footer">
-				<div class="footer-project">000002</div>
-				<div class="footer-date-created">7/20/2022</div>
-				<div class="footer-page-index">Bundle 11/21</div>
-			</div>
-		</div>
-		<div class="page">
-			<div class="header"><img src="C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg"/><div class="version">BundleBuilder v1.0</div></div>
-			<div class="bundle-info">
-				<div class="bundle-info-left-side">
-					<div class="title">
-						<ul>
-							<li>Project Name</li>
-							<li>Project Number</li>
-							<li>Project Location</li>
-							<li>Bundle</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>Walls_Smart2.0-55_TemplateSpli</li>
-							<li>000002</li>
-							<li>ADDRESS
-CITY, STATE ZIP</li>
-							<li>B12 Exterior - 2x6</li>
-						</ul>
-					</div>
-				</div>
-				<div class="bundle-info-right-side">
-					<div class="title">
-						<ul>
-							<li>Bundle Length</li>
-							<li>Bundle Width</li>
-							<li>Bundle Height</li>
-							<li>Bundle Weight</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>14' - 10"</li>
-							<li>4' - 10.5"</li>
-							<li>2' - 0"</li>
-							<li>273 lbs.</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="length-view">
-				<div class="view-title">Length View</div>
-				<div class="view-bundle">
-
-					<div class="panel" style="width: 96px; height: 19.5px;">E18A </div>					<div class="sticker"></div>
-
-					<div class="panel" style="width: 406.5px; height: 19.5px;">E7 </div>					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="width-view">
-				<div class="view-title">Width View</div>
-				<div class="view-bundle">
-					<div class="panel" style="width: 40.59375px; height: 19.5px;"></div>
-					<div class="sticker"></div>
-					<div class="panel" style="width: 137.625px; height: 19.5px;"></div>
-					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="footer">
-				<div class="footer-project">000002</div>
-				<div class="footer-date-created">7/20/2022</div>
-				<div class="footer-page-index">Bundle 12/21</div>
-			</div>
-		</div>
-		<div class="page">
-			<div class="header"><img src="C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg"/><div class="version">BundleBuilder v1.0</div></div>
-			<div class="bundle-info">
-				<div class="bundle-info-left-side">
-					<div class="title">
-						<ul>
-							<li>Project Name</li>
-							<li>Project Number</li>
-							<li>Project Location</li>
-							<li>Bundle</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>Walls_Smart2.0-55_TemplateSpli</li>
-							<li>000002</li>
-							<li>ADDRESS
-CITY, STATE ZIP</li>
-							<li>B13 Exterior - 2x6</li>
-						</ul>
-					</div>
-				</div>
-				<div class="bundle-info-right-side">
-					<div class="title">
-						<ul>
-							<li>Bundle Length</li>
-							<li>Bundle Width</li>
-							<li>Bundle Height</li>
-							<li>Bundle Weight</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>18' - 3"</li>
-							<li>4' - 3.375"</li>
-							<li>2' - 0"</li>
-							<li>360 lbs.</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="length-view">
-				<div class="view-title">Length View</div>
-				<div class="view-bundle">
-
-					<div class="panel" style="width: 498.75px; height: 19.5px;">E22 </div>					<div class="sticker"></div>
-
-					<div class="panel" style="width: 264.75px; height: 19.5px;">E29 </div>					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="width-view">
-				<div class="view-title">Width View</div>
+				<div class="view-title">Width View - Allowable Overhang 33%</div>
 				<div class="view-bundle">
 					<div class="panel" style="width: 97.125px; height: 19.5px;"></div>
 					<div class="sticker"></div>
-					<div class="panel" style="width: 121.59375px; height: 19.5px;"></div>
+					<div class="panel" style="width: 137.625px; height: 19.5px;"></div>
+					<div class="sticker"></div>
+					<div class="panel" style="width: 138.75px; height: 19.5px;"></div>
 					<div class="sticker"></div>
 				</div>
 			</div>
+			<div class="comment">
+				Comment: _________________________________________________
+			</div>
 			<div class="footer">
 				<div class="footer-project">000002</div>
-				<div class="footer-date-created">7/20/2022</div>
-				<div class="footer-page-index">Bundle 13/21</div>
+				<div class="footer-date-created">7/21/2022</div>
+				<div class="footer-page-index">Bundle 7/9</div>
 			</div>
+		</div>
+		<div class="page">
+			<table>
+				<tr>
+					<th>Panel</th><th>Height</th><th>Width</th><th>Weight</th>
+				</tr>
+				<tr>
+					<td>E22</td>
+					<td>18' - 3"</td>
+					<td>3' - 4.5"</td>
+					<td>240 lbs.</td>
+				</tr>
+				<tr>
+					<td>E7</td>
+					<td>14' - 10"</td>
+					<td>4' - 10.5"</td>
+					<td>263 lbs.</td>
+				</tr>
+				<tr>
+					<td>E17</td>
+					<td>14' - 10"</td>
+					<td>4' - 11"</td>
+					<td>264 lbs.</td>
+				</tr>
+			</table>
 		</div>
 		<div class="page">
 			<div class="header"><img src="C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg"/><div class="version">BundleBuilder v1.0</div></div>
@@ -907,7 +923,7 @@ CITY, STATE ZIP</li>
 							<li>000002</li>
 							<li>ADDRESS
 CITY, STATE ZIP</li>
-							<li>B14 Exterior - 2x6</li>
+							<li>B08 Exterior - 2x8</li>
 						</ul>
 					</div>
 				</div>
@@ -916,360 +932,68 @@ CITY, STATE ZIP</li>
 						<ul>
 							<li>Bundle Length</li>
 							<li>Bundle Width</li>
-							<li>Bundle Height</li>
 							<li>Bundle Weight</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>18' - 3"</li>
-							<li>3' - 2"</li>
-							<li>2' - 0"</li>
-							<li>227 lbs.</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="length-view">
-				<div class="view-title">Length View</div>
-				<div class="view-bundle">
-
-					<div class="panel" style="width: 214.6875px; height: 19.5px;">E23 </div>					<div class="sticker"></div>
-
-					<div class="panel" style="width: 498.75px; height: 19.5px;">E27 </div>					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="width-view">
-				<div class="view-title">Width View</div>
-				<div class="view-bundle">
-					<div class="panel" style="width: 91.5px; height: 19.5px;"></div>
-					<div class="sticker"></div>
-					<div class="panel" style="width: 62.25px; height: 19.5px;"></div>
-					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="footer">
-				<div class="footer-project">000002</div>
-				<div class="footer-date-created">7/20/2022</div>
-				<div class="footer-page-index">Bundle 14/21</div>
-			</div>
-		</div>
-		<div class="page">
-			<div class="header"><img src="C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg"/><div class="version">BundleBuilder v1.0</div></div>
-			<div class="bundle-info">
-				<div class="bundle-info-left-side">
-					<div class="title">
-						<ul>
-							<li>Project Name</li>
-							<li>Project Number</li>
-							<li>Project Location</li>
-							<li>Bundle</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>Walls_Smart2.0-55_TemplateSpli</li>
-							<li>000002</li>
-							<li>ADDRESS
-CITY, STATE ZIP</li>
-							<li>B15 Exterior - 2x6</li>
-						</ul>
-					</div>
-				</div>
-				<div class="bundle-info-right-side">
-					<div class="title">
-						<ul>
-							<li>Bundle Length</li>
-							<li>Bundle Width</li>
 							<li>Bundle Height</li>
-							<li>Bundle Weight</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>14' - 10"</li>
-							<li>3' - 2"</li>
-							<li>2' - 0"</li>
-							<li>185 lbs.</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="length-view">
-				<div class="view-title">Length View</div>
-				<div class="view-bundle">
-
-					<div class="panel" style="width: 114.84375px; height: 19.5px;">E28 </div>					<div class="sticker"></div>
-
-					<div class="panel" style="width: 406.5px; height: 19.5px;">E19 </div>					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="width-view">
-				<div class="view-title">Width View</div>
-				<div class="view-bundle">
-					<div class="panel" style="width: 91.5px; height: 19.5px;"></div>
-					<div class="sticker"></div>
-					<div class="panel" style="width: 71.53125px; height: 19.5px;"></div>
-					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="footer">
-				<div class="footer-project">000002</div>
-				<div class="footer-date-created">7/20/2022</div>
-				<div class="footer-page-index">Bundle 15/21</div>
-			</div>
-		</div>
-		<div class="page">
-			<div class="header"><img src="C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg"/><div class="version">BundleBuilder v1.0</div></div>
-			<div class="bundle-info">
-				<div class="bundle-info-left-side">
-					<div class="title">
-						<ul>
-							<li>Project Name</li>
-							<li>Project Number</li>
-							<li>Project Location</li>
-							<li>Bundle</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>Walls_Smart2.0-55_TemplateSpli</li>
-							<li>000002</li>
-							<li>ADDRESS
-CITY, STATE ZIP</li>
-							<li>B16 Exterior - 2x6</li>
-						</ul>
-					</div>
-				</div>
-				<div class="bundle-info-right-side">
-					<div class="title">
-						<ul>
-							<li>Bundle Length</li>
-							<li>Bundle Width</li>
-							<li>Bundle Height</li>
-							<li>Bundle Weight</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>8' - 0.25"</li>
-							<li>4' - 5.767"</li>
-							<li>2' - 0"</li>
-							<li>160 lbs.</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="length-view">
-				<div class="view-title">Length View</div>
-				<div class="view-bundle">
-
-					<div class="panel" style="width: 222.5625px; height: 19.5px;">E36 </div>					<div class="sticker"></div>
-
-					<div class="panel" style="width: 222.5625px; height: 19.5px;">E38 </div>					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="width-view">
-				<div class="view-title">Width View</div>
-				<div class="view-bundle">
-					<div class="panel" style="width: 117.996px; height: 19.5px;"></div>
-					<div class="sticker"></div>
-					<div class="panel" style="width: 126.97575px; height: 19.5px;"></div>
-					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="footer">
-				<div class="footer-project">000002</div>
-				<div class="footer-date-created">7/20/2022</div>
-				<div class="footer-page-index">Bundle 16/21</div>
-			</div>
-		</div>
-		<div class="page">
-			<div class="header"><img src="C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg"/><div class="version">BundleBuilder v1.0</div></div>
-			<div class="bundle-info">
-				<div class="bundle-info-left-side">
-					<div class="title">
-						<ul>
-							<li>Project Name</li>
-							<li>Project Number</li>
-							<li>Project Location</li>
-							<li>Bundle</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>Walls_Smart2.0-55_TemplateSpli</li>
-							<li>000002</li>
-							<li>ADDRESS
-CITY, STATE ZIP</li>
-							<li>B17 Exterior - 2x6</li>
-						</ul>
-					</div>
-				</div>
-				<div class="bundle-info-right-side">
-					<div class="title">
-						<ul>
-							<li>Bundle Length</li>
-							<li>Bundle Width</li>
-							<li>Bundle Height</li>
-							<li>Bundle Weight</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>8' - 0.25"</li>
-							<li>4' - 3.759"</li>
-							<li>2' - 0"</li>
-							<li>139 lbs.</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="length-view">
-				<div class="view-title">Length View</div>
-				<div class="view-bundle">
-
-					<div class="panel" style="width: 222.5625px; height: 19.5px;">E37 </div>					<div class="sticker"></div>
-
-					<div class="panel" style="width: 191.90625px; height: 19.5px;">E35 </div>					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="width-view">
-				<div class="view-title">Width View</div>
-				<div class="view-bundle">
-					<div class="panel" style="width: 122.45775px; height: 19.5px;"></div>
-					<div class="sticker"></div>
-					<div class="panel" style="width: 114px; height: 19.5px;"></div>
-					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="footer">
-				<div class="footer-project">000002</div>
-				<div class="footer-date-created">7/20/2022</div>
-				<div class="footer-page-index">Bundle 17/21</div>
-			</div>
-		</div>
-		<div class="page">
-			<div class="header"><img src="C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg"/><div class="version">BundleBuilder v1.0</div></div>
-			<div class="bundle-info">
-				<div class="bundle-info-left-side">
-					<div class="title">
-						<ul>
-							<li>Project Name</li>
-							<li>Project Number</li>
-							<li>Project Location</li>
-							<li>Bundle</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>Walls_Smart2.0-55_TemplateSpli</li>
-							<li>000002</li>
-							<li>ADDRESS
-CITY, STATE ZIP</li>
-							<li>B18 Exterior - 2x6</li>
-						</ul>
-					</div>
-				</div>
-				<div class="bundle-info-right-side">
-					<div class="title">
-						<ul>
-							<li>Bundle Length</li>
-							<li>Bundle Width</li>
-							<li>Bundle Height</li>
-							<li>Bundle Weight</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>8' - 0.125"</li>
-							<li>3' - 4"</li>
-							<li>1' - 6"</li>
-							<li>56 lbs.</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="length-view">
-				<div class="view-title">Length View</div>
-				<div class="view-bundle">
-
-					<div class="panel" style="width: 222.28125px; height: 19.5px;">E6 </div>					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="width-view">
-				<div class="view-title">Width View</div>
-				<div class="view-bundle">
-					<div class="panel" style="width: 96px; height: 19.5px;"></div>
-					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="footer">
-				<div class="footer-project">000002</div>
-				<div class="footer-date-created">7/20/2022</div>
-				<div class="footer-page-index">Bundle 18/21</div>
-			</div>
-		</div>
-		<div class="page">
-			<div class="header"><img src="C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg"/><div class="version">BundleBuilder v1.0</div></div>
-			<div class="bundle-info">
-				<div class="bundle-info-left-side">
-					<div class="title">
-						<ul>
-							<li>Project Name</li>
-							<li>Project Number</li>
-							<li>Project Location</li>
-							<li>Bundle</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>Walls_Smart2.0-55_TemplateSpli</li>
-							<li>000002</li>
-							<li>ADDRESS
-CITY, STATE ZIP</li>
-							<li>B19 Exterior - 2x8</li>
-						</ul>
-					</div>
-				</div>
-				<div class="bundle-info-right-side">
-					<div class="title">
-						<ul>
-							<li>Bundle Length</li>
-							<li>Bundle Width</li>
-							<li>Bundle Height</li>
-							<li>Bundle Weight</li>
 						</ul>
 					</div>
 					<div class="data">
 						<ul>
 							<li>21' - 0"</li>
 							<li>8' - 0.25"</li>
-							<li>1' - 4.75"</li>
-							<li>340 lbs.</li>
+							<li>503 lbs.</li>
+							<li>2' - 0.5"</li>
 						</ul>
 					</div>
 				</div>
+				<div class="additional-info">
+					<div class="sticker-info">* Height assumes 3" stickers</div>
+				</div>
 			</div>
 			<div class="length-view">
-				<div class="view-title">Length View</div>
+				<div class="view-title">Length View - Allowable Overhang 33%</div>
 				<div class="view-bundle">
 
-					<div class="panel" style="width: 573px; height: 23.4375px;">E39 </div>					<div class="sticker"></div>
+					<div class="panel" style="width: 573px; height: 23.4375px;">Level 2: E40 </div>					<div class="sticker"></div>
+
+					<div class="panel" style="width: 573px; height: 23.4375px;">Level 1: E39 </div>					<div class="sticker"></div>
 				</div>
 			</div>
 			<div class="width-view">
-				<div class="view-title">Width View</div>
+				<div class="view-title">Width View - Allowable Overhang 33%</div>
 				<div class="view-bundle">
+					<div class="panel" style="width: 106.6875px; height: 23.4375px;"></div>
+					<div class="sticker"></div>
 					<div class="panel" style="width: 222.5625px; height: 23.4375px;"></div>
 					<div class="sticker"></div>
 				</div>
 			</div>
+			<div class="comment">
+				Comment: _________________________________________________
+			</div>
 			<div class="footer">
 				<div class="footer-project">000002</div>
-				<div class="footer-date-created">7/20/2022</div>
-				<div class="footer-page-index">Bundle 19/21</div>
+				<div class="footer-date-created">7/21/2022</div>
+				<div class="footer-page-index">Bundle 8/9</div>
 			</div>
+		</div>
+		<div class="page">
+			<table>
+				<tr>
+					<th>Panel</th><th>Height</th><th>Width</th><th>Weight</th>
+				</tr>
+				<tr>
+					<td>E40</td>
+					<td>21' - 0"</td>
+					<td>3' - 8.75"</td>
+					<td>163 lbs.</td>
+				</tr>
+				<tr>
+					<td>E39</td>
+					<td>21' - 0"</td>
+					<td>8' - 0.25"</td>
+					<td>340 lbs.</td>
+				</tr>
+			</table>
 		</div>
 		<div class="page">
 			<div class="header"><img src="C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg"/><div class="version">BundleBuilder v1.0</div></div>
@@ -1289,7 +1013,7 @@ CITY, STATE ZIP</li>
 							<li>000002</li>
 							<li>ADDRESS
 CITY, STATE ZIP</li>
-							<li>B20 Exterior - 2x8</li>
+							<li>B09 Steel - 600</li>
 						</ul>
 					</div>
 				</div>
@@ -1298,92 +1022,34 @@ CITY, STATE ZIP</li>
 						<ul>
 							<li>Bundle Length</li>
 							<li>Bundle Width</li>
-							<li>Bundle Height</li>
 							<li>Bundle Weight</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>21' - 0"</li>
-							<li>3' - 8.75"</li>
-							<li>1' - 4.75"</li>
-							<li>163 lbs.</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="length-view">
-				<div class="view-title">Length View</div>
-				<div class="view-bundle">
-
-					<div class="panel" style="width: 573px; height: 23.4375px;">E40 </div>					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="width-view">
-				<div class="view-title">Width View</div>
-				<div class="view-bundle">
-					<div class="panel" style="width: 106.6875px; height: 23.4375px;"></div>
-					<div class="sticker"></div>
-				</div>
-			</div>
-			<div class="footer">
-				<div class="footer-project">000002</div>
-				<div class="footer-date-created">7/20/2022</div>
-				<div class="footer-page-index">Bundle 20/21</div>
-			</div>
-		</div>
-		<div class="page">
-			<div class="header"><img src="C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg"/><div class="version">BundleBuilder v1.0</div></div>
-			<div class="bundle-info">
-				<div class="bundle-info-left-side">
-					<div class="title">
-						<ul>
-							<li>Project Name</li>
-							<li>Project Number</li>
-							<li>Project Location</li>
-							<li>Bundle</li>
-						</ul>
-					</div>
-					<div class="data">
-						<ul>
-							<li>Walls_Smart2.0-55_TemplateSpli</li>
-							<li>000002</li>
-							<li>ADDRESS
-CITY, STATE ZIP</li>
-							<li>B21 Steel - 600</li>
-						</ul>
-					</div>
-				</div>
-				<div class="bundle-info-right-side">
-					<div class="title">
-						<ul>
-							<li>Bundle Length</li>
-							<li>Bundle Width</li>
 							<li>Bundle Height</li>
-							<li>Bundle Weight</li>
 						</ul>
 					</div>
 					<div class="data">
 						<ul>
 							<li>18' - 0"</li>
 							<li>7' - 9.75"</li>
-							<li>2' - 0.226"</li>
 							<li>419 lbs.</li>
+							<li>2' - 0.226"</li>
 						</ul>
 					</div>
 				</div>
+				<div class="additional-info">
+					<div class="sticker-info">* Height assumes 3" stickers</div>
+				</div>
 			</div>
 			<div class="length-view">
-				<div class="view-title">Length View</div>
+				<div class="view-title">Length View - Allowable Overhang 33%</div>
 				<div class="view-bundle">
 
-					<div class="panel" style="width: 492px; height: 19.75425px;">S1 </div>					<div class="sticker"></div>
+					<div class="panel" style="width: 492px; height: 19.75425px;">Level 2: S1 </div>					<div class="sticker"></div>
 
-					<div class="panel" style="width: 492px; height: 19.75425px;">S2 </div>					<div class="sticker"></div>
+					<div class="panel" style="width: 492px; height: 19.75425px;">Level 1: S2 </div>					<div class="sticker"></div>
 				</div>
 			</div>
 			<div class="width-view">
-				<div class="view-title">Width View</div>
+				<div class="view-title">Width View - Allowable Overhang 33%</div>
 				<div class="view-bundle">
 					<div class="panel" style="width: 175.3125px; height: 19.75425px;"></div>
 					<div class="sticker"></div>
@@ -1391,11 +1057,33 @@ CITY, STATE ZIP</li>
 					<div class="sticker"></div>
 				</div>
 			</div>
+			<div class="comment">
+				Comment: _________________________________________________
+			</div>
 			<div class="footer">
 				<div class="footer-project">000002</div>
-				<div class="footer-date-created">7/20/2022</div>
-				<div class="footer-page-index">Bundle 21/21</div>
+				<div class="footer-date-created">7/21/2022</div>
+				<div class="footer-page-index">Bundle 9/9</div>
 			</div>
+		</div>
+		<div class="page">
+			<table>
+				<tr>
+					<th>Panel</th><th>Height</th><th>Width</th><th>Weight</th>
+				</tr>
+				<tr>
+					<td>S1</td>
+					<td>18' - 0"</td>
+					<td>6' - 3.25"</td>
+					<td>198 lbs.</td>
+				</tr>
+				<tr>
+					<td>S2</td>
+					<td>18' - 0"</td>
+					<td>7' - 9.75"</td>
+					<td>221 lbs.</td>
+				</tr>
+			</table>
 		</div>
 	</body>
 </html>

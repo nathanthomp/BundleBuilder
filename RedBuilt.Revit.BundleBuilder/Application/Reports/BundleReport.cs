@@ -33,7 +33,11 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
                 for (int j = bundle.Levels.Count; j > 0; j--)
                 {
                     Level level = bundle.Levels.Where(x => x.Number == j).First();
-                    sw.WriteLine("<div class=\"panel\" style=\"width: " + level.Length * 1.75 + "px; height: " + level.Height * 1.75 + "px\"><p class=\"label\">");
+
+                    // sw.WriteLine("<div class=\"panel\" style=\"width: " + level.Length * 1.75 + "px; height: " + (level.Height * 1.75 + 6) + "px\"><p class=\"label\">");
+
+                    // DELETE after debugging
+                    sw.WriteLine("<div class=\"panel\" style=\"width: " + level.Length * 1.75 + "px; height: " + (level.Height * 1.75 + 6) + "px\"><p class=\"label\">Level " + level.Number + ":");
                     foreach (Panel panel in level.Panels)
                     {
                         sw.Write(panel.Name + " ");
@@ -47,7 +51,8 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
                 for (int j = bundle.Levels.Count; j > 0; j--)
                 {
                     Level level = bundle.Levels.Where(x => x.Number == j).FirstOrDefault();
-                    sw.WriteLine("<div class=\"panel\" style=\"width: " + level.Width * 1.75 + "px; height: " + level.Height * 1.75 + "px\"></div>");
+
+                    sw.WriteLine("<div class=\"panel\" style=\"width: " + level.Width * 1.75 + "px; height: " + (level.Height * 1.75 + 6) + "px\"></div>");
                 }
                 sw.WriteLine("</div>");
 
@@ -71,8 +76,8 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             sw.WriteLine(".width-side{ float: right; }");
             sw.WriteLine(".panel{ border: 1px solid; margin: 1px; }");
             sw.WriteLine(".bundle{ margin-bottom: 10px; }");
-            sw.WriteLine(".header{ font-size: 12px; margin-bottom: 1px; }");
-            sw.WriteLine(".label{ font-size: 10px; margin: 0px; }");
+            sw.WriteLine(".header{ font-size: 16px; margin-bottom: 1px; }");
+            sw.WriteLine(".label{ font-size: 12px; margin: 0px; }");
             sw.WriteLine("th, td{ padding-right: 10px; padding-left: 10px; text-align: center; }");
             sw.WriteLine("</style></head><body>");
         }

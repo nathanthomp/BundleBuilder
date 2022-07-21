@@ -91,6 +91,8 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             sw.WriteLine("\t\t\t.data{ float: right; }");
             sw.WriteLine("\t\t\tul{ list-style-type: none; padding-left: 0px; padding-right: 50px; }");
             sw.WriteLine("\t\t\tli{ padding-top: 8px; }");
+            sw.WriteLine("\t\t\t.additional-info{ font-size: 14px; padding-top: 2px; }");
+            sw.WriteLine("\t\t\t.sticker-info{ float: right; padding-right: 50px; }");
 
             // Views
             sw.WriteLine("\t\t\t.length-view{ height: 250px; }");
@@ -99,12 +101,21 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             sw.WriteLine("\t\t\t.panel{ border: 1px solid black; }");
             sw.WriteLine("\t\t\t.sticker{ height: 6px; }");
 
+            // Comment
+            sw.WriteLine("\t\t\t.comment{ padding-top: 140px; padding-left: 110px }");
+
             // Footer
-            sw.WriteLine("\t\t\t.footer{ padding-top: 200px; }");
+            sw.WriteLine("\t\t\t.footer{ padding-top: 50px; }");
             sw.WriteLine("\t\t\t.footer-project{ display: inline-block; width: 310px; float: left; }");
             sw.WriteLine("\t\t\t.footer-date-created{ display: inline-block; width: 100px; }");
             sw.WriteLine("\t\t\t.footer-page-index{ display: inline-block; width: 200px; float: right; text-align: right; }");
 
+            // Data Page
+            sw.WriteLine("\t\t\ttable{ margin-left: auto; margin-right: auto; border-collapse: collapse; text-align: center; padding-top: 100px; }");
+            sw.WriteLine("\t\t\tth{ padding-left: 40px; padding-right: 40px; padding-top: 100px; padding-bottom: 8px; }");
+            sw.WriteLine("\t\t\ttr{ border-bottom: 1px solid black; padding: 8px; }");
+            sw.WriteLine("\t\t\ttd{ padding-top: 4px; padding-bottom: 4px; }");
+            
             sw.WriteLine("\t\t</style>");
             #endregion
 
@@ -144,30 +155,35 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             sw.WriteLine("\t\t\t\t\t\t<ul>");
             sw.WriteLine("\t\t\t\t\t\t\t<li>Bundle Length</li>");
             sw.WriteLine("\t\t\t\t\t\t\t<li>Bundle Width</li>");
-            sw.WriteLine("\t\t\t\t\t\t\t<li>Bundle Height</li>");
             sw.WriteLine("\t\t\t\t\t\t\t<li>Bundle Weight</li>");
+            sw.WriteLine("\t\t\t\t\t\t\t<li>Bundle Height</li>");
             sw.WriteLine("\t\t\t\t\t\t</ul>");
             sw.WriteLine("\t\t\t\t\t</div>");
             sw.WriteLine("\t\t\t\t\t<div class=\"data\">");
             sw.WriteLine("\t\t\t\t\t\t<ul>");
             sw.WriteLine(String.Format("\t\t\t\t\t\t\t<li>{0}</li>", Tools.DimensionTools.AsString(bundle.Length))); 
             sw.WriteLine(String.Format("\t\t\t\t\t\t\t<li>{0}</li>", Tools.DimensionTools.AsString(bundle.Width))); 
-            sw.WriteLine(String.Format("\t\t\t\t\t\t\t<li>{0}</li>", Tools.DimensionTools.AsString(bundle.Height))); 
-            sw.WriteLine(String.Format("\t\t\t\t\t\t\t<li>{0} lbs.</li>", bundle.Weight)); 
+            sw.WriteLine(String.Format("\t\t\t\t\t\t\t<li>{0} lbs.</li>", bundle.Weight));
+            sw.WriteLine(String.Format("\t\t\t\t\t\t\t<li>{0}</li>", Tools.DimensionTools.AsString(bundle.Height)));
             sw.WriteLine("\t\t\t\t\t\t</ul>");
             sw.WriteLine("\t\t\t\t\t</div>");
+            sw.WriteLine("\t\t\t\t</div>");
+            sw.WriteLine("\t\t\t\t<div class=\"additional-info\">");
+            sw.WriteLine("\t\t\t\t\t<div class=\"sticker-info\">* Height assumes 3\" stickers</div>");
             sw.WriteLine("\t\t\t\t</div>");
             sw.WriteLine("\t\t\t</div>");
 
             // Length View
             sw.WriteLine("\t\t\t<div class=\"length-view\">");
-            sw.WriteLine("\t\t\t\t<div class=\"view-title\">Length View</div>");
+            sw.WriteLine(String.Format("\t\t\t\t<div class=\"view-title\">Length View - Allowable Overhang {0}%</div>", Settings.LengthMargin * 100));
             sw.WriteLine("\t\t\t\t<div class=\"view-bundle\">");
 
-            foreach (Level level in bundle.Levels)
+            for (int i = bundle.Levels.Count; i > 0; i--)
             {
+                Level level = bundle.Levels.Where(x => x.Number == i).First();
+
                 sw.WriteLine();
-                sw.Write(String.Format("\t\t\t\t\t<div class=\"panel\" style=\"width: {0}px; height: {1}px;\">", (level.Length * 2.25) + 6, (level.Height * 2.25) + 6));
+                sw.Write(String.Format("\t\t\t\t\t<div class=\"panel\" style=\"width: {0}px; height: {1}px;\">Level {2}: ", (level.Length * 2.25) + 6, (level.Height * 2.25) + 6, level.Number));
 
                 foreach (Panel panel in level.Panels)
                     sw.Write(panel.Name.FullName + " ");
@@ -181,16 +197,23 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
 
             // Width View
             sw.WriteLine("\t\t\t<div class=\"width-view\">");
-            sw.WriteLine("\t\t\t\t<div class=\"view-title\">Width View</div>");
+            sw.WriteLine(String.Format("\t\t\t\t<div class=\"view-title\">Width View - Allowable Overhang {0}%</div>", Settings.WidthMargin * 100));
             sw.WriteLine("\t\t\t\t<div class=\"view-bundle\">");
 
-            foreach (Level level in bundle.Levels)
+            for (int i = bundle.Levels.Count; i > 0; i--)
             {
+                Level level = bundle.Levels.Where(x => x.Number == i).First();
+
                 sw.WriteLine(String.Format("\t\t\t\t\t<div class=\"panel\" style=\"width: {0}px; height: {1}px;\"></div>", (level.Width * 2.25) + 6, (level.Height * 2.25) + 6));
                 sw.WriteLine("\t\t\t\t\t<div class=\"sticker\"></div>");
             }
 
             sw.WriteLine("\t\t\t\t</div>");
+            sw.WriteLine("\t\t\t</div>");
+
+            // Comment
+            sw.WriteLine("\t\t\t<div class=\"comment\">");
+            sw.WriteLine("\t\t\t\tComment: _________________________________________________");
             sw.WriteLine("\t\t\t</div>");
 
             // Footer
@@ -200,6 +223,31 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             sw.WriteLine(String.Format("\t\t\t\t<div class=\"footer-page-index\">Bundle {0}/{1}</div>", bundle.Number, Project.Bundles.Count));
             sw.WriteLine("\t\t\t</div>");
 
+            sw.WriteLine("\t\t</div>");
+
+            // Data Page
+            sw.WriteLine("\t\t<div class=\"page\">");
+            sw.WriteLine("\t\t\t<table>");
+            sw.WriteLine("\t\t\t\t<tr>");
+            sw.WriteLine("\t\t\t\t\t<th>Panel</th><th>Height</th><th>Width</th><th>Weight</th>");
+            sw.WriteLine("\t\t\t\t</tr>");
+
+            for (int i = bundle.Levels.Count; i > 0; i--)
+            {
+                Level level = bundle.Levels.Where(x => x.Number == i).First();
+
+                foreach (Panel panel in level.Panels)
+                {
+                    sw.WriteLine("\t\t\t\t<tr>");
+                    sw.WriteLine(String.Format("\t\t\t\t\t<td>{0}</td>", panel.Name.FullName));
+                    sw.WriteLine(String.Format("\t\t\t\t\t<td>{0}</td>", panel.Height.AsString));
+                    sw.WriteLine(String.Format("\t\t\t\t\t<td>{0}</td>", panel.Width.AsString));
+                    sw.WriteLine(String.Format("\t\t\t\t\t<td>{0} lbs.</td>", panel.Weight));
+                    sw.WriteLine("\t\t\t\t</tr>");
+                }
+            }
+
+            sw.WriteLine("\t\t\t</table>");
             sw.WriteLine("\t\t</div>");
         }
 
