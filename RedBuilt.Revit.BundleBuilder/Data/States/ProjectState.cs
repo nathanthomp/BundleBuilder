@@ -20,5 +20,8 @@ namespace RedBuilt.Revit.BundleBuilder.Data.States
 
         public static readonly string Version = "1.0";
 
+        public static bool CanBundle { get; set; } = true;
+
+
     }
 }

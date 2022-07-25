@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Panel = RedBuilt.Revit.BundleBuilder.Data.Models.Panel;
 using RedBuilt.Revit.BundleBuilder.Application.Sort;
 using RedBuilt.Revit.BundleBuilder.Data.Models;
+using System.Windows;
 
 namespace RedBuilt.Revit.BundleBuilder.Data.Services
 {
@@ -44,7 +45,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
         //}
 
         /// <summary>
-        /// List of panel parameter names
+        /// List of panel parameter names and their guid in revit
         /// </summary>
         private static readonly Dictionary<string, string> ParameterNameAndGuid = new Dictionary<string, string>
         {
@@ -181,35 +182,47 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
         /// </summary>
         public static void GetProject(Document doc)
         {
-            // Get the cover page
+            List<Element> viewSheetSet = new FilteredElementCollector(doc).OfClass(typeof(ViewSheet)).ToList();
+            ViewSheet projectCoverPage = (ViewSheet)viewSheetSet.First(x => x.Name == "Project Cover Page");
 
-            
-
-
-
-
-
-
-
-            if (doc.Title == null || doc.Title.Trim(' ').Length == 0)
-                throw new Exception("Document title is missing");
-            else
-                Project.Name = doc.Title;
-
+            // Project Number
             if (doc.ProjectInformation.Number == null || doc.ProjectInformation.Number.Trim(' ').Length == 0)
                 throw new Exception("Project number is missing");
             else
                 Project.Number = doc.ProjectInformation.Number;
 
-            if (doc.ProjectInformation.Location == null)
-                if (doc.ProjectInformation.Address == null)
-                    throw new Exception("No location data availible.");
-                else
-                    Project.Location = doc.ProjectInformation.Address;
-            else
-                Project.Location = doc.ProjectInformation.Location.ToString();
-                
+            // Project Name
+            ParameterSet parameterSet = doc.ProjectInformation.Parameters;
+            foreach (Parameter parameter in parameterSet)
+            {
+                if (parameter.Definition.Name.Equals("Project Name"))
+                {
+                    Project.Name = parameter.AsString();
+                    break;
+                }
+                   
+            }
+            if (String.IsNullOrEmpty(Project.Name))
+                throw new Exception("Cannot find project name");
 
+            // Project Location
+            if (doc.ProjectInformation.Address == null)
+                throw new Exception("No location data availible.");
+            else
+            {
+                string address = doc.ProjectInformation.Address;
+
+                if (address.Contains(Environment.NewLine))
+                {
+                    int indexOfNewLine = address.IndexOf(Environment.NewLine) + 2;
+                    Project.Location = address.Substring(indexOfNewLine, (address.Length - 6) - indexOfNewLine);
+                }
+                else
+                    Project.Location = address;
+
+            }
+
+            // Correct project information
             if (Project.Name.Contains(Project.Number))
             {
                 // Take project number out of project name

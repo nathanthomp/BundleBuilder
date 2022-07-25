@@ -22,6 +22,7 @@ namespace RedBuilt.Revit.BundleBuilder
             UIDocument uiDoc = uiApp.ActiveUIDocument;
             Autodesk.Revit.ApplicationServices.Application app = uiApp.Application;
             Document doc = uiDoc.Document;
+
             try
             {
                 MainWindow mw = new MainWindow(doc);

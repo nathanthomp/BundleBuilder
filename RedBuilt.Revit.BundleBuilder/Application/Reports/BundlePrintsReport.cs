@@ -229,7 +229,7 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             sw.WriteLine("\t\t<div class=\"page\">");
             sw.WriteLine("\t\t\t<table>");
             sw.WriteLine("\t\t\t\t<tr>");
-            sw.WriteLine("\t\t\t\t\t<th>Panel</th><th>Height</th><th>Width</th><th>Weight</th>");
+            sw.WriteLine("\t\t\t\t\t<th>Panel</th><th>Level</th><th>Height</th><th>Width</th><th>Weight</th>");
             sw.WriteLine("\t\t\t\t</tr>");
 
             for (int i = bundle.Levels.Count; i > 0; i--)
@@ -240,6 +240,7 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
                 {
                     sw.WriteLine("\t\t\t\t<tr>");
                     sw.WriteLine(String.Format("\t\t\t\t\t<td>{0}</td>", panel.Name.FullName));
+                    sw.WriteLine(String.Format("\t\t\t\t\t<td>{0}</td>", panel.Level.Number));
                     sw.WriteLine(String.Format("\t\t\t\t\t<td>{0}</td>", panel.Height.AsString));
                     sw.WriteLine(String.Format("\t\t\t\t\t<td>{0}</td>", panel.Width.AsString));
                     sw.WriteLine(String.Format("\t\t\t\t\t<td>{0} lbs.</td>", panel.Weight));

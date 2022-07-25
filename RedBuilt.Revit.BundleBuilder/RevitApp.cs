@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RedBuilt.Revit.BundleBuilder
 {
@@ -20,22 +21,22 @@ namespace RedBuilt.Revit.BundleBuilder
 
         public Result OnStartup(UIControlledApplication application)
         {
-            AddMenu(application);
+            string assemblyPath = Assembly.GetExecutingAssembly().Location;
+
+            // Create ribbon tab
+            string tab = "BundleBuilderTest";
+            application.CreateRibbonTab(tab);
+
+            // Create push button
+            PushButtonData pushButtonData = new PushButtonData("bundlebutton", "Bundle", assemblyPath, "RedBuilt.Revit.BundleBuilder.RevitCommand");
+
+            // Create ribbon panel
+            RibbonPanel ribbonPanel = application.CreateRibbonPanel(tab, "BundleBuilder");
+            PushButton pushButton = ribbonPanel.AddItem(pushButtonData) as PushButton;
+            pushButton.ToolTip = "Custom Build Bundles";
+
             return Result.Succeeded;
         }
 
-        private void AddMenu(UIControlledApplication application)
-        {
-            application.CreateRibbonTab("BundleBuilderTest");
-            string assemblyPath = Assembly.GetExecutingAssembly().Location;
-
-            RibbonPanel ribbonPanel = application.CreateRibbonPanel("BundleBuilderTest", "BundleBuilder");
-
-            PushButtonData pushButtonData = new PushButtonData("BundleButton", "BundleBuilder", assemblyPath, typeof(RevitCommand).FullName);
-            RibbonItem item = ribbonPanel.AddItem(pushButtonData);
-
-            item.ToolTip = "Custom Build Bundles";
-
-        }
     }
 }

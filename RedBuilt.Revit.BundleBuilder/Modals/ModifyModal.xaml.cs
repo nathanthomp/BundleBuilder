@@ -32,32 +32,49 @@ namespace RedBuilt.Revit.BundleBuilder.Modals
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            // When data entered is validated
-            // Use DataService to add either: panel to level, level to bundle, bundle to project, or all
-            // Use DataService to remove either: panel from level, level from bundle, bundle from project, or all
 
-            // Assume that panel is not empty, level number is [1 , bundle.level.count + 1]
+            if (Int32.TryParse(this.BundleLocation.Text, out int destBundleNumber) && 
+                Int32.TryParse(this.LevelLocation.Text, out int destLevelNumber) &&
+                DataIsValid(destBundleNumber, destLevelNumber))
+            {
+                // Get Level to move
+                Level level = LevelTools.GetLevelFromName(this.Levels.Text);
 
-            // Get Level to move
-            Level level = LevelTools.GetLevelFromName(this.Levels.Text);
+                // Process the resquested modification
+                DataService.ProcessModification(level, destBundleNumber, destLevelNumber);
 
-            // Get bundle number Destination
-            if (Int32.TryParse(this.BundleLocation.Text, out int destBundleNumber)) { }
+                // Close the popup
+                this.Close();
+            }
+            else
+            {
+                this.BundleLocation.Text = "";
+                this.LevelLocation.Text = "";
+                this.Levels.Text = "";
 
-            // Get level number
-            if (Int32.TryParse(this.LevelLocation.Text, out int destLevelNumber)) { }
-
-            // Process the resquested modification
-            DataService.ProcessModification(level, destBundleNumber, destLevelNumber);
-
-            // Close the popup
-            this.Close();
+                MessageBox.Show("Invalid Move");
+            }
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             // Close the popup
             this.Close();
+        }
+
+        private bool DataIsValid(int destBundleNumber, int destLevelNumber)
+        {
+            bool result = true;
+
+            Bundle bundle = Project.Bundles.Where(x => x.Number == destBundleNumber).First();
+
+            if (destLevelNumber < 1 ||  destLevelNumber > bundle.NumberOfLevels + 1)
+                result = false;
+
+            if (destBundleNumber < 1 || destBundleNumber > Project.Bundles.Count + 1)
+                result = false;
+
+            return result;
         }
     }
 }

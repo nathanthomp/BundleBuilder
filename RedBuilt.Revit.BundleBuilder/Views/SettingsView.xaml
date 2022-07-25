@@ -39,7 +39,10 @@
                 <TextBlock Text="Project Settings:" Grid.Column="0" Grid.Row="0" TextAlignment="Right" />
                 <!-- Starting Panel -->
                 <TextBlock Text="Starting Panel" Grid.Column="1" Grid.Row="1" Margin="10" TextAlignment="Right"/>
-                <ComboBox x:Name="startingPanel" Grid.Column="2" Grid.Row="1" Margin="20,10" SelectedItem="{Binding StartingPanel}" ItemsSource="{Binding StartingPanels}"/>
+                <ComboBox x:Name="startingPanel" Grid.Column="2" Grid.Row="1" Margin="20,10" 
+                          SelectedValue="{Binding StartingPanel, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+                          ItemsSource="{Binding StartingPanels}"
+                          ToolTip="{Binding ErrorCollection[StartingPanel]}"/>
                 <!-- Starting Direction -->
                 <TextBlock Text="Starting Direction" Grid.Column="1" Grid.Row="2" Margin="10" TextAlignment="Right"/>
                 <ComboBox x:Name="startingDirection" Grid.Column="2" Grid.Row="2" Margin="20,10" SelectedItem="{Binding StartingDirection}" ItemsSource="{Binding StartingDirections}"/>
@@ -49,23 +52,33 @@
                 <TextBlock Text="Bundle Settings:" Grid.Column="0" Grid.Row="3" TextAlignment="Right" Margin="0,30,0,0"/>
                 <!-- Width Margin Percent -->
                 <TextBlock Text="Width Margin Percent" Grid.Column="1" Grid.Row="4" Margin="10" TextAlignment="Right"/>
-                <TextBox x:Name="widthMarginPercent" Grid.Column="2" Grid.Row="4" MinWidth="110" Margin="20,10" Text="{Binding WidthMargin}"/>
+                <TextBox x:Name="widthMarginPercent" Grid.Column="2" Grid.Row="4" MinWidth="110" Margin="20,10" 
+                         Text="{Binding WidthMargin, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="{Binding ErrorCollection[WidthMargin]}"/>
                 <!-- Width Margin Percent -->
                 <TextBlock Text="Length Margin Percent" Grid.Column="1" Grid.Row="5" Margin="10" TextAlignment="Right"/>
-                <TextBox x:Name="lengthMarginPercent" Grid.Column="2" Grid.Row="5" Margin="20,10" Text="{Binding LengthMargin}"/>
+                <TextBox x:Name="lengthMarginPercent" Grid.Column="2" Grid.Row="5" Margin="20,10" 
+                         Text="{Binding LengthMargin, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="{Binding ErrorCollection[LengthMargin]}"/>
                 <!-- Max Bundle Width -->
                 <TextBlock Text="Max Bundle Width" Grid.Column="1" Grid.Row="6" Margin="10" TextAlignment="Right"/>
-                <TextBox x:Name="maxBundleWidth" Grid.Column="2" Grid.Row="6" Margin="20,10" Text="{Binding MaxBundleWidth}"/>
+                <TextBox x:Name="maxBundleWidth" Grid.Column="2" Grid.Row="6" Margin="20,10" 
+                         Text="{Binding MaxBundleWidth, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="{Binding ErrorCollection[MaxBundleWidth]}"/>
                 <!-- Max Bundle Length -->
                 <TextBlock Text="Max Bundle Length" Grid.Column="1" Grid.Row="7" Margin="10" TextAlignment="Right"/>
-                <TextBox x:Name="maxBundleLength" Grid.Column="2" Grid.Row="7" Margin="20,10" Text="{Binding MaxBundleLength}"/>
+                <TextBox x:Name="maxBundleLength" Grid.Column="2" Grid.Row="7" Margin="20,10" 
+                         Text="{Binding MaxBundleLength, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="{Binding ErrorCollection[MaxBundleLength]}"/>
 
 
                 <!-- Level Settings -->
                 <TextBlock Text="Level Settings:" Grid.Column="0" Grid.Row="8" TextAlignment="Right" Margin="0,30,0,0"/>
                 <!-- Max Number of Panels In a Level -->
                 <TextBlock Text="Max Number of Panels in a Level" Grid.Column="1" Grid.Row="9" Margin="10" TextAlignment="Right"/>
-                <TextBox x:Name="numberOfPanelsInLevel" Grid.Column="2" Grid.Row="9" Margin="20,10" Text="{Binding MaxPanelsPerLevel}"/>
+                <TextBox x:Name="numberOfPanelsInLevel" Grid.Column="2" Grid.Row="9" Margin="20,10" 
+                         Text="{Binding MaxPanelsPerLevel, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="{Binding ErrorCollection[MaxPanelsPerLevel]}"/>
 
 
 
@@ -77,7 +90,7 @@
         <Label Content="Settings" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Margin="10,18,0,0"/>
 
         <!-- Buttons -->
-        <Button Content="Back" Command="{Binding NavigateBundleViewCommand}" Width="308" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+        <Button Content="Back" Command="{Binding NavigateBundleViewCommand}" IsEnabled="{Binding IsBackValid}" Width="308" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
 
     </Grid>
 </UserControl>
