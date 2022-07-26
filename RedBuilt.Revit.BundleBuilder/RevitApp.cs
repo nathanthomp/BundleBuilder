@@ -23,16 +23,21 @@ namespace RedBuilt.Revit.BundleBuilder
         {
             string assemblyPath = Assembly.GetExecutingAssembly().Location;
 
-            // Create ribbon tab
-            string tab = "BundleBuilderTest";
-            application.CreateRibbonTab(tab);
+            // Create ribbon panel
+            RibbonPanel ribbonPanel;
+            try
+            {
+                ribbonPanel = application.CreateRibbonPanel("RedBuilt", "BundleBuilder");
+            }
+            catch
+            {
+                ribbonPanel = application.CreateRibbonPanel("BundleBuilder");
+            }
 
             // Create push button
             PushButtonData pushButtonData = new PushButtonData("bundlebutton", "Bundle", assemblyPath, "RedBuilt.Revit.BundleBuilder.RevitCommand");
-
-            // Create ribbon panel
-            RibbonPanel ribbonPanel = application.CreateRibbonPanel(tab, "BundleBuilder");
             PushButton pushButton = ribbonPanel.AddItem(pushButtonData) as PushButton;
+            
             pushButton.ToolTip = "Custom Build Bundles";
 
             return Result.Succeeded;

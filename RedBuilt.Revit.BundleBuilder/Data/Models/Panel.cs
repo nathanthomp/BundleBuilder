@@ -19,7 +19,10 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         public Truck Truck { get; set; }
         public Bundle Bundle { get; set; }
         public Level Level { get; set; }
-        public Element Element { get; set; }
+        public Element PanelElement { get; set; }
+        public Element WallElement { get; set; }
+        public int Column { get; set; }
+        public int Depth { get; set; }
 
         private bool _toBundle;
         public bool ToBundle
@@ -32,10 +35,11 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
             }
         }
 
-        public Panel(Element element)
+        public Panel(Element panelElement, Element wallElement)
         {
-            Element = element;
-            Name = new Name(Element.Name);
+            PanelElement = panelElement;
+            WallElement = wallElement;
+            Name = new Name(panelElement.Name);
             _toBundle = true;
         }
 

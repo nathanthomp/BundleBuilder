@@ -76,13 +76,18 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
             FilterStringRuleEvaluator fsrv = new FilterStringEquals();
             FilterRule fr = new FilterStringRule(pvp, fsrv, "Structural Framing Assembly", true);
             ElementParameterFilter paramFilter = new ElementParameterFilter(fr, false);
-
             List<Element> panelElements = new FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Assemblies)
                 .WhereElementIsNotElementType().WherePasses(paramFilter).ToList();
+
+            // Filter elements by "Wall" to a list
+            List<Element> wallElements = new FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Walls)
+                .OfClass(typeof(Wall)).WhereElementIsNotElementType().ToList();
 
             // Exceptions
             if (panelElements.Count == 0)
                 throw new Exception("No \"Structural Framing Assembly\" elements found.");
+            if (wallElements.Count == 0)
+                throw new Exception("No \"Wall\" elments found.");
 
             // Create parameters
             //foreach (string parameterName in ParameterNames)
@@ -97,8 +102,26 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                 if (String.IsNullOrEmpty(panelElement.Name))
                     throw new Exception("Panel name not found on element: " + panelElement.Id);
 
+
+                // Find matching wall and panel elements
+                Element wallElement = wallElements.Where(x => x.Name == panelElement.Name).First();
+
+                // Exceptions
+                if (wallElement == null)
+                    throw new Exception("Panel not found");
+                if (String.IsNullOrEmpty(wallElement.Name))
+                    throw new Exception("Panel name not found on element: " + wallElement.Id);
+
                 // Create the panel
-                Panel panel = new Panel(panelElement);
+                Panel panel = new Panel(panelElement, wallElement);
+
+
+
+
+
+
+
+
 
                 // Populate each field (Width, Height, Weight, Plate, Type)
                 foreach (KeyValuePair<string, string> parameterNameGuidPair in ParameterNameAndGuid)
@@ -106,9 +129,9 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                     // Find the revit parameter
                     Parameter p;
                     if (String.IsNullOrEmpty(parameterNameGuidPair.Value))
-                        p = panel.Element.LookupParameter(parameterNameGuidPair.Key);
+                        p = panel.PanelElement.LookupParameter(parameterNameGuidPair.Key);
                     else
-                        p = panel.Element.get_Parameter(new Guid(parameterNameGuidPair.Value));
+                        p = panel.PanelElement.get_Parameter(new Guid(parameterNameGuidPair.Value));
 
                     // Exception
                     if (p == null)

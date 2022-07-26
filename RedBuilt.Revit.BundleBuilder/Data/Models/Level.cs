@@ -52,7 +52,6 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
                 Width -= panel.Width.AsDouble;
                 Weight -= panel.Weight;
 
-
                 if (Panels.Count > 0)
                     Length = Panels.Max(x => x.Height.AsDouble);
                 else
