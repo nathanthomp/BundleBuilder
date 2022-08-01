@@ -12,11 +12,15 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
     public class BundleSolve
     {
         /// <summary>
+        /// Creates bundles based on the type and plate
+        /// 
+        /// TODO: extensive documentation
+        /// 
         /// 
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="plate"></param>
-        /// <param name="panelList"></param>
+        /// <param name="type">bundle type</param>
+        /// <param name="plate">bundle plate</param>
+        /// <param name="panelList">list of panels to bundle together</param>
         public static void Solve(string type, string plate, List<Panel> panelList)
         {
             List<Panel> panelListCopy = new List<Panel>(panelList);

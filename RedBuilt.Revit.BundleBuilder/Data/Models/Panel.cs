@@ -24,6 +24,9 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         public int Column { get; set; }
         public int Depth { get; set; }
 
+        /// <summary>
+        /// Property to determine if this panel will be included in the bundles
+        /// </summary>
         private bool _toBundle;
         public bool ToBundle
         {
@@ -35,6 +38,11 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
             }
         }
 
+        /// <summary>
+        /// Panel constructor
+        /// </summary>
+        /// <param name="panelElement">revit wall assembly element</param>
+        /// <param name="wallElement">revit generic wall element</param>
         public Panel(Element panelElement, Element wallElement)
         {
             PanelElement = panelElement;
@@ -43,19 +51,22 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
             _toBundle = true;
         }
 
-        public Panel(Element panelElement)
-        {
-            PanelElement = panelElement;
-            Name = new Name(panelElement.Name);
-            _toBundle = true;
-        }
-
+        /// <summary>
+        /// Determines if the panel is within the criteria for width and length
+        /// </summary>
+        /// <param name="widthBounds">width upper and lower bound</param>
+        /// <param name="lengthBounds">length upper and lower bound</param>
+        /// <returns>true if within bounds, otherwisw false</returns>
         public bool IsWithinBounds(double[] widthBounds, double[] lengthBounds)
         {
             return (Height.AsDouble > lengthBounds[0] && Height.AsDouble < lengthBounds[1])
                 && (Width.AsDouble > widthBounds[0] && Width.AsDouble < widthBounds[1]);
         }
 
+        /// <summary>
+        /// Panel object ToString() method
+        /// </summary>
+        /// <returns>panel full name</returns>
         public override string ToString()
         {
             return Name.FullName;

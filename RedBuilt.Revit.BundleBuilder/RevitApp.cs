@@ -14,11 +14,21 @@ namespace RedBuilt.Revit.BundleBuilder
     {
         static AddInId m_appId = new AddInId(new Guid("BD4B0625-4B95-44E9-BC9C-5F7EE6505AD1"));
 
+        /// <summary>
+        /// Revit shutdown method
+        /// </summary>
+        /// <param name="application">revit applicaton</param>
+        /// <returns>status</returns>
         public Result OnShutdown(UIControlledApplication application)
         {
             return Result.Succeeded;
         }
 
+        /// <summary>
+        /// Revit startup method
+        /// </summary>
+        /// <param name="application">revit applicaton</param>
+        /// <returns>status</returns>
         public Result OnStartup(UIControlledApplication application)
         {
             string assemblyPath = Assembly.GetExecutingAssembly().Location;

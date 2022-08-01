@@ -10,12 +10,16 @@ using System.Threading.Tasks;
 
 namespace RedBuilt.Revit.BundleBuilder
 {
-    /// <summary>
-    /// Interaction logic for Revit
-    /// </summary>
     [Transaction(TransactionMode.Manual)]
     public class RevitCommand : IExternalCommand
     {
+        /// <summary>
+        /// Revit plugin interaction logic
+        /// </summary>
+        /// <param name="commandData">revit command data</param>
+        /// <param name="message">revit status message</param>
+        /// <param name="elements">elements</param>
+        /// <returns>status</returns>
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
             UIApplication uiApp = commandData.Application;

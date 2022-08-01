@@ -22,12 +22,21 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         public string Plate { get; set; }
         public List<Level> Levels { get; set; } = new List<Level>();
 
+        /// <summary>
+        /// Bundle constructor
+        /// </summary>
+        /// <param name="bundleNumber">initial number</param>
+        /// <param name="bundleNumberOfLevels">initial number of levels</param>
         public Bundle(int bundleNumber, int bundleNumberOfLevels)
         {
             Number = bundleNumber;
             NumberOfLevels = bundleNumberOfLevels;
         }
 
+        /// <summary>
+        /// Adds a level to this bundle
+        /// </summary>
+        /// <param name="level">the level to add</param>
         public void Add(Level level)
         {
             if (!Levels.Contains(level))
@@ -43,6 +52,10 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
             }
         }
 
+        /// <summary>
+        /// Removes a level from this bundle
+        /// </summary>
+        /// <param name="level">the level to remove</param>
         public void Remove(Level level)
         {
             if (Levels.Contains(level))
@@ -62,6 +75,10 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
             }
         }
 
+        /// <summary>
+        /// Bundle object ToString() method
+        /// </summary>
+        /// <returns>proper bundle number, bundle type and bundle plate</returns>
         public override string ToString()
         {
             string properNumber = string.Empty;

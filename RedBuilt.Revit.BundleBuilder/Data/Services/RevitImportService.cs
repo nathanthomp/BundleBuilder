@@ -13,6 +13,8 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
 {
     public class RevitImportService
     {
+        #region Parameter class
+
         /// <summary>
         /// Parameter model
         /// </summary>
@@ -36,13 +38,20 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
         //                    Guid = parameter.GUID;
         //                else
         //                    Guid = Guid.Empty;
-                        
+
         //                StorageType = parameter.StorageType;
         //                break;
         //            }
         //        }
         //    }
         //}
+
+        /// <summary>
+        /// List of parameter objects
+        /// </summary>
+        //private static List<Parameter> Parameters = new List<Parameter>();
+
+        #endregion
 
         /// <summary>
         /// List of panel parameter names and their guid in revit
@@ -55,11 +64,6 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
             { "Framing Member Mass", "70be58b1-bbbc-4199-9d16-d0af4969f2af" },
             { "Assembly Area", "99a0d818-1d3b-4954-a777-e87ab3f3d5c8" }
         };
-
-        /// <summary>
-        /// List of parameter objects
-        /// </summary>
-        //private static List<Parameter> Parameters = new List<Parameter>();
 
         /// <summary>
         /// Filters revit document for wall panel elements and creates a list of panel objects
@@ -80,19 +84,19 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                 .WhereElementIsNotElementType().WherePasses(paramFilter).ToList();
 
             // Filter elements by "Wall" to a list
-            //List<Element> wallElements = new FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Walls)
-            //    .OfClass(typeof(Wall)).WhereElementIsNotElementType().ToList();
+            List<Element> wallElements = new FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Walls)
+                .OfClass(typeof(Wall)).WhereElementIsNotElementType().ToList();
 
             // Exceptions
             if (panelElements.Count == 0)
                 throw new Exception("No \"Structural Framing Assembly\" elements found.");
-            //if (wallElements.Count == 0)
-            //    throw new Exception("No \"Wall\" elments found.");
+            if (wallElements.Count == 0)
+                throw new Exception("No \"Wall\" elments found.");
 
             // Create parameters
             //foreach (string parameterName in ParameterNames)
             //    Parameters.Add(new Parameter(parameterName, panelElements[0]));
-            
+
             // Create new Panels using the filtered elements
             foreach (Element panelElement in panelElements)
             {
@@ -104,24 +108,24 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
 
 
                 // Find matching wall and panel elements
-                //Element wallElement = wallElements.Where(x => x.Name == panelElement.Name).First();
-
+                Element wallElement = null;
+                foreach (Element wall in wallElements)
+                {
+                    string mark = wall.LookupParameter("Mark").AsString();
+                    if (mark.Equals(panelElement.Name))
+                    {
+                        wallElement = wall;
+                    }
+                }
+                
                 // Exceptions
-                //if (wallElement == null)
-                //    throw new Exception("Panel not found");
-                //if (String.IsNullOrEmpty(wallElement.Name))
-                //    throw new Exception("Panel name not found on element: " + wallElement.Id);
+                if (wallElement == null)
+                    throw new Exception("Panel not found");
+                if (String.IsNullOrEmpty(wallElement.Name))
+                    throw new Exception("Panel name not found on element: " + wallElement.Id);
 
                 // Create the panel
-                Panel panel = new Panel(panelElement);
-
-
-
-
-
-
-
-
+                Panel panel = new Panel(panelElement, wallElement);
 
                 // Populate each field (Width, Height, Weight, Plate, Type)
                 foreach (KeyValuePair<string, string> parameterNameGuidPair in ParameterNameAndGuid)
@@ -186,10 +190,11 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
         }
 
         /// <summary>
-        /// 
+        /// Checks the list of panels to ensure that there are no other panels 
+        /// with the same name as panel
         /// </summary>
-        /// <param name="panel"></param>
-        /// <param name="panels"></param>
+        /// <param name="panel">the panel to ensure does not exist twice</param>
+        /// <param name="panels">list of panels</param>
         /// <returns></returns>
         public static bool HasDuplicatePanel(Panel panel, List<Panel> panels)
         {
@@ -201,8 +206,10 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
         }
 
         /// <summary>
-        /// 
+        /// Imports the project data including project number, name, and location
         /// </summary>
+        /// <param name="doc">revit document</param>
+        /// <exception cref="Exception">whether or not the parameter is found</exception>
         public static void GetProject(Document doc)
         {
             List<Element> viewSheetSet = new FilteredElementCollector(doc).OfClass(typeof(ViewSheet)).ToList();

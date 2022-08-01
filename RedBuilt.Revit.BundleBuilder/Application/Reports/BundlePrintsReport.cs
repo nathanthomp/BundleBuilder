@@ -19,6 +19,11 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
         private static readonly string localFile = @"C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Documents\BundlePrints.html";
         private static readonly string imageFile = @"C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg";
 
+        /// <summary>
+        /// Creates the html document and converts it to a pdf document
+        /// </summary>
+        /// <param name="fileName">the pdf document file path</param>
+        /// <exception cref="Exception">I/O problems</exception>
         public static void CreatePdf(string fileName)
         {
 
@@ -48,6 +53,9 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             #endregion
         }
 
+        /// <summary>
+        /// Creates the html document
+        /// </summary>
         private static void CreateHtml()
         {
             StreamWriter sw = new StreamWriter(localFile);
@@ -59,12 +67,16 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
                 CreatePage(bundle, sw);
             }
                 
-
             CreateFileFooter(sw);
 
             sw.Close();
         }
 
+        /// <summary>
+        /// Creates the static header for the html document including the 
+        /// doc type, html, head, and initial body tags
+        /// </summary>
+        /// <param name="sw">output stream</param>
         private static void CreateFileHeader(StreamWriter sw)
         {
             sw.WriteLine("<!DOCTYPE html>");
@@ -131,6 +143,11 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             sw.WriteLine("\t<body>");
         }
 
+        /// <summary>
+        /// Creates a single html/pdf page for a single bundle
+        /// </summary>
+        /// <param name="bundle">bundle to display on page</param>
+        /// <param name="sw">output stream</param>
         private static void CreatePage(Bundle bundle, StreamWriter sw)
         {
             sw.WriteLine("\t\t<div class=\"page\">");
@@ -245,6 +262,11 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             sw.WriteLine("\t\t</div>");
         }
 
+        /// <summary>
+        /// Creates a length view for a single bundle
+        /// </summary>
+        /// <param name="bundle">bundle length view to display</param>
+        /// <param name="sw">output stream</param>
         private static void CreateLengthLevels(Bundle bundle, StreamWriter sw)
         {
             // Get maximum number of depths in the bundle
@@ -283,6 +305,11 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             }
         }
 
+        /// <summary>
+        /// Creates a width view for a single bundle
+        /// </summary>
+        /// <param name="bundle">bundle width view to display</param>
+        /// <param name="sw">output stream</param>
         private static void CreateWidthLevels(Bundle bundle, StreamWriter sw)
         {
             // Get maximum number of columns in the bundle
@@ -376,6 +403,11 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             sw.WriteLine("\t\t\t\t\t\t</div>");
         }
 
+        /// <summary>
+        /// Creates static footer for the html document including
+        /// closing body, and html tags
+        /// </summary>
+        /// <param name="sw"></param>
         private static void CreateFileFooter(StreamWriter sw)
         {
             sw.WriteLine("\t</body>");

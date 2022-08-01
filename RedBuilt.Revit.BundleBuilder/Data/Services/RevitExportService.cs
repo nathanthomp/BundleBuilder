@@ -19,11 +19,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
             { "FM TR Number", new Guid("8d03c405-03b0-4f19-b18d-da8f23c5fd0f")},
             { "FM TR Column Number", new Guid("602730bd-59da-47eb-a04f-819262d6eac4") },
             { "FM TR Row Number", new Guid("1ec33ab7-867b-4663-ba4c-e6e50f0cd592") },
-            { "FM TR Type", new Guid("8ccd8cec-1a6d-4631-8cfa-8e9b4b2e9a56") },
-            //{ "RB Bundle", new Guid("") },
-            //{ "RB Bundle Level", new Guid("") },
-            //{ "RB Bundle Column", new Guid("") },
-            //{ "RB Bundle Depth", new Guid("") }
+            { "FM TR Type", new Guid("8ccd8cec-1a6d-4631-8cfa-8e9b4b2e9a56") }
         };
 
         /// <summary>
@@ -38,23 +34,27 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
 
                 foreach (Panel panel in Project.Panels)
                 {
-                    // Get panel element and element parameter set
-                    Element panelElement = panel.PanelElement;
-                    ParameterSet panelParameterSet = panelElement.Parameters;
-
                     #region RB Fields
 
+                    Element wallElement = panel.WallElement;
+
                     // Change RB Bundle parameter to panel bundle number
+                    wallElement.LookupParameter("RB Bundle").Set(panel.Bundle.Number.ToString());
 
                     // Change RB Bundle Level parameter to panel level
+                    wallElement.LookupParameter("RB Bundle Level").Set(panel.Level.Number.ToString());
 
                     // Change RB Bundle Column parameter to panel column
+                    wallElement.LookupParameter("RB Bundle Column").Set(panel.Column.ToString());
 
                     // Change RB Bundle Depth parameter to panel depth
+                    wallElement.LookupParameter("RB Bundle Depth").Set(panel.Depth.ToString());
 
                     #endregion
 
                     #region FM TR Fields
+
+                    Element panelElement = panel.PanelElement;
 
                     // Change FM TR Number parameter to panel bundle number
                     panelElement.get_Parameter(ParameterNameAndGuid["FM TR Number"]).Set(panel.Bundle.Number.ToString());

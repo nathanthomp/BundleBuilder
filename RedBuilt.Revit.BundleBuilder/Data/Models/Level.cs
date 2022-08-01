@@ -17,12 +17,21 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         public Bundle Bundle { get; set; }
         public List<Panel> Panels { get; set; }
 
+        /// <summary>
+        /// Level constructor
+        /// </summary>
+        /// <param name="levelNumber">initial number</param>
         public Level(int levelNumber)
         {
             Number = levelNumber;
             Panels = new List<Panel>();
         }
 
+        /// <summary>
+        /// Adds a panel to this level
+        /// </summary>
+        /// <param name="panel">the panel to add</param>
+        /// <returns>true if add was successful, false otherwise</returns>
         public bool Add(Panel panel)
         {
             if (!Panels.Contains(panel))
@@ -44,6 +53,11 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
             }
         }
 
+        /// <summary>
+        /// Removes a panel from this level
+        /// </summary>
+        /// <param name="panel">the panel to remove</param>
+        /// <returns>true if remove was successful, false otherwise</returns>
         public bool Remove(Panel panel)
         {
             if (Panels.Contains(panel))
@@ -65,6 +79,10 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
             }
         }
 
+        /// <summary>
+        /// Level object ToString() method
+        /// </summary>
+        /// <returns>level bundle and level number</returns>
         public override string ToString()
         {
             return String.Format("Bundle {0} - Level {1}", Bundle.Number, Number);
