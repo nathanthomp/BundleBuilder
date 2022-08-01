@@ -98,8 +98,16 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             sw.WriteLine("\t\t\t.length-view{ height: 250px; }");
             sw.WriteLine("\t\t\t.width-view{ height: 250px; }");
             sw.WriteLine("\t\t\t.view-title{ text-align: center; padding-bottom: 30px; }");
-            sw.WriteLine("\t\t\t.panel{ border: 1px solid black; }");
+            sw.WriteLine("\t\t\t.view-bundle-bottom{ float: left; width: 40%; text-align: right; }");
+            sw.WriteLine("\t\t\t.view-bundle-top{ float: right; width: 40%; }");
+            sw.WriteLine("\t\t\t.level{ display: inline-block; }");
+            sw.WriteLine("\t\t\t.depth{ display: inline-block; }");
+            sw.WriteLine("\t\t\t.column{ display: inline-block; }");
+            sw.WriteLine("\t\t\t.panel{ border: 1px solid black; font-size: 10px; }");
+            sw.WriteLine("\t\t\t.panel-ghost{ border: 1px solid dashed; }");
             sw.WriteLine("\t\t\t.sticker{ height: 6px; }");
+            sw.WriteLine("\t\t\t.width-subtitle-left{ float: left; margin-top: 20px; width: 50%; text-align: center; }");
+            sw.WriteLine("\t\t\t.width-subtitle-right{ float: right; margin-top: 20px; width: 50%; text-align: center; }");
 
             // Comment
             sw.WriteLine("\t\t\t.comment{ padding-top: 140px; padding-left: 110px }");
@@ -178,19 +186,7 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             sw.WriteLine(String.Format("\t\t\t\t<div class=\"view-title\">Length View - Allowable Overhang {0}%</div>", Settings.LengthMargin * 100));
             sw.WriteLine("\t\t\t\t<div class=\"view-bundle\">");
 
-            for (int i = bundle.Levels.Count; i > 0; i--)
-            {
-                Level level = bundle.Levels.Where(x => x.Number == i).First();
-
-                sw.WriteLine();
-                sw.Write(String.Format("\t\t\t\t\t<div class=\"panel\" style=\"width: {0}px; height: {1}px;\">Level {2}: ", (level.Length * 2.25) + 6, (level.Height * 2.25) + 6, level.Number));
-
-                foreach (Panel panel in level.Panels)
-                    sw.Write(panel.Name.FullName + " ");
-
-                sw.Write("</div>");
-                sw.WriteLine("\t\t\t\t\t<div class=\"sticker\"></div>");
-            }
+            CreateLengthLevels(bundle, sw);
 
             sw.WriteLine("\t\t\t\t</div>");
             sw.WriteLine("\t\t\t</div>");
@@ -198,17 +194,14 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             // Width View
             sw.WriteLine("\t\t\t<div class=\"width-view\">");
             sw.WriteLine(String.Format("\t\t\t\t<div class=\"view-title\">Width View - Allowable Overhang {0}%</div>", Settings.WidthMargin * 100));
-            sw.WriteLine("\t\t\t\t<div class=\"view-bundle\">");
+            
+            CreateWidthLevels(bundle, sw);
 
-            for (int i = bundle.Levels.Count; i > 0; i--)
-            {
-                Level level = bundle.Levels.Where(x => x.Number == i).First();
-
-                sw.WriteLine(String.Format("\t\t\t\t\t<div class=\"panel\" style=\"width: {0}px; height: {1}px;\"></div>", (level.Width * 2.25) + 6, (level.Height * 2.25) + 6));
-                sw.WriteLine("\t\t\t\t\t<div class=\"sticker\"></div>");
-            }
-
+            sw.WriteLine("\t\t\t\t<div>");
+            sw.WriteLine("\t\t\t\t\t<div class=\"width-subtitle-right\">Top View</div>");
+            sw.WriteLine("\t\t\t\t\t<div class=\"width-subtitle-left\">Bottom View</div>");
             sw.WriteLine("\t\t\t\t</div>");
+
             sw.WriteLine("\t\t\t</div>");
 
             // Comment
@@ -250,6 +243,137 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
 
             sw.WriteLine("\t\t\t</table>");
             sw.WriteLine("\t\t</div>");
+        }
+
+        private static void CreateLengthLevels(Bundle bundle, StreamWriter sw)
+        {
+            // Get maximum number of depths in the bundle
+            List<int> depths = new List<int>();
+            bundle.Levels.ForEach(level => level.Panels.ForEach(panel => depths.Add(panel.Depth)));
+            int maxDepthsInBundle = depths.Max();
+
+            // Create each level
+            for (int i = bundle.Levels.Count; i > 0; i--)
+            {
+                Level level = bundle.Levels.Where(x => x.Number == i).First();
+
+                sw.WriteLine();
+                sw.WriteLine("\t\t\t\t\t<div class=\"level\">");
+
+                // Get number of depths
+                int numOfDepths = level.Panels.Max(x => x.Depth);
+                for (int j = 0; j < numOfDepths; j++)
+                {
+                    // Get depth length
+                    double maxLengthOfDepth = level.Panels.Where(x => x.Depth == j + 1).Max(x => x.Height.AsDouble);
+                    double depthLength = maxLengthOfDepth * 2.25;
+                    if (maxDepthsInBundle > 1 && numOfDepths == 1)
+                        depthLength += (maxDepthsInBundle - 1) * 6;
+
+                    // Get panel names
+                    string panelNames = "";
+                    //foreach (Panel panel in level.Panels.Where(x => x.Depth == j + 1))
+                    //    panelNames += panel.Name.FullName + " ";
+
+                    // Create depth
+                    sw.WriteLine(String.Format("\t\t\t\t\t\t<div class=\"depth panel\" style=\"width: {0}px; height: {1}px;\">{2}</div>", depthLength, (level.Height * 2.25) + 6, panelNames));
+                }
+                sw.WriteLine("\t\t\t\t\t</div>");
+                sw.WriteLine("\t\t\t\t\t<div class=\"sticker\"></div>");
+            }
+        }
+
+        private static void CreateWidthLevels(Bundle bundle, StreamWriter sw)
+        {
+            // Get maximum number of columns in the bundle
+            List<int> columns = new List<int>();
+            bundle.Levels.ForEach(level => level.Panels.ForEach(panel => columns.Add(panel.Column)));
+            int maxColumnsInBundle = columns.Max();
+
+
+            // Bottom Side
+            sw.WriteLine("\t\t\t\t<div class=\"view-bundle-bottom\">");
+            for (int i = bundle.Levels.Count; i > 0; i--)
+            {
+                Level level = bundle.Levels.Where(x => x.Number == i).First();
+                sw.WriteLine("\t\t\t\t\t<div class\"level\">");
+
+                // Find number of columns in level where depth is 1
+                int numOfColumns = level.Panels.Where(x => x.Depth == 1).Max(x => x.Column);
+ 
+                // Print all of the columns with depth of 1
+                for (int j = numOfColumns; j > 0; j--)
+                {
+                    Panel panel = level.Panels.Where(x => x.Depth == 1 && x.Column == j).First();
+
+                    // Get column width
+                    double columnWidth = panel.Width.AsDouble * 2.25;
+                    if (maxColumnsInBundle > 1 && numOfColumns == 1)
+                        columnWidth += (maxColumnsInBundle - 1) * 6;
+
+                    sw.WriteLine(String.Format("\t\t\t\t\t\t<div class=\"column panel\" style=\"width: {0}px; height: {1}px;\">{2}</div>", columnWidth, (level.Height * 2.25) + 6, panel.Name.FullName));
+                }
+
+                sw.WriteLine("\t\t\t\t\t\t</div>");
+                sw.WriteLine("\t\t\t\t\t\t<div class=\"sticker\"></div>");
+                
+            }
+            sw.WriteLine("\t\t\t\t</div>");
+
+            // Top Side
+            sw.WriteLine("\t\t\t\t<div class=\"view-bundle-top\">");
+            for (int i = bundle.Levels.Count; i > 0; i--)
+            {
+                Level level = bundle.Levels.Where(x => x.Number == i).First();
+                sw.WriteLine("\t\t\t\t\t<div class\"level column\">");
+
+                List<Panel> topViewPanels = level.Panels.Where(x => x.Depth == 2).ToList();
+                
+                if (topViewPanels.Count == 0)
+                {
+                    // Find number of columns in level where depth is 1
+                    int numOfColumns = level.Panels.Where(x => x.Depth == 1).Max(x => x.Column);
+
+                    // Print all of the columns with a depth of 1
+                    for (int j = 0; j < numOfColumns; j++)
+                    {
+                        Panel panel = level.Panels.Where(x => x.Depth == 1 && x.Column == j + 1).First();
+
+                        // Get column width
+                        double columnWidth = panel.Width.AsDouble * 2.25;
+                        if (maxColumnsInBundle > 1 && numOfColumns == 1)
+                            columnWidth += (maxColumnsInBundle - 1) * 6;
+
+                        // Create column
+                        sw.WriteLine(String.Format("\t\t\t\t\t\t<div class=\"column panel\" style=\"width: {0}px; height: {1}px;\">{2}</div>", columnWidth, (level.Height * 2.25) + 6, panel.Name.FullName));
+                    }
+                }
+                else
+                {
+                    // Find number of columns in level where depth is 2
+                    int numOfColumns = level.Panels.Where(x => x.Depth == 2).Max(x => x.Column);
+
+
+                    // Print all of the columns with a depth of 2
+                    for (int j = 0; j < numOfColumns; j++)
+                    {
+                        Panel panel = level.Panels.Where(x => x.Depth == 2 && x.Column == j + 1).First();
+
+                        // Get column width
+                        double columnWidth = panel.Width.AsDouble * 2.25;
+                        if (maxColumnsInBundle > 1 && numOfColumns == 1)
+                            columnWidth += (maxColumnsInBundle - 1) * 6;
+
+                        // Create column
+                        sw.WriteLine(String.Format("\t\t\t\t\t\t<div class=\"column panel\" style=\"width: {0}px; height: {1}px;\">{2}</div>", columnWidth, (level.Height * 2.25) + 6, panel.Name.FullName));
+                    }
+                }
+
+                sw.WriteLine("\t\t\t\t\t\t</div>");
+                sw.WriteLine("\t\t\t\t\t\t<div class=\"sticker\"></div>");
+
+            }
+            sw.WriteLine("\t\t\t\t\t\t</div>");
         }
 
         private static void CreateFileFooter(StreamWriter sw)

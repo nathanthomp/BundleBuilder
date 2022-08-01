@@ -20,10 +20,10 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
             { "FM TR Column Number", new Guid("602730bd-59da-47eb-a04f-819262d6eac4") },
             { "FM TR Row Number", new Guid("1ec33ab7-867b-4663-ba4c-e6e50f0cd592") },
             { "FM TR Type", new Guid("8ccd8cec-1a6d-4631-8cfa-8e9b4b2e9a56") },
-            { "RB Bundle", new Guid("") },
-            { "RB Bundle Level", new Guid("") },
-            { "RB Bundle Column", new Guid("") },
-            { "RB Bundle Depth", new Guid("") }
+            //{ "RB Bundle", new Guid("") },
+            //{ "RB Bundle Level", new Guid("") },
+            //{ "RB Bundle Column", new Guid("") },
+            //{ "RB Bundle Depth", new Guid("") }
         };
 
         /// <summary>

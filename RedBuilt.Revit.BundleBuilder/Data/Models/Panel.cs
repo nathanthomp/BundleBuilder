@@ -43,6 +43,13 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
             _toBundle = true;
         }
 
+        public Panel(Element panelElement)
+        {
+            PanelElement = panelElement;
+            Name = new Name(panelElement.Name);
+            _toBundle = true;
+        }
+
         public bool IsWithinBounds(double[] widthBounds, double[] lengthBounds)
         {
             return (Height.AsDouble > lengthBounds[0] && Height.AsDouble < lengthBounds[1])

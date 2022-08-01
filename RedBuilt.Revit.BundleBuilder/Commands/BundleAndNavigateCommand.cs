@@ -84,6 +84,102 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
                 }
             }
 
+            // Correct the depth and column numbers
+            for (int i = 0; i < Project.Bundles.Count; i++)
+            {
+                Bundle bundle = Project.Bundles[i];
+
+                for (int j = bundle.NumberOfLevels - 1; j >= 0; j--)
+                {
+                    Level level = bundle.Levels[j];
+
+                    
+                    if (level.Panels.Max(x => x.Depth) > 1)
+                    {
+                        // Correct depth if level has more than 1 depth
+                        List<Panel> depthPanels1 = level.Panels.Where(x => x.Depth == 1).ToList();
+                        List<Panel> depthPanels2 = level.Panels.Where(x => x.Depth == 2).ToList();
+
+                        double depthLength1 = depthPanels1.Max(x => x.Height.AsDouble);
+                        double depthLength2 = depthPanels2.Max(x => x.Height.AsDouble);
+
+                        if (depthLength2 < depthLength1)
+                        {
+                            // Switch
+                            for (int k = 0; k < depthPanels1.Count; k++)
+                                depthPanels1[k].Depth = 2;
+                            for (int k = 0; k < depthPanels2.Count; k++)
+                                depthPanels2[k].Depth = 1;
+                        }
+
+                        // Correct column if level has more than 1 depth
+                        List<Panel> columnPanelsWithDepthOf1 = level.Panels.Where(x => x.Depth == 1).ToList();
+                        List<Panel> columnPanelsWithDepthOf2 = level.Panels.Where(x => x.Depth == 2).ToList();
+
+                        // Take panels with depth of 1 and sort smallest to largest
+                        int numberOfColumnsWithDepthOf1 = columnPanelsWithDepthOf1.Count;
+                        while (columnPanelsWithDepthOf1.Count > 0)
+                        {
+                            for (int k = 0; k < numberOfColumnsWithDepthOf1; k++)
+                            {
+                                // Find the smallest panel
+                                double smallestColumnWidth = columnPanelsWithDepthOf1.Min(x => x.Width.AsDouble);
+                                Panel panel = columnPanelsWithDepthOf1.Where(x => x.Width.AsDouble == smallestColumnWidth).First();
+
+                                // Make the smallest panel column of k + 1
+                                panel.Column = k + 1;
+
+                                // Remove smallest panel from panelsCopy
+                                columnPanelsWithDepthOf1.Remove(panel);
+                            }
+                        }
+
+                        // Take panels with depth of 2 and sort smallest to largest
+                        int numberOfColumnsWithDepthOf2 = columnPanelsWithDepthOf2.Count;
+                        while (columnPanelsWithDepthOf2.Count > 0)
+                        {
+                            for (int k = 0; k < numberOfColumnsWithDepthOf2; k++)
+                            {
+                                // Find the smallest panel
+                                double smallestColumnWidth = columnPanelsWithDepthOf2.Min(x => x.Width.AsDouble);
+                                Panel panel = columnPanelsWithDepthOf2.Where(x => x.Width.AsDouble == smallestColumnWidth).First();
+
+                                // Make the smallest panel column of k + 1
+                                panel.Column = k + 1;
+
+                                // Remove smallest panel from panelsCopy
+                                columnPanelsWithDepthOf2.Remove(panel);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // Correct column if level has 1 depth
+
+                        // Take all panels and sort smallest to largest
+                        List<Panel> panelsCopy = new List<Panel>(level.Panels);
+                        int numberOfColumns = panelsCopy.Count;
+                        while (panelsCopy.Count > 0)
+                        {
+                            for (int k = 0; k < numberOfColumns; k++)
+                            {
+                                // Find the smallest panel
+                                double smallestColumnWidth = panelsCopy.Min(x => x.Width.AsDouble);
+                                Panel panel = panelsCopy.Where(x => x.Width.AsDouble == smallestColumnWidth).First();
+
+                                // Make the smallest panel column of k + 1
+                                panel.Column = k + 1;
+
+                                // Remove smallest panel from panelsCopy
+                                panelsCopy.Remove(panel);
+                            }
+                        }
+
+                    }
+                }
+            }
+
+            // Export the bundle preview
             BundleReport.Export();
 
             // Update current view

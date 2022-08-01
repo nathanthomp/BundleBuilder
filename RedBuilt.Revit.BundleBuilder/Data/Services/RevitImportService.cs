@@ -80,14 +80,14 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                 .WhereElementIsNotElementType().WherePasses(paramFilter).ToList();
 
             // Filter elements by "Wall" to a list
-            List<Element> wallElements = new FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Walls)
-                .OfClass(typeof(Wall)).WhereElementIsNotElementType().ToList();
+            //List<Element> wallElements = new FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Walls)
+            //    .OfClass(typeof(Wall)).WhereElementIsNotElementType().ToList();
 
             // Exceptions
             if (panelElements.Count == 0)
                 throw new Exception("No \"Structural Framing Assembly\" elements found.");
-            if (wallElements.Count == 0)
-                throw new Exception("No \"Wall\" elments found.");
+            //if (wallElements.Count == 0)
+            //    throw new Exception("No \"Wall\" elments found.");
 
             // Create parameters
             //foreach (string parameterName in ParameterNames)
@@ -104,16 +104,16 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
 
 
                 // Find matching wall and panel elements
-                Element wallElement = wallElements.Where(x => x.Name == panelElement.Name).First();
+                //Element wallElement = wallElements.Where(x => x.Name == panelElement.Name).First();
 
                 // Exceptions
-                if (wallElement == null)
-                    throw new Exception("Panel not found");
-                if (String.IsNullOrEmpty(wallElement.Name))
-                    throw new Exception("Panel name not found on element: " + wallElement.Id);
+                //if (wallElement == null)
+                //    throw new Exception("Panel not found");
+                //if (String.IsNullOrEmpty(wallElement.Name))
+                //    throw new Exception("Panel name not found on element: " + wallElement.Id);
 
                 // Create the panel
-                Panel panel = new Panel(panelElement, wallElement);
+                Panel panel = new Panel(panelElement);
 
 
 

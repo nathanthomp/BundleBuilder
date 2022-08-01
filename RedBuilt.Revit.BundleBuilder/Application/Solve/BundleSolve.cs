@@ -52,12 +52,13 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
                 // is empty.
                 for (int i = 0; i < numberOfLevels; i++)
                 {
+                    int colIndex = 1;
 
                     // top level, squeeze as many panels in as possible
                     if (i == 0)
                     {
                         Level level = bundle.Levels[i];
-                        int colIndex = 1;
+                        colIndex = 1;
                         for (int j = 0; j < panelListCopy.Count; j++)
                         {
                             if (panelListCopy.Count != 0)
@@ -90,7 +91,7 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
                     else if (i < numberOfLevels - 1)
                     {
                         Level level = bundle.Levels[i];
-                        int colIndex = 1;
+                        colIndex = 1;
                         for (int j = 0; j < panelListCopy.Count; j++)
                         {
                             if (panelListCopy.Count != 0)
@@ -163,7 +164,7 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
                     // if there are still panels to bundle
                     if (panelListCopy.Count != 0)
                     {
-                         // bundle.Reversed = true;
+                        int colIndex = 1;
 
                         // remove all panels in bundle
                         for (int i = 0; i < bundle.Levels.Count; i++)
@@ -204,7 +205,7 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
                         for (int i = numberOfLevels - 2; i >= 0; i--)
                         {
                             Level level = bundle.Levels[i];
-                            int colIndex = 1;
+                            colIndex = 1;
                             int depthIndex = 1;
                             for (int j = panelListCopy.Count - 1; j >= 0; j--)
                             {
