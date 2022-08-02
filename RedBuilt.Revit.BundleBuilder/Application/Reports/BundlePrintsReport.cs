@@ -323,7 +323,7 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             for (int i = bundle.Levels.Count; i > 0; i--)
             {
                 Level level = bundle.Levels.Where(x => x.Number == i).First();
-                sw.WriteLine("\t\t\t\t\t<div class\"level\">");
+                sw.WriteLine("\t\t\t\t\t<div class=\"level\">");
 
                 // Find number of columns in level where depth is 1
                 int numOfColumns = level.Panels.Where(x => x.Depth == 1).Max(x => x.Column);
@@ -352,7 +352,7 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
             for (int i = bundle.Levels.Count; i > 0; i--)
             {
                 Level level = bundle.Levels.Where(x => x.Number == i).First();
-                sw.WriteLine("\t\t\t\t\t<div class\"level column\">");
+                sw.WriteLine("\t\t\t\t\t<div class=\"level column\">");
 
                 List<Panel> topViewPanels = level.Panels.Where(x => x.Depth == 2).ToList();
                 

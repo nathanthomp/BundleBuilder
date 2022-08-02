@@ -10,7 +10,7 @@
     <Grid Margin="10">
         
         <!-- Main Content -->
-        <WebBrowser x:Name="createdBundles" Margin="0,50,0,70" Loaded="CreatedBundles_Loaded">
+        <WebBrowser x:Name="createdBundles" Margin="0,50,0,50" Loaded="CreatedBundles_Loaded">
         </WebBrowser>
         
         <!-- Header -->
