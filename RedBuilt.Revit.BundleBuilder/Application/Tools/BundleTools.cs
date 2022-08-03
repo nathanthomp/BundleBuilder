@@ -138,47 +138,5 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Tools
             }
         }
 
-        public static void CorrectLevelNumbers()
-        {
-            // Increment through all of the bundles in Project.Bundles
-            for (int i = 0; i < Project.Bundles.Count; i++)
-            {
-                // Select a bundle
-                Bundle bundle = Project.Bundles[i];
-                List<Level> levelsCopy = new List<Level>(bundle.Levels);
-
-                // Increment for number of levels
-                for (int j = bundle.Levels.Count; j > 0; j--)
-                {
-                    // Get level with the largest number
-                    Level level = LevelTools.GetLevelFromNumberAndBundle(bundle, levelsCopy.Max(x => x.Number));
-
-                    // Remove the largest level from levelsCopy
-                    levelsCopy.Remove(level);
-
-                    // Change level number to the levels.count
-                    level.Number = j;
-                }
-            }
-        }
-
-        public static void CorrectLevelNumbers(Bundle bundle)
-        {
-            List<Level> levelsCopy = new List<Level>(bundle.Levels);
-
-            // Increment for number of levels
-            for (int j = bundle.Levels.Count; j > 0; j--)
-            {
-                // Get level with the largest number
-                Level level = LevelTools.GetLevelFromNumberAndBundle(bundle, levelsCopy.Max(x => x.Number));
-
-                // Remove the largest level from levelsCopy
-                levelsCopy.Remove(level);
-
-                // Change level number to the levels.count
-                level.Number = j;
-            }
-        }
-
     }
 }

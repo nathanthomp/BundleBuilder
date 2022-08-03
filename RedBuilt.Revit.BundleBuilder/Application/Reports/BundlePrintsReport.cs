@@ -126,9 +126,9 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
 
             // Footer
             sw.WriteLine("\t\t\t.footer{ padding-top: 50px; }");
-            sw.WriteLine("\t\t\t.footer-project{ display: inline-block; width: 310px; float: left; }");
+            sw.WriteLine("\t\t\t.footer-project{ display: inline-block; width: 310px; }");
             sw.WriteLine("\t\t\t.footer-date-created{ display: inline-block; width: 100px; }");
-            sw.WriteLine("\t\t\t.footer-page-index{ display: inline-block; width: 200px; float: right; text-align: right; }");
+            sw.WriteLine("\t\t\t.footer-page-index{ display: inline-block; width: 200px; text-align: right; }");
 
             // Data Page
             sw.WriteLine("\t\t\ttable{ margin-left: auto; margin-right: auto; border-collapse: collapse; text-align: center; padding-top: 100px; }");

@@ -23,9 +23,9 @@ namespace RedBuilt.Revit.BundleBuilder.Modals
     /// <summary>
     /// Interaction logic for ModifyModal.xaml
     /// </summary>
-    public partial class ModifyModal : Window
+    public partial class ModifyLevelModal : Window
     {
-        public ModifyModal()
+        public ModifyLevelModal()
         {
             InitializeComponent();
         }

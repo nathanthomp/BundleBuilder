@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Panel = RedBuilt.Revit.BundleBuilder.Data.Models.Panel;
 
 namespace RedBuilt.Revit.BundleBuilder.Views
 {
@@ -23,6 +24,8 @@ namespace RedBuilt.Revit.BundleBuilder.Views
     /// </summary>
     public partial class ExportView : UserControl
     {
+        private static readonly string filePath = @"C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Documents\BundleReport.html";
+
         public ExportView()
         {
             ProjectState.ExportView = this;
@@ -31,12 +34,25 @@ namespace RedBuilt.Revit.BundleBuilder.Views
 
         private void CreatedBundles_Loaded(object sender, RoutedEventArgs e)
         {
-            createdBundles.Navigate(new Uri(@"C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Documents\BundleReport.html"));
+            createdBundles.Navigate(new Uri(filePath));
         }
 
-        private void Modify_Click(object sender, RoutedEventArgs e)
+        private void ModifyPanel_Click(object sender, RoutedEventArgs e)
         {
-            ModifyModal mm = new ModifyModal();
+            ModifyPanelModal mpm = new ModifyPanelModal();
+
+            // Create list of panels in project
+            List<string> panels = new List<string>();
+            foreach (Panel panel in Project.Panels)
+                panels.Add(panel.ToString());
+
+            mpm.Panels.ItemsSource = panels;
+            mpm.ShowDialog();
+        }
+
+        private void ModifyLevel_Click(object sender, RoutedEventArgs e)
+        {
+            ModifyLevelModal mlm = new ModifyLevelModal();
 
             // Create list of levels in project
             List<string> levels = new List<string>();
@@ -44,13 +60,15 @@ namespace RedBuilt.Revit.BundleBuilder.Views
                 for (int i = bundle.Levels.Count; i > 0; i--)
                     levels.Add(bundle.Levels.Where(x => x.Number == i).First().ToString());
 
-            mm.Levels.ItemsSource = levels;
-            mm.ShowDialog();
+            mlm.Levels.ItemsSource = levels;
+            mlm.ShowDialog();
         }
 
         private void ViewOnWeb_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start(@"C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Documents\BundleReport.html");
+            System.Diagnostics.Process.Start(filePath);
         }
+
+
     }
 }

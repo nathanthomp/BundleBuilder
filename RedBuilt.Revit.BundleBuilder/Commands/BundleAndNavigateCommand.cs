@@ -180,7 +180,7 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
             }
 
             // Export the bundle preview
-            BundleReport.Export();
+            BundleReport.CreateHtml();
 
             // Update current view
             _navigationState.CurrentViewModel = _createViewModel();

@@ -90,5 +90,20 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
             return String.Format("B{0} {1} - {2}", properNumber, Type, Plate);
         }
 
+        /// <summary>
+        /// Checks whether or not there is a level in bundle with Number equal to levelNumber
+        /// </summary>
+        /// <param name="levelNumber">level number to check within bundle</param>
+        /// <returns>true if there is a level in bundle with levelNumber, false otherwise</returns>
+        public bool Contains(int levelNumber)
+        {
+            foreach (Level level in Levels)
+            {
+                if (level.Number == levelNumber)
+                    return true;
+            }
+            return false;
+        }
+
     }
 }
