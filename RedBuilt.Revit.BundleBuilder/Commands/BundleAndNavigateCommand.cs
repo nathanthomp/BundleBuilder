@@ -59,16 +59,12 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
             {
                 Bundle bundle = Project.Bundles[i];
                 while (BundleTools.NumberOfEmptyLevels(bundle) > 0)
-                {
                     for (int j = 0; j < bundle.Levels.Count; j++)
                     {
                         Level level = bundle.Levels[j];
                         if (level.Panels.Count < 1)
-                        {
                             bundle.Remove(level);
-                        }
                     }
-                }
             }
 
             // Correct the bundle numbers

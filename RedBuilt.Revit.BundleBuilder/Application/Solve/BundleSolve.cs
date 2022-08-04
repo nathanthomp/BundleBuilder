@@ -318,10 +318,11 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
                 foreach (Level levelInBundle in bundle.Levels)
                 {
                     height += levelInBundle.Height;
-                    // Add sticker
-                    height += 3;
                     weight += levelInBundle.Weight;
                 }
+
+                // Add sticker
+                height += 3;
 
                 bundle.Height = height;
                 bundle.Weight = weight;

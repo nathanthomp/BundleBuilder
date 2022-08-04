@@ -9,7 +9,11 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Sort
 {
     public class PanelPreferenceSort
     {
-
+        /// <summary>
+        /// Sorts the list of panels based on preference input by user
+        /// </summary>
+        /// <param name="panelList">panels to sort</param>
+        /// <returns>sorted panels</returns>
         public static List<Panel> Sort(List<Panel> panelList)
         {
             List<Panel> extPanels = panelList.Where(x => x.Type.Name.Equals("Exterior")).ToList();
@@ -24,21 +28,15 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Sort
             foreach (Panel panel in extPanels)
             {
                 if (panel.Equals(Tools.PanelTools.GetPanelFromName(Settings.StartingPanel)))
-                {
                     break;
-                }
                 counter++;
             }
 
             if (counter != 0)
-            {
                 before = extPanels.Take(counter).ToList();
-            }
 
             if (counter != extPanels.Count - 1)
-            {
                 after = extPanels.Skip(counter + 1).ToList();
-            }
 
             result.Add(extPanels[counter]);
             if (Settings.StartingDirection.Equals("Increasing"))

@@ -113,9 +113,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                 {
                     string mark = wall.LookupParameter("Mark").AsString();
                     if (mark.Equals(panelElement.Name))
-                    {
                         wallElement = wall;
-                    }
                 }
                 
                 // Exceptions
@@ -195,7 +193,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
         /// </summary>
         /// <param name="panel">the panel to ensure does not exist twice</param>
         /// <param name="panels">list of panels</param>
-        /// <returns></returns>
+        /// <returns>true if there are two panels with the same name, false otherwise</returns>
         public static bool HasDuplicatePanel(Panel panel, List<Panel> panels)
         {
             bool result = false;

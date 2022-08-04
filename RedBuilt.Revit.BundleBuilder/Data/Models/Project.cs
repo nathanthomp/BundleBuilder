@@ -16,7 +16,10 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         public static List<Panel> Panels { get; set; } = new List<Panel>();
         public static int CurrentBundleNumber { get; set; } = 1;
 
-
+        /// <summary>
+        /// Removes a bundle from Bundles
+        /// </summary>
+        /// <param name="bundle">bundle to remove</param>
         public static void Remove(Bundle bundle)
         {
             if (Bundles.Contains(bundle))

@@ -12,7 +12,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
     public static class RevitExportService
     {
         /// <summary>
-        /// 
+        /// FM parameter names and thier guids 
         /// </summary>
         private static readonly Dictionary<string, Guid> ParameterNameAndGuid = new Dictionary<string, Guid>
         {
@@ -23,8 +23,9 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
         };
 
         /// <summary>
-        /// 
+        /// Exports data to Revit RB and FM Fields
         /// </summary>
+        /// <param name="doc">revit document</param>
         public static void Export(Document doc)
         {
             using (Transaction transaction = new Transaction(doc, "BundleBuilder"))
@@ -39,16 +40,16 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                     Element wallElement = panel.WallElement;
 
                     // Change RB Bundle parameter to panel bundle number
-                    wallElement.LookupParameter("RB Bundle").Set(panel.Bundle.Number.ToString());
+                    wallElement.LookupParameter("RB Bundle")?.Set(panel.Bundle.Number.ToString());
 
                     // Change RB Bundle Level parameter to panel level
-                    wallElement.LookupParameter("RB Bundle Level").Set(panel.Level.Number.ToString());
+                    wallElement.LookupParameter("RB Bundle Level")?.Set(panel.Level.Number.ToString());
 
                     // Change RB Bundle Column parameter to panel column
-                    wallElement.LookupParameter("RB Bundle Column").Set(panel.Column.ToString());
+                    wallElement.LookupParameter("RB Bundle Column")?.Set(panel.Column.ToString());
 
                     // Change RB Bundle Depth parameter to panel depth
-                    wallElement.LookupParameter("RB Bundle Depth").Set(panel.Depth.ToString());
+                    wallElement.LookupParameter("RB Bundle Depth")?.Set(panel.Depth.ToString());
 
                     #endregion
 
