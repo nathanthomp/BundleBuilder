@@ -1,18 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <RevitAddIns>
 	<AddIn Type="Application">
-		<Assembly>RedBuilt.Revit.BundleBuilder.dll</Assembly>
+    <Name>RedBuilt Wall Bundle Builder</Name>
+		<Assembly>RBBundleBuilder\RedBuilt.Revit.BundleBuilder.dll</Assembly>
 		<FullClassName>RedBuilt.Revit.BundleBuilder.RevitApp</FullClassName>
-		<AddInId>502fe383-2648-4f98-bdf8-5e6047f9dd30</AddInId>
-		<Text>BundleBuilder</Text>
-		<VendorId>RedBuilt</VendorId>
-		<Description>Auto Bundling Tool</Description>
-		<VisibilityMode>AlwaysVisible</VisibilityMode>
-	</AddIn>
-	<AddIn Type="Command">
-		<Assembly>RedBuilt.Revit.BundleBuilder.dll</Assembly>
-		<FullClassName>RedBuilt.Revit.BundleBuilder.RevitCommand</FullClassName>
-		<AddInId>502fe383-2648-4f98-bdf8-5e6047f9dd30</AddInId>
+		<AddInId>BD4B0625-4B95-44E9-BC9C-5F7EE6505AD1</AddInId>
 		<Text>BundleBuilder</Text>
 		<VendorId>RedBuilt</VendorId>
 		<Description>Auto Bundling Tool</Description>
