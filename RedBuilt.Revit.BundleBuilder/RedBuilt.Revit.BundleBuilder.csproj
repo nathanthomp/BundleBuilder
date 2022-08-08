@@ -260,10 +260,11 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="BundleBuilder.Addin" />
+    <None Include="RedBuiltBundleBuilder.Addin" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documents\test.html" />
+    <EmbeddedResource Include="Resources\BundleBuilder.ico" />
     <Content Include="Resources\RedBuilt.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

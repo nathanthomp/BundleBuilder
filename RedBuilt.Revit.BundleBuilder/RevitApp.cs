@@ -2,11 +2,13 @@
 using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace RedBuilt.Revit.BundleBuilder
 {
@@ -33,7 +35,11 @@ namespace RedBuilt.Revit.BundleBuilder
         {
             string assemblyPath = Assembly.GetExecutingAssembly().Location;
 
-            // Create ribbon panel
+            // Attempt to create ribbon panel
+            // When referencing the RedBuilt tab...
+            // the .addin file of this .dll must contain the prefix RedBuilt,
+            // this is because the .addin file for the .dll containing the RedBuilt
+            // tab is named RedBuilt and .addin files are loaded alphabetically
             RibbonPanel ribbonPanel;
             try
             {
@@ -49,8 +55,35 @@ namespace RedBuilt.Revit.BundleBuilder
             PushButton pushButton = ribbonPanel.AddItem(pushButtonData) as PushButton;
             
             pushButton.ToolTip = "Custom Build Bundles";
+            pushButton.LargeImage = GetEmbeddedImage("RedBuilt.Revit.BundleBuilder.Resources.BundleBuilder.ico");
 
             return Result.Succeeded;
+        }
+
+        /// <summary>
+        /// Gets embedded image source
+        /// </summary>
+        /// <param name="name">name of image file</param>
+        /// <returns>image source, otherwise null</returns>
+        static BitmapImage GetEmbeddedImage(string name)
+        {
+            try
+            {
+                Assembly a = Assembly.GetExecutingAssembly();
+                Stream s = a.GetManifestResourceStream(name);
+
+                BitmapImage img = new BitmapImage();
+
+                img.BeginInit();
+                img.StreamSource = s;
+                img.EndInit();
+
+                return img;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
     }
