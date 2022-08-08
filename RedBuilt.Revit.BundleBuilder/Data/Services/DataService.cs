@@ -15,6 +15,20 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
 {
     public class DataService
     {
+        #region Modify Bundle
+
+        /// <summary>
+        /// Changes bundle number based on criteria
+        /// </summary>
+        /// <param name="bundle">bundle to change number</param>
+        /// <param name="destBundleNumber">new bundle number</param>
+        public static void ProcessModification(Bundle bundle, int destBundleNumber)
+        { 
+            bundle.Number = destBundleNumber;
+            Update();
+        }
+
+        #endregion
 
         #region Modify Panel
 

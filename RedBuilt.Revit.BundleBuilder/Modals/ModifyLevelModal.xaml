@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
         Title="Modify"
+        Topmost="true"
         Height="250"
         Width="300">
     <Grid Margin="10">

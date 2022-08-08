@@ -7,6 +7,7 @@
         xmlns:views="clr-namespace:RedBuilt.Revit.BundleBuilder.Views" 
         xmlns:modals="clr-namespace:RedBuilt.Revit.BundleBuilder.Modals"
         mc:Ignorable="d"
+        Topmost="True"
         Title="BundleBuilder"
         ResizeMode="NoResize"
         Height="490" 

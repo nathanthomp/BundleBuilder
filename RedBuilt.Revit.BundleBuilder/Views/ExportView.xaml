@@ -17,8 +17,9 @@
         <Label Content="Export Bundles" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Margin="10,18,0,0"/>
 
         <!-- Buttons -->
-        <Button Content="Modify Panel" Click="ModifyPanel_Click" Width="149" Height="36" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,318,0"/>
-        <Button Content="Modify Level" Click="ModifyLevel_Click" Width="149" Height="36" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,159,0"/>
+        <Button Content="Modify Level" Click="ModifyLevel_Click" Width="149" Height="36" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,318,0"/>
+        <Button Content="Modify Panel" Click="ModifyPanel_Click" Width="149" Height="36" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,159,0"/>
+        <Button Content="Modify Bundle" Click="ModifyBundle_Click" Width="149" Height="36" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,477,0"/>
         <Button Content="View On Web" Click="ViewOnWeb_Click" Width="149" Height="36" VerticalAlignment="Top" HorizontalAlignment="Right" />
         <Button Content="Export" Command="{Binding ExportCommand}" Width="308" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
         <Button Content="Cancel" Command="{Binding RestartAndNavigateCommand}" Width="308" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>

@@ -1,4 +1,4 @@
-﻿<Window x:Class="RedBuilt.Revit.BundleBuilder.Modals.ModifyPanelModal"
+﻿<Window x:Class="RedBuilt.Revit.BundleBuilder.Modals.ModifyBundleModal"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -26,18 +26,14 @@
         </Grid.RowDefinitions>
 
         <!-- Select Panel -->
-        <Label Content="Panel:" Grid.Column="0" Grid.Row="0" Margin="5" VerticalAlignment="Center"/>
-        <ComboBox x:Name="Panels" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" Margin="5" VerticalAlignment="Center"/>
+        <Label Content="Bundle:" Grid.Column="0" Grid.Row="0" Margin="5" VerticalAlignment="Center"/>
+        <ComboBox x:Name="Bundles" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" Margin="5" VerticalAlignment="Center"/>
 
         <!-- Select Location -->
         <Label Content="Choose Location" Grid.Column="0" Grid.Row="2"  VerticalAlignment="Center" Margin="0,10,0,0"/>
 
         <Label Content="Bundle:" Grid.Column="0" Grid.Row="3" Margin="5" VerticalAlignment="Center"/>
         <TextBox x:Name="BundleLocation" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3" Margin="5" VerticalAlignment="Center"/>
-
-
-        <Label Content="Level:" Grid.Column="0" Grid.Row="4" Margin="5" VerticalAlignment="Center"/>
-        <TextBox x:Name="LevelLocation" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" Margin="5" VerticalAlignment="Center"/>
 
         <!-- Buttons -->
         <StackPanel Grid.Column="0" Grid.Row="5" Orientation="Horizontal" Grid.ColumnSpan="2" HorizontalAlignment="Right">

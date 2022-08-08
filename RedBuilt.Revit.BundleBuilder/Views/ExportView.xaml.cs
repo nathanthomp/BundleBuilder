@@ -37,6 +37,19 @@ namespace RedBuilt.Revit.BundleBuilder.Views
             createdBundles.Navigate(new Uri(filePath));
         }
 
+        private void ModifyBundle_Click(object sender, RoutedEventArgs e)
+        {
+            ModifyBundleModal mbm = new ModifyBundleModal();
+
+            // Create list of bundles
+            List<int> bundles = new List<int>();
+            foreach (Bundle bundle in Project.Bundles)
+                bundles.Add(bundle.Number);
+
+            mbm.Bundles.ItemsSource = bundles;
+            mbm.ShowDialog();
+        }
+
         private void ModifyPanel_Click(object sender, RoutedEventArgs e)
         {
             ModifyPanelModal mpm = new ModifyPanelModal();

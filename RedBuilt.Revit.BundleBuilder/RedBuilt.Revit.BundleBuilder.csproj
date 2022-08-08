@@ -179,6 +179,9 @@
     <Compile Include="Data\Services\RevitImportService.cs" />
     <Compile Include="Data\States\NavigationState.cs" />
     <Compile Include="Data\States\ProjectState.cs" />
+    <Compile Include="Modals\ModifyBundleModal.xaml.cs">
+      <DependentUpon>ModifyBundleModal.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modals\ModifyLevelModal.xaml.cs">
       <DependentUpon>ModifyLevelModal.xaml</DependentUpon>
     </Compile>
@@ -194,6 +197,10 @@
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Modals\ModifyBundleModal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Modals\ModifyLevelModal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -266,6 +273,7 @@
   <ItemGroup>
     <Content Include="Documents\test.html" />
     <EmbeddedResource Include="Resources\BundleBuilder.ico" />
+    <Resource Include="Resources\BundleBuilder.png" />
     <Content Include="Resources\RedBuilt.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -43,15 +43,15 @@ namespace RedBuilt.Revit.BundleBuilder
             RibbonPanel ribbonPanel;
             try
             {
-                ribbonPanel = application.CreateRibbonPanel("RedBuilt", "BundleBuilder");
+                ribbonPanel = application.CreateRibbonPanel("RedBuilt", "Bundle");
             }
             catch
             {
-                ribbonPanel = application.CreateRibbonPanel("BundleBuilder");
+                ribbonPanel = application.CreateRibbonPanel("Bundle");
             }
 
             // Create push button
-            PushButtonData pushButtonData = new PushButtonData("bundlebutton", "Bundle", assemblyPath, "RedBuilt.Revit.BundleBuilder.RevitCommand");
+            PushButtonData pushButtonData = new PushButtonData("bundlebutton", "BundleBuilder", assemblyPath, "RedBuilt.Revit.BundleBuilder.RevitCommand");
             PushButton pushButton = ribbonPanel.AddItem(pushButtonData) as PushButton;
             
             pushButton.ToolTip = "Custom Build Bundles";
@@ -65,20 +65,13 @@ namespace RedBuilt.Revit.BundleBuilder
         /// </summary>
         /// <param name="name">name of image file</param>
         /// <returns>image source, otherwise null</returns>
-        static BitmapImage GetEmbeddedImage(string name)
+        static BitmapFrame GetEmbeddedImage(string name)
         {
             try
             {
                 Assembly a = Assembly.GetExecutingAssembly();
                 Stream s = a.GetManifestResourceStream(name);
-
-                BitmapImage img = new BitmapImage();
-
-                img.BeginInit();
-                img.StreamSource = s;
-                img.EndInit();
-
-                return img;
+                return BitmapFrame.Create(s);
             }
             catch
             {
