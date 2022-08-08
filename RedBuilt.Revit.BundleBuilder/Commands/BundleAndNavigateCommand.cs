@@ -27,8 +27,14 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
 
         public override void Execute(object parameter)
         {
+            Panel startingPanel = PanelTools.GetPanelFromName(Settings.StartingPanel);
+
+            // Exceptions
+            if (!startingPanel.ToBundle)
+                throw new Exception("Starting panel cannot be excluded in bundles");
+
             // Assign panels to project panels only if the ToBundle property is true
-            Project.Panels = Project.Panels.Where(x => x.ToBundle = true).ToList();
+            Project.Panels = Project.Panels.Where(x => x.ToBundle == true).ToList();
 
             // Sort exterior panels by user preference
             Project.Panels = PanelPreferenceSort.Sort(Project.Panels);
@@ -37,7 +43,7 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
             Dictionary<string, Dictionary<string, List<Panel>>> panelsByTypeThenPlate = PanelTypeAndPlateSort.Sort();
 
             // Solve list of panels that includes the starting panel
-            string startPanelType = PanelTools.GetPanelFromName(Settings.StartingPanel).Type.Name;
+            string startPanelType = startingPanel.Type.Name;
             string startPanelPlate = PanelTools.GetPanelFromName(Settings.StartingPanel).Plate.Description;
             foreach (KeyValuePair<string, Dictionary<string, List<Panel>>> typePlateDict in panelsByTypeThenPlate)
                 if (typePlateDict.Key.Equals(startPanelType))
