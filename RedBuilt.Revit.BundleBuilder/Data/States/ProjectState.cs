@@ -1,4 +1,5 @@
 ﻿using Autodesk.Revit.DB;
+using RedBuilt.Revit.BundleBuilder.ViewModels;
 using RedBuilt.Revit.BundleBuilder.Views;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace RedBuilt.Revit.BundleBuilder.Data.States
         public static ExportView ExportView;
 
         public static MainWindow MainWindow;
+
+        public static BundleViewModel BundleViewModel { get; set; }
 
         public static readonly string Version = "1.0";
 

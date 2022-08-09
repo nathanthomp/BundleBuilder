@@ -11,12 +11,12 @@
     <Grid Margin="10">
         
         <!-- Main Content -->
-        <ListView x:Name="panels" Margin="0,50,0,70">
+        <ListView Name="panels" Margin="0,50,0,70">
             <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Type" Width="150" DisplayMemberBinding="{Binding Path=Type.Name}"/>
-                    <GridViewColumn Header="Plate" Width="100" DisplayMemberBinding="{Binding Path=Plate.Description}"/>
-                    <GridViewColumn Header="Panel" Width="100" DisplayMemberBinding="{Binding Path=Name}"/>
+                <GridView x:Name="gridView">
+                    <GridViewColumn Header="Type" Width="200" DisplayMemberBinding="{Binding NoValue}"/>
+                    <GridViewColumn Header="Panel" Width="50" DisplayMemberBinding="{Binding Path=Name}"/>
+                    <GridViewColumn Header="Plate" Width="50" DisplayMemberBinding="{Binding Path=Plate.Description}"/>
                     <GridViewColumn Header="Height" Width="150" DisplayMemberBinding="{Binding Path=Height.AsString}"/>
                     <GridViewColumn Header="Width" Width="150" DisplayMemberBinding="{Binding Path=Width.AsString}"/>
                     <GridViewColumn Header="Bundle" Width="50">
@@ -28,6 +28,32 @@
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander IsExpanded="False">
+                                            <Expander.Header>
+                                                <StackPanel x:Name="stackPanel" Orientation="Horizontal">
+                                                    <CheckBox HorizontalContentAlignment="Right" MinWidth="40" MaxHeight="40" IsChecked="True" Checked="OnGroup_Checked" Unchecked="OnGroup_UnChecked"/>
+                                                    <TextBlock Text="{Binding Name}" x:Name="typeName" FontWeight="Bold" VerticalAlignment="Bottom"/>
+                                                    <TextBlock Text="(" FontWeight="Bold" VerticalAlignment="Bottom" Margin="10,0,0,0"/>
+                                                    <TextBlock Text="{Binding ItemCount}" FontWeight="Bold" VerticalAlignment="Bottom"/>
+                                                    <TextBlock Text=" Panels)" FontWeight="Bold" VerticalAlignment="Bottom"/>
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ListView.GroupStyle>
         </ListView>
 
         <!-- Header -->
