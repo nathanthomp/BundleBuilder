@@ -35,7 +35,7 @@ namespace RedBuilt.Revit.BundleBuilder.Views
             NavigationState navigationState = new NavigationState();
             BundleViewModel bundleViewModel = new BundleViewModel(navigationState);
             navigationState.CurrentViewModel = bundleViewModel;
-            ProjectState.BundleViewModel = bundleViewModel;
+            ProjectState.BundleViewModelInstanciated = true;
 
             DataContext = new MainWindowViewModel(navigationState);
 

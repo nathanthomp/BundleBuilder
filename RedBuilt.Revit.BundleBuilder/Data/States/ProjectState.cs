@@ -19,7 +19,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.States
 
         public static MainWindow MainWindow;
 
-        public static BundleViewModel BundleViewModel { get; set; }
+        public static bool BundleViewModelInstanciated { get; set; }
 
         public static readonly string Version = "1.0";
 

@@ -15,7 +15,7 @@ namespace RedBuilt.Revit.BundleBuilder.ViewModels
 
         public ExportViewModel(NavigationState navigationState)
         {
-            RestartAndNavigateCommand = new RestartAndNavigateCommand<BundleViewModel>(navigationState, () => ProjectState.BundleViewModel);
+            RestartAndNavigateCommand = new RestartAndNavigateCommand<BundleViewModel>(navigationState, () => new BundleViewModel(navigationState));
             ExportCommand = new ExportCommand();
         }
     }

@@ -19,7 +19,7 @@ namespace RedBuilt.Revit.BundleBuilder.ViewModels
 
         public SettingsViewModel(NavigationState navigationState)
         {
-            NavigateBundleViewCommand = new NavigateCommand<BundleViewModel>(navigationState, () => ProjectState.BundleViewModel);
+            NavigateBundleViewCommand = new NavigateCommand<BundleViewModel>(navigationState, () => new BundleViewModel(navigationState));
         }
 
         #region Properties

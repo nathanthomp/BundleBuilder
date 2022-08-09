@@ -33,10 +33,14 @@ namespace RedBuilt.Revit.BundleBuilder.Views
             panels.ItemsSource = Project.Panels;
 
             // Assign data to collection view source
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(panels.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Type.Name");
-            view.GroupDescriptions.Add(groupDescription);
+            if (ProjectState.BundleViewModelInstanciated)
+            {
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(panels.ItemsSource);
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("Type.Name");
+                view.GroupDescriptions.Add(groupDescription);
 
+                ProjectState.BundleViewModelInstanciated = false;
+            }
         }
 
         private void OnGroup_Checked(object sender, RoutedEventArgs e)

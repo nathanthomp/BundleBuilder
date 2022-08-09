@@ -23,10 +23,13 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
         {
             _navigationState = navigationState;
             _createViewModel = createViewModel;
+
         }
 
         public override void Execute(object parameter)
         {
+            ProjectState.BundleViewModelInstanciated = true;
+
             Panel startingPanel = PanelTools.GetPanelFromName(Settings.StartingPanel);
 
             // Exceptions
