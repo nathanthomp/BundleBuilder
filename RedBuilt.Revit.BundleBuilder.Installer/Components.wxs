@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+
+		<!-- C Drive RedBuilt folder files -->
+		<ComponentGroup Id="DllGroup">
+			<ComponentRef Id="BundleBuilderDll" />
+			<ComponentRef Id="BouncyCastleDll" />
+			<ComponentRef Id="CommonsDll" />
+			<ComponentRef Id="Html2PdfDll" />
+			<ComponentRef Id="IoDll" />
+			<ComponentRef Id="KernelDll" />
+			<ComponentRef Id="LayoutDll" />
+			<ComponentRef Id="StyledXmlParserDll" />
+			<ComponentRef Id="SvgDll" />
+		</ComponentGroup>
+		<DirectoryRef Id="BUNDLEBUILDERFOLDER" FileSource="..\RedBuilt.Revit.BundleBuilder\bin\Debug\">
+			<Component Id="BundleBuilderDll" Guid="62CC9C4A-6C32-4A6F-9988-B193A7C85B02">
+				<File Id="BundleBuilderDllFile" Name="RedBuilt.Revit.BundleBuilder.dll" />
+			</Component>
+			<Component Id="BouncyCastleDll" Guid="A35AE90E-B090-4CB6-8CDF-68BE1AACD3AD">
+				<File Id="BouncyCastleDllFile" Name="BouncyCastle.Crypto.dll" />
+			</Component>
+			<Component Id="CommonsDll" Guid="97DF6CD0-798D-40E0-9A1B-C8AE738CC41D">
+				<File Id="CommonsDllFile" Name="itext.commons.dll" />
+			</Component>
+			<Component Id="Html2PdfDll" Guid="0879DB89-10F2-49CD-B4EA-6A649DBFA8DC">
+				<File Id="Html2PdfDllFile" Name="itext.html2pdf.dll" />
+			</Component>
+			<Component Id="IoDll" Guid="C6629B95-F0C9-419D-95F9-24F44E3C9EC8">
+				<File Id="IoDllFile" Name="itext.io.dll" />
+			</Component>
+			<Component Id="KernelDll" Guid="FC06A87B-85F0-486B-9E8C-67D5EA8F3B22">
+				<File Id="KernelDllFile" Name="itext.kernel.dll" />
+			</Component>
+			<Component Id="LayoutDll" Guid="D87D39E4-37AF-4B73-9E97-EAFD48968888">
+				<File Id="LayoutDllFile" Name="itext.layout.dll" />
+			</Component>
+			<Component Id="StyledXmlParserDll" Guid="DA61CF2E-5E42-49D6-8B28-F6EA4871E501">
+				<File Id="StyledXmlParserDllFile" Name="itext.styledxmlparser.dll" />
+			</Component>
+			<Component Id="SvgDll" Guid="FB93FA6A-BEF5-4A41-BA95-C6AA5CE77C8E">
+				<File Id="SvgDllFile" Name="itext.svg.dll" />
+			</Component>
+		</DirectoryRef>
+
+		<!-- Autodesk Revit plugin folder files -->
+		<ComponentGroup Id="AddinGroup">
+			<ComponentRef Id="Addin" />
+		</ComponentGroup>
+		<DirectoryRef Id="ADDINSFOLDER" FileSource="..\RedBuilt.Revit.BundleBuilder\">
+			<Component Id="Addin" Guid="05ED7A8C-01EE-4DB2-928B-42C24FBCFE05">
+				<File Id="FileAddinFile" Name="RedBuiltBundleBuilder.addin" />
+			</Component>
+		</DirectoryRef>
+
+	</Fragment>
+</Wix>

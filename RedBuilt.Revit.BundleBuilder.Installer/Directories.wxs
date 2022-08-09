@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+		
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramDataFolder" Name="ProgramData">
+				<Directory Id="RedBuiltFolder" Name="RedBuilt">
+					<Directory Id="BUNDLEBUILDERFOLDER" Name="RBBundleBuilder" />
+				</Directory>
+				<Directory Id="AutodeskFolder" Name="Autodesk">
+					<Directory Id="RevitFolder" Name="Revit">
+						<Directory Id="AddinsFolder" Name="Addins">
+							<Directory Id="ADDINSFOLDER" Name="2021" />
+						</Directory>
+					</Directory>
+				</Directory>
+			</Directory>
+		</Directory>
+		
+	</Fragment>
+</Wix>

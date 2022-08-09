@@ -2,7 +2,7 @@
 <RevitAddIns>
 	<AddIn Type="Application">
     <Name>RedBuilt Wall Bundle Builder</Name>
-		<Assembly>RBBundleBuilder\RedBuilt.Revit.BundleBuilder.dll</Assembly>
+		<Assembly>..\..\..\..\RedBuilt\RBBundleBuilder\RedBuilt.Revit.BundleBuilder.dll</Assembly>
 		<FullClassName>RedBuilt.Revit.BundleBuilder.RevitApp</FullClassName>
 		<AddInId>BD4B0625-4B95-44E9-BC9C-5F7EE6505AD1</AddInId>
 		<Text>BundleBuilder</Text>
