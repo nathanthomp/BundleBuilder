@@ -37,40 +37,43 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                 {
                     #region RB Fields
 
-                    Element wallElement = panel.WallElement;
+                    Element basicWall = panel.BasicWall;
 
                     // Change RB Bundle parameter to panel bundle number
-                    wallElement.LookupParameter("RB Bundle")?.Set(panel.Bundle.Number.ToString());
+                    basicWall.LookupParameter("RB Bundle")?.Set(panel.Bundle.Number.ToString());
 
                     // Change RB Bundle Level parameter to panel level
-                    wallElement.LookupParameter("RB Bundle Level")?.Set(panel.Level.Number.ToString());
+                    basicWall.LookupParameter("RB Bundle Level")?.Set(panel.Level.Number.ToString());
 
                     // Change RB Bundle Column parameter to panel column
-                    wallElement.LookupParameter("RB Bundle Column")?.Set(panel.Column.ToString());
+                    basicWall.LookupParameter("RB Bundle Column")?.Set(panel.Column.ToString());
 
                     // Change RB Bundle Depth parameter to panel depth
-                    wallElement.LookupParameter("RB Bundle Depth")?.Set(panel.Depth.ToString());
+                    basicWall.LookupParameter("RB Bundle Depth")?.Set(panel.Depth.ToString());
 
                     #endregion
 
                     #region FM TR Fields
 
-                    Element panelElement = panel.PanelElement;
+                    Element structWall = panel.StructWall;
 
-                    // Change FM TR Number parameter to panel bundle number
-                    panelElement.get_Parameter(ParameterNameAndGuid["FM TR Number"]).Set(panel.Bundle.Number.ToString());
+                    if (structWall != null)
+                    {
+                        // Change FM TR Number parameter to panel bundle number
+                        structWall.get_Parameter(ParameterNameAndGuid["FM TR Number"]).Set(panel.Bundle.Number.ToString());
 
-                    // Change FM TR Column Number parameter to panel level index
-                    panelElement.get_Parameter(ParameterNameAndGuid["FM TR Column Number"]).Set((panel.Level.Panels.IndexOf(panel) + 1).ToString());
+                        // Change FM TR Column Number parameter to panel level index
+                        structWall.get_Parameter(ParameterNameAndGuid["FM TR Column Number"]).Set((panel.Level.Panels.IndexOf(panel) + 1).ToString());
 
-                    // Change FM TR Row Number parameter to panel level number
-                    panelElement.get_Parameter(ParameterNameAndGuid["FM TR Row Number"]).Set(panel.Level.Number.ToString());
+                        // Change FM TR Row Number parameter to panel level number
+                        structWall.get_Parameter(ParameterNameAndGuid["FM TR Row Number"]).Set(panel.Level.Number.ToString());
 
-                    // Change FM TR Type parameter to "Bundle"
-                    panelElement.get_Parameter(ParameterNameAndGuid["FM TR Type"]).Set("Bundle");
+                        // Change FM TR Type parameter to "Bundle"
+                        structWall.get_Parameter(ParameterNameAndGuid["FM TR Type"]).Set("Bundle");
 
-                    // Change Comments parameter to panel bundle number
-                    panelElement.LookupParameter("Comments").Set(panel.Bundle.Number.ToString());
+                        // Change Comments parameter to panel bundle number
+                        structWall.LookupParameter("Comments").Set(panel.Bundle.Number.ToString());
+                    }
 
                     #endregion
                 }

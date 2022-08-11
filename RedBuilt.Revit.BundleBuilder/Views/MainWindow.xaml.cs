@@ -33,14 +33,9 @@ namespace RedBuilt.Revit.BundleBuilder.Views
             ProjectState.MainWindow = this;
 
             NavigationState navigationState = new NavigationState();
-            BundleViewModel bundleViewModel = new BundleViewModel(navigationState);
-            navigationState.CurrentViewModel = bundleViewModel;
-            ProjectState.BundleViewModelInstanciated = true;
+            navigationState.CurrentViewModel = new BundleViewModel(navigationState);
 
             DataContext = new MainWindowViewModel(navigationState);
-
-            Project.Panels = RevitImportService.GetPanels(ProjectState.Doc);
-            RevitImportService.GetProject(ProjectState.Doc);
 
             InitializeComponent();
         }

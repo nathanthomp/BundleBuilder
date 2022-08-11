@@ -10,7 +10,9 @@
 				<Directory Id="AutodeskFolder" Name="Autodesk">
 					<Directory Id="RevitFolder" Name="Revit">
 						<Directory Id="AddinsFolder" Name="Addins">
-							<Directory Id="ADDINSFOLDER" Name="2021" />
+							<Directory Id="ADDINSFOLDER2020" Name="2020" />
+							<Directory Id="ADDINSFOLDER2021" Name="2021" />
+							<Directory Id="ADDINSFOLDER2022" Name="2022" />
 						</Directory>
 					</Directory>
 				</Directory>

@@ -13,6 +13,14 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
 {
     public class RevitImportService
     {
+
+        public static string ErrorMessage { get; private set; }
+
+        public static bool Import(Document doc)
+        {
+            return (GetPanels(doc) && GetProject(doc));
+        }
+
         #region Parameter class
 
         /// <summary>
@@ -54,121 +62,166 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
         #endregion
 
         /// <summary>
-        /// List of panel parameter names and their guid in revit
+        /// List of panel parameter names in revit
         /// </summary>
-        private static readonly Dictionary<string, string> ParameterNameAndGuid = new Dictionary<string, string>
+        private static readonly List<string> ParamNames = new List<string>
         {
-            { "Assembly Height", "be9990f3-9c7f-4732-a147-c6bf839f92bf"},
-            { "Assembly Length", "f35bfde6-7ea9-4cf2-b07d-a06d9c98a572" },
-            { "Assembly Depth", "381d4274-c8f0-4b79-ba9b-683f7aab0e21" },
-            { "Framing Member Mass", "70be58b1-bbbc-4199-9d16-d0af4969f2af" },
-            { "Assembly Area", "99a0d818-1d3b-4954-a777-e87ab3f3d5c8" }
+            "Assembly Height",
+            "Assembly Length",
+            "Assembly Depth",
+            "Assembly Area",
         };
 
         /// <summary>
-        /// Filters revit document for wall panel elements and creates a list of panel objects
+        /// Ensures that the configuration of panels is correct,
+        /// then imports data for every panel
         /// </summary>
         /// <param name="doc">revit document</param>
-        /// <returns>list of sorted panels</returns>
-        public static List<Panel> GetPanels(Document doc)
+        /// <returns>true if import success, false otherwise</returns>
+        private static bool GetPanels(Document doc)
         {
+            // Only Basic walls & RB Fields = GOOD
+            // Only Basic walls & no RB Fields = BAD
+            // Both walls = GOOD
+
+            bool hasBasicWalls = false;
+            bool hasStructWalls = false;
+            bool hasRBFields = false;
             List<Panel> panels = new List<Panel>();
 
-            // Filter elements by "Structural Framing Assembly" to a list
+            // Get both panels
             ElementId elementId = new ElementId(BuiltInParameter.ELEM_FAMILY_PARAM);
             ParameterValueProvider pvp = new ParameterValueProvider(elementId);
             FilterStringRuleEvaluator fsrv = new FilterStringEquals();
             FilterRule fr = new FilterStringRule(pvp, fsrv, "Structural Framing Assembly", true);
             ElementParameterFilter paramFilter = new ElementParameterFilter(fr, false);
-            List<Element> panelElements = new FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Assemblies)
+            List<Element> structWallElements = new FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Assemblies)
                 .WhereElementIsNotElementType().WherePasses(paramFilter).ToList();
 
-            // Filter elements by "Wall" to a list
-            List<Element> wallElements = new FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Walls)
+            List<Element> basicWallElements = new FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Walls)
                 .OfClass(typeof(Wall)).WhereElementIsNotElementType().ToList();
 
-            // Exceptions
-            if (panelElements.Count == 0)
-                throw new Exception("No \"Structural Framing Assembly\" elements found.");
-            if (wallElements.Count == 0)
-                throw new Exception("No \"Wall\" elments found.");
+            // Determine if viable fields have been found
+            if (basicWallElements.Count > 0)
+                hasBasicWalls = true;
+            if (structWallElements.Count > 0)
+                hasStructWalls = true;
 
-            // Create parameters
-            //foreach (string parameterName in ParameterNames)
-            //    Parameters.Add(new Parameter(parameterName, panelElements[0]));
-
-            // Create new Panels using the filtered elements
-            foreach (Element panelElement in panelElements)
+            if (!hasBasicWalls && !hasStructWalls)
             {
-                // Exceptions
-                if (panelElement == null)
-                    throw new Exception("Panel not found");
-                if (String.IsNullOrEmpty(panelElement.Name))
-                    throw new Exception("Panel name not found on element: " + panelElement.Id);
+                // No walls found
+                ErrorMessage = "Unviable Setup: Cannot find wall elements.";
+                return false;
+            }
 
+            Parameter p = basicWallElements.First().LookupParameter("RB Bundle");
+            if (p != null)
+                hasRBFields = true;
 
-                // Find matching wall and panel elements
-                Element wallElement = null;
-                foreach (Element wall in wallElements)
+            // Gate - assuming panel data is correct,
+            // ensure that there is a viable option to export to revit
+            if (!hasStructWalls && !hasRBFields)
+            {
+                // Only basic walls && no RB Fields = BAD
+                ErrorMessage = "Unviable Setup: Cannot find wall elements and wall fields that will work with BundleBuilder.";
+                return false;
+            }
+
+            // Remove walls that do not have mark field
+            List<Element> basicWallElementsCopy = new List<Element>(basicWallElements);
+            while (basicWallElementsCopy.Count > 0)
+            {
+                Element wall = basicWallElementsCopy.First();
+                string wallMark = GetParameterAsString(wall, "Mark");
+                if (String.IsNullOrEmpty(wallMark))
+                    basicWallElements.Remove(wall);
+
+                basicWallElementsCopy.Remove(wall);
+            }
+
+            // Check if Basic walls have dimensions
+            bool hasDimensions = true;
+
+            // Ensures that if atleast one panel does not have dimensions,
+            // hasDimensions will be false
+            foreach (Element element in basicWallElements)
+                if (GetParameterAsDouble(element, "Assembly Area") == 0)
+                    hasDimensions = false;
+
+            if (!hasDimensions)
+            {
+                // Good chance that dimensions have not been created
+                ErrorMessage = "Unviable Setup: Cannot find dimensions. Calculate assembly dimensions and try again";
+                return false;
+            }
+
+            // Get Basic wall dimensions and create panel
+            foreach (Element basicWall in basicWallElements)
+            {
+                // Panel to add
+                Panel panel = null;
+
+                // Find Struct wall that matches Basic wall
+                string basicWallName = GetParameterAsString(basicWall, "Mark");
+                bool hasMatch = false;
+                Element structWallMatch = null;
+
+                if (hasStructWalls)
+                    foreach (Element structWall in structWallElements)
+                        if (structWall.Name.Equals(basicWallName))
+                        {
+                            structWallMatch = structWall;
+                            hasMatch = true;
+                        }
+                            
+                // If there is a match, add both to constructor,
+                // otherwise just add basic wall
+                if (hasMatch)
+                    panel = new Panel(basicWall, structWallMatch);
+                else
+                    panel = new Panel(basicWall);
+
+                // Fill in fields for panel
+                foreach (string paramName in ParamNames)
                 {
-                    string mark = wall.LookupParameter("Mark").AsString();
-                    if (mark.Equals(panelElement.Name))
-                        wallElement = wall;
-                }
-                
-                // Exceptions
-                if (wallElement == null)
-                    throw new Exception("Panel not found");
-                if (String.IsNullOrEmpty(wallElement.Name))
-                    throw new Exception("Panel name not found on element: " + wallElement.Id);
+                    double paramValue = GetParameterAsDouble(basicWall, paramName);
 
-                // Create the panel
-                Panel panel = new Panel(panelElement, wallElement);
-
-                // Populate each field (Width, Height, Weight, Plate, Type)
-                foreach (KeyValuePair<string, string> parameterNameGuidPair in ParameterNameAndGuid)
-                {
-                    // Find the revit parameter
-                    Parameter p;
-                    if (String.IsNullOrEmpty(parameterNameGuidPair.Value))
-                        p = panel.PanelElement.LookupParameter(parameterNameGuidPair.Key);
-                    else
-                        p = panel.PanelElement.get_Parameter(new Guid(parameterNameGuidPair.Value));
-
-                    // Exception
-                    if (p == null)
-                        throw new Exception("Panel attribute " + parameterNameGuidPair.Key + " not found on element: " + panelElement.Id);
-                    if (p.AsDouble() <= 0)
-                        throw new Exception("Panel element: " + panelElement.Id + " with attribute " + p.Definition + " is not defined.");
-                    if (HasDuplicatePanel(panel, panels))
-                        throw new Exception("Panel element: " + panelElement.Id + " has duplicate names");
-
-                    panel.Type = new Models.Type(panel.Name.FullName);
-
-                    switch (parameterNameGuidPair.Key)
+                    if (paramValue == 0)
                     {
-                        case "Assembly Height":
-                            panel.Height = new Height(Math.Round(p.AsDouble() * 12, 3));
-                            break;
-                        case "Assembly Length":
-                            panel.Width = new Width(Math.Round(p.AsDouble() * 12, 3));
-                            break;
-                        case "Assembly Depth":
-                            panel.Plate = new Plate(Math.Round(p.AsDouble() * 12, 3), panel.Type.Name);
-                            break;
-                        case "Framing Member Mass":
-                            panel.Weight = Math.Round(p.AsDouble());
-                            break;
-                        case "Assembly Area":
-                            panel.Area = Math.Round(p.AsDouble());
-                            break;
+                        // Does not have parameter value
+                        ErrorMessage = String.Format("Unviable Setup: Cannot find parameter {0} in panel {1}.", paramName, panel.Name);
+                        return false;
                     }
 
+                    switch (paramName)
+                    {
+                        case "Assembly Height":
+                            panel.Height = new Height(Math.Round(paramValue * 12, 3));
+                            break;
+                        case "Assembly Length":
+                            panel.Width = new Width(Math.Round(paramValue * 12, 3));
+                            break;
+                        case "Assembly Depth":
+                            panel.Plate = new Plate(Math.Round(paramValue * 12, 3), panel.Type.Name);
+                            break;
+                        case "Assembly Area":
+                            panel.Area = Math.Round(paramValue);
+                            break;
+                    }
                 }
 
-                // Exceptions
-                if (panel.Plate.Description == null)
-                    throw new Exception("Panel element: " + panelElement.Id + " with attribute Assembly Depth is not accurate.");
+                // Get mass parameter is there is a struct wall
+                if (hasMatch)
+                {
+                    double paramValue = GetParameterAsDouble(panel.StructWall, "Framing Member Mass");
+
+                    if (paramValue == 0)
+                    {
+                        // Does not have parameter value
+                        ErrorMessage = String.Format("Unviable Setup: Cannot find parameter Framing Member Mass in panel {0}.", panel.Name);
+                        return false;
+                    }
+                }
 
                 // Switch width and height if the panel is sideways
                 if (panel.Width.AsDouble > panel.Height.AsDouble)
@@ -181,10 +234,13 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                 panels.Add(panel);
             }
 
-            // Sort Panels by name
+            // Sort panels by name
             panels = PanelNameSort.Sort(panels);
 
-            return panels;
+            // Set panels in project
+            Project.Panels = panels;
+
+            return true;
         }
 
         /// <summary>
@@ -194,30 +250,30 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
         /// <param name="panel">the panel to ensure does not exist twice</param>
         /// <param name="panels">list of panels</param>
         /// <returns>true if there are two panels with the same name, false otherwise</returns>
-        public static bool HasDuplicatePanel(Panel panel, List<Panel> panels)
+        private static bool HasDuplicatePanel(Panel panel, List<Panel> panels)
         {
-            bool result = false;
-            foreach (Panel p in panels)
-                if (panel.Name.FullName.Equals(p.Name.FullName))
-                    result = true;
-            return result;
+            return true;
         }
 
         /// <summary>
         /// Imports the project data including project number, name, and location
         /// </summary>
         /// <param name="doc">revit document</param>
-        /// <exception cref="Exception">whether or not the parameter is found</exception>
-        public static void GetProject(Document doc)
+        /// <returns>true if import success, false otherwise</returns>
+        private static bool GetProject(Document doc)
         {
             List<Element> viewSheetSet = new FilteredElementCollector(doc).OfClass(typeof(ViewSheet)).ToList();
             ViewSheet projectCoverPage = (ViewSheet)viewSheetSet.First(x => x.Name == "Project Cover Page");
 
             // Project Number
             if (doc.ProjectInformation.Number == null || doc.ProjectInformation.Number.Trim(' ').Length == 0)
-                throw new Exception("Project number is missing");
-            else
-                Project.Number = doc.ProjectInformation.Number;
+            {
+                ErrorMessage = "Unviable Setup: Cannot find Project Number.";
+                return false;
+            }
+
+            Project.Number = doc.ProjectInformation.Number;
+
 
             // Project Name
             ParameterSet parameterSet = doc.ProjectInformation.Parameters;
@@ -231,11 +287,17 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                    
             }
             if (String.IsNullOrEmpty(Project.Name))
-                throw new Exception("Cannot find project name");
+            {
+                ErrorMessage = "Unviable Setup: Cannot find Project Name.";
+                return false;
+            }
 
             // Project Location
             if (doc.ProjectInformation.Address == null)
-                throw new Exception("No location data availible.");
+            {
+                ErrorMessage = "Unviable Setup: Cannot find Project Location.";
+                return false;
+            }
             else
             {
                 string address = doc.ProjectInformation.Address;
@@ -250,23 +312,17 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
 
             }
 
-            // Correct project information
-            if (Project.Name.Contains(Project.Number))
-            {
-                // Take project number out of project name
-                int indexOfNumber = Project.Name.IndexOf(Project.Number);
-                Project.Name = Project.Name.Remove(indexOfNumber, 6);
-            }
-
-            if (Project.Name.Length > 30)
-                // trim down the string
-                Project.Name = Project.Name.Substring(0, 30);
-
-            if (Project.Location.Length > 30)
-                // trim down the string
-                Project.Location = Project.Location.Substring(0, 30);
-            
+            return true;
         }
 
+        private static string GetParameterAsString(Element element, string param)
+        {
+            return element.LookupParameter(param).AsString();
+        }
+
+        private static double GetParameterAsDouble(Element element, string param)
+        {
+            return element.LookupParameter(param).AsDouble();
+        }
     }
 }

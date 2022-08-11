@@ -10,7 +10,7 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
 {
     public class BundleReport
     {
-        private static readonly string filePath = @"C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Documents\BundleReport.html";
+        private static readonly string filePath = @"C:\ProgramData\RedBuilt\RBBundleBuilder\BundleReport.html";
 
         /// <summary>
         /// Creates the html document

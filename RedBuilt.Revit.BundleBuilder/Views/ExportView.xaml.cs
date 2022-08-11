@@ -24,7 +24,7 @@ namespace RedBuilt.Revit.BundleBuilder.Views
     /// </summary>
     public partial class ExportView : UserControl
     {
-        private static readonly string filePath = @"C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Documents\BundleReport.html";
+        private static readonly string filePath = @"C:\ProgramData\RedBuilt\RBBundleBuilder\BundleReport.html";
 
         public ExportView()
         {

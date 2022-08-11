@@ -16,8 +16,8 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
 {
     public class BundlePrintsReport
     {
-        private static readonly string localFile = @"C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Documents\BundlePrints.html";
-        private static readonly string imageFile = @"C:\RedBuilt\Revit\BundleBuilder\RedBuilt.Revit.BundleBuilder\Resources\RedBuilt.svg";
+        private static readonly string localFile = @"C:\ProgramData\RedBuilt\RBBundleBuilder\BundlePrints.html";
+        private static readonly string imageFile = @"C:\ProgramData\RedBuilt\RBBundleBuilder\RedBuilt.svg";
 
         /// <summary>
         /// Creates the html document and converts it to a pdf document

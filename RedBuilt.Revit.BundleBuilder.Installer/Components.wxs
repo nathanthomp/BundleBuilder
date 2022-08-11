@@ -13,7 +13,9 @@
 			<ComponentRef Id="LayoutDll" />
 			<ComponentRef Id="StyledXmlParserDll" />
 			<ComponentRef Id="SvgDll" />
+			<ComponentRef Id="M.E.Logging" />
 		</ComponentGroup>
+		
 		<DirectoryRef Id="BUNDLEBUILDERFOLDER" FileSource="..\RedBuilt.Revit.BundleBuilder\bin\Debug\">
 			<Component Id="BundleBuilderDll" Guid="62CC9C4A-6C32-4A6F-9988-B193A7C85B02">
 				<File Id="BundleBuilderDllFile" Name="RedBuilt.Revit.BundleBuilder.dll" />
@@ -42,17 +44,47 @@
 			<Component Id="SvgDll" Guid="FB93FA6A-BEF5-4A41-BA95-C6AA5CE77C8E">
 				<File Id="SvgDllFile" Name="itext.svg.dll" />
 			</Component>
+			<Component Id="M.E.Logging" Guid="477F9BCE-8C70-4F90-9EA1-BA7A27AD3575">
+				<File Id="M.E.LoggingFile" Name="Microsoft.Extensions.Logging.dll" />
+			</Component>
 		</DirectoryRef>
 
 		<!-- Autodesk Revit plugin folder files -->
 		<ComponentGroup Id="AddinGroup">
-			<ComponentRef Id="Addin" />
+			<ComponentRef Id="Addin2020" />
+			<ComponentRef Id="Addin2021" />
+			<ComponentRef Id="Addin2022" />
 		</ComponentGroup>
-		<DirectoryRef Id="ADDINSFOLDER" FileSource="..\RedBuilt.Revit.BundleBuilder\">
-			<Component Id="Addin" Guid="05ED7A8C-01EE-4DB2-928B-42C24FBCFE05">
-				<File Id="FileAddinFile" Name="RedBuiltBundleBuilder.addin" />
+		
+		<DirectoryRef Id="ADDINSFOLDER2020" FileSource="..\RedBuilt.Revit.BundleBuilder\">
+			<Component Id="Addin2020" Guid="05ED7A8C-01EE-4DB2-928B-42C24FBCFE05">
+				<File Id="FileAddin2020File" Name="RedBuiltBundleBuilder.addin" />
 			</Component>
 		</DirectoryRef>
+
+		<DirectoryRef Id="ADDINSFOLDER2021" FileSource="..\RedBuilt.Revit.BundleBuilder\">
+			<Component Id="Addin2021" Guid="1A29E03D-508D-4E94-B3A7-90BBC0EA3815">
+				<File Id="FileAddin2021File" Name="RedBuiltBundleBuilder.addin" />
+			</Component>
+		</DirectoryRef>
+
+		<DirectoryRef Id="ADDINSFOLDER2022" FileSource="..\RedBuilt.Revit.BundleBuilder\">
+			<Component Id="Addin2022" Guid="FE802939-6F69-49FC-B3BE-0681D6CB7A52">
+				<File Id="FileAddin2022File" Name="RedBuiltBundleBuilder.addin" />
+			</Component>
+		</DirectoryRef>
+		
+		<!-- Resources -->
+		<ComponentGroup Id="Resources">
+			<ComponentRef Id="BundleBuilderResources"/>
+		</ComponentGroup>
+		<DirectoryRef Id="BUNDLEBUILDERFOLDER" FileSource="..\RedBuilt.Revit.BundleBuilder\Resources\">
+			<Component Id="BundleBuilderResources" Guid="28047342-E9CD-48F1-A666-EBECCC0CEBCA">
+				<File Id="RedBuiltImage" Name="RedBuilt.svg" />
+			</Component>
+			
+		</DirectoryRef>
+		
 
 	</Fragment>
 </Wix>

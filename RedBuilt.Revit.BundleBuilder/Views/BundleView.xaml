@@ -14,7 +14,7 @@
         <ListView Name="panels" Margin="0,50,0,70">
             <ListView.View>
                 <GridView x:Name="gridView">
-                    <GridViewColumn Header="Type" Width="200" DisplayMemberBinding="{Binding NoValue}"/>
+                    <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding Type}"/>
                     <GridViewColumn Header="Panel" Width="50" DisplayMemberBinding="{Binding Path=Name}"/>
                     <GridViewColumn Header="Plate" Width="50" DisplayMemberBinding="{Binding Path=Plate.Description}"/>
                     <GridViewColumn Header="Height" Width="150" DisplayMemberBinding="{Binding Path=Height.AsString}"/>

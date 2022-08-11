@@ -28,6 +28,12 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
                 }
             }
 
+            // Clear bundles
+            Project.Bundles.Clear();
+
+            // Reset current bundle number
+            Project.CurrentBundleNumber = 1;
+
             // Show proof of export
             System.Windows.MessageBox.Show("Success!");
 

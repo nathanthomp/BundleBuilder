@@ -1,6 +1,7 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using RedBuilt.Revit.BundleBuilder.Data.Services;
 using RedBuilt.Revit.BundleBuilder.Views;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,14 @@ namespace RedBuilt.Revit.BundleBuilder
             Autodesk.Revit.ApplicationServices.Application app = uiApp.Application;
             Document doc = uiDoc.Document;
 
+            // Attempt to create data
+            if (!RevitImportService.Import(doc))
+            {
+                message = RevitImportService.ErrorMessage;
+                return Result.Failed;
+            }
+
+            // Attempt to create windows
             try
             {
                 MainWindow mw = new MainWindow(doc);
@@ -35,12 +44,14 @@ namespace RedBuilt.Revit.BundleBuilder
             }
             catch (Autodesk.Revit.Exceptions.OperationCanceledException)
             {
-                TaskDialog.Show("BundleBuilder", "This operation was cancelled");
+                // TaskDialog.Show("BundleBuilder", "This operation was cancelled");
+                message = "This operation was cancelled";
                 return Result.Cancelled;
             }
             catch (Exception ex)
             {
-                TaskDialog.Show("BundleBuilder", "The following error occured: " + ex.Message);
+                // TaskDialog.Show("BundleBuilder", "The following error occured: " + ex.Message);
+                message = "The following error occured: " + ex.Message;
                 return Result.Failed;
             }
         }

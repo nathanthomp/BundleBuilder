@@ -19,8 +19,8 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         public Truck Truck { get; set; }
         public Bundle Bundle { get; set; }
         public Level Level { get; set; }
-        public Element PanelElement { get; set; }
-        public Element WallElement { get; set; }
+        public Element StructWall { get; set; }
+        public Element BasicWall { get; set; }
         public int Column { get; set; }
         public int Depth { get; set; }
 
@@ -41,13 +41,27 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         /// <summary>
         /// Panel constructor
         /// </summary>
+        /// <param name="basicWall">revit wall assembly element</param>
+        public Panel(Element basicWall)
+        {
+            BasicWall = basicWall;
+            Name = new Name(basicWall.LookupParameter("Mark").AsString());
+            Type = new Type(Name.FullName);
+            _toBundle = true;
+        }
+
+        /// <summary>
+        /// Panel constructor
+        /// </summary>
         /// <param name="panelElement">revit wall assembly element</param>
         /// <param name="wallElement">revit generic wall element</param>
-        public Panel(Element panelElement, Element wallElement)
+        public Panel(Element basicWall, Element structWall)
         {
-            PanelElement = panelElement;
-            WallElement = wallElement;
-            Name = new Name(panelElement.Name);
+            BasicWall = basicWall;
+            StructWall = structWall;
+            StructWall = structWall;
+            Name = new Name(structWall.Name);
+            Type = new Type(Name.FullName);
             _toBundle = true;
         }
 

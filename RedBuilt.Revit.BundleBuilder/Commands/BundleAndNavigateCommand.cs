@@ -28,8 +28,6 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
 
         public override void Execute(object parameter)
         {
-            ProjectState.BundleViewModelInstanciated = true;
-
             Panel startingPanel = PanelTools.GetPanelFromName(Settings.StartingPanel);
 
             // Exceptions
