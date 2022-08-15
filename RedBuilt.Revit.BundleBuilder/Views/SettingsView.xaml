@@ -33,6 +33,16 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
                 <!-- Project Settings -->
@@ -82,16 +92,26 @@
 
                 <!-- Plate Settings -->
                 <TextBlock Text="Plate Settings:" Grid.Column="0" Grid.Row="10" TextAlignment="Right" Margin="0,30,0,0"/>
-                <TextBlock Text="2x4 - Number of panels tall" Grid.Column="1" Grid.Row="11" Margin="10" TextAlignment="Right"/>
-                <TextBox x:Name="PanelsTall2x4" Grid.Column="2" Grid.Row="11" Margin="20,10"/>
-                <TextBlock Text="2x6 - Number of panels tall" Grid.Column="1" Grid.Row="11" Margin="10" TextAlignment="Right"/>
-                <TextBox x:Name="PanelsTall2x6" Grid.Column="2" Grid.Row="11" Margin="20,10"/>
-                <TextBlock Text="2x8 - Number of panels tall" Grid.Column="1" Grid.Row="11" Margin="10" TextAlignment="Right"/>
-                <TextBox x:Name="PanelsTall2x8" Grid.Column="2" Grid.Row="11" Margin="20,10"/>
-                <TextBlock Text="2x10 - Number of panels tall" Grid.Column="1" Grid.Row="11" Margin="10" TextAlignment="Right"/>
-                <TextBox x:Name="PanelsTall2x10" Grid.Column="2" Grid.Row="11" Margin="20,10"/>
-                <TextBlock Text="2x12 - Number of panels tall" Grid.Column="1" Grid.Row="11" Margin="10" TextAlignment="Right"/>
-                <TextBox x:Name="PanelsTall2x12" Grid.Column="2" Grid.Row="11" Margin="20,10"/>
+                <TextBlock Text="2x4 / 400 - Number of Levels" Grid.Column="1" Grid.Row="11" Margin="10" TextAlignment="Right"/>
+                <TextBox x:Name="NumberOfLevels2x4" Grid.Column="2" Grid.Row="11" Margin="20,10"
+                         Text="{Binding NumberOfLevels2x4, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="{Binding ErrorCollection[NumberOfLevels2x4]}"/>
+                <TextBlock Text="2x6 / 600 - Number of Levels" Grid.Column="1" Grid.Row="12" Margin="10" TextAlignment="Right"/>
+                <TextBox x:Name="NumberOfLevels2x6" Grid.Column="2" Grid.Row="12" Margin="20,10"
+                         Text="{Binding NumberOfLevels2x6, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="{Binding ErrorCollection[NumberOfLevels2x6]}"/>
+                <TextBlock Text="2x8 / 800 - Number of Levels" Grid.Column="1" Grid.Row="13" Margin="10" TextAlignment="Right"/>
+                <TextBox x:Name="NumberOfLevels2x8" Grid.Column="2" Grid.Row="13" Margin="20,10"
+                         Text="{Binding NumberOfLevels2x8, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="{Binding ErrorCollection[NumberOfLevels2x8]}"/>
+                <TextBlock Text="2x10 / 1000 - Number of Levels" Grid.Column="1" Grid.Row="14" Margin="10" TextAlignment="Right"/>
+                <TextBox x:Name="NumberOfLevels2x10" Grid.Column="2" Grid.Row="14" Margin="20,10"
+                         Text="{Binding NumberOfLevels2x10, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="{Binding ErrorCollection[NumberOfLevels2x10]}"/>
+                <TextBlock Text="2x12 / 1200 - Number of Levels" Grid.Column="1" Grid.Row="15" Margin="10" TextAlignment="Right"/>
+                <TextBox x:Name="NumberOfLevels2x12" Grid.Column="2" Grid.Row="15" Margin="20,10"
+                         Text="{Binding NumberOfLevels2x12, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="{Binding ErrorCollection[NumberOfLevels2x12]}"/>
 
             </Grid>
         </ScrollViewer>

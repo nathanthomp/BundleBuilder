@@ -82,28 +82,27 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Tools
                 switch (plate)
                 {
                     case "2x4":
-                        return 6;
+                        return Settings.NumberOfLevels2x4;
                     case "400":
-                        return 6;
+                        return Settings.NumberOfLevels2x4;
                     case "2x6":
-                        return 4;
+                        return Settings.NumberOfLevels2x6;
                     case "550":
-                        return 4;
+                        return Settings.NumberOfLevels2x6;
                     case "600":
-                        return 4;
+                        return Settings.NumberOfLevels2x6;
                     case "2x8":
-                        return 3;
+                        return Settings.NumberOfLevels2x8;
                     case "800":
-                        return 3;
+                        return Settings.NumberOfLevels2x8;
                     case "2x10":
-                        return 2;
+                        return Settings.NumberOfLevels2x10;
                     case "1000":
-                        return 2;
+                        return Settings.NumberOfLevels2x10;
                     case "2x12":
-                        // Change back for default
-                        return 3;
+                        return Settings.NumberOfLevels2x12;
                     case "1200":
-                        return 2;
+                        return Settings.NumberOfLevels2x12;
                     default:
                         return 1;
                 }

@@ -142,6 +142,57 @@ namespace RedBuilt.Revit.BundleBuilder.ViewModels
             }
         }
 
+        // Plate Settings //
+        public int NumberOfLevels2x4 
+        { 
+            get { return Settings.NumberOfLevels2x4; }
+            set
+            {
+                Settings.NumberOfLevels2x4 = value;
+                NotifyPropertyChanged();
+            } 
+        }
+
+        public int NumberOfLevels2x6
+        {
+            get { return Settings.NumberOfLevels2x6; }
+            set
+            {
+                Settings.NumberOfLevels2x6 = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public int NumberOfLevels2x8
+        {
+            get { return Settings.NumberOfLevels2x8; }
+            set
+            {
+                Settings.NumberOfLevels2x8 = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public int NumberOfLevels2x10
+        {
+            get { return Settings.NumberOfLevels2x10; }
+            set
+            {
+                Settings.NumberOfLevels2x10 = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public int NumberOfLevels2x12
+        {
+            get { return Settings.NumberOfLevels2x12; }
+            set
+            {
+                Settings.NumberOfLevels2x12 = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region Validation
@@ -199,6 +250,31 @@ namespace RedBuilt.Revit.BundleBuilder.ViewModels
                     case "MaxPanelsPerLevel":
                         if (MaxPanelsPerLevel == 0)
                             result = "Max panels per level cannot be zero.";
+                        break;
+
+                    case "NumberOfLevels2x4":
+                        if (MaxPanelsPerLevel == 0)
+                            result = "Levels in a bundle cannot be zero.";
+                        break;
+
+                    case "NumberOfLevels2x6":
+                        if (MaxPanelsPerLevel == 0)
+                            result = "Levels in a bundle cannot be zero.";
+                        break;
+
+                    case "NumberOfLevels2x8":
+                        if (MaxPanelsPerLevel == 0)
+                            result = "Levels in a bundle cannot be zero.";
+                        break;
+
+                    case "NumberOfLevels2x10":
+                        if (MaxPanelsPerLevel == 0)
+                            result = "Levels in a bundle cannot be zero.";
+                        break;
+
+                    case "NumberOfLevels2x12":
+                        if (MaxPanelsPerLevel == 0)
+                            result = "Levels in a bundle cannot be zero.";
                         break;
                 }
 

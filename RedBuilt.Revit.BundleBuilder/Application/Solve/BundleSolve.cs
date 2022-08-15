@@ -460,5 +460,36 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
 
             Project.Bundles.AddRange(bundles);
         }
+
+        public static void SolveParapet(string plate, List<Panel> panelList)
+        {
+            Bundle bundle;
+
+            //while (panelList.Count > 0)
+            //{
+            //    // Establish Bundle
+            //    bundle = new Bundle(Project.CurrentBundleNumber, 6)
+            //    {
+            //        Type = "Parapet",
+            //        Plate = plate
+            //    };
+            //    bundleWidthBounds = new double[2];
+            //    bundleLengthBounds = new double[2];
+
+            //    // Fill in Bundle with Levels
+            //    for (int i = numberOfLevels; i > 0; i--)
+            //    {
+            //        Level level = new Level(i);
+            //        bundle.Add(level);
+            //        level.Bundle = bundle;
+            //    }
+
+
+
+
+
+
+            //}
+        }
     }
 }

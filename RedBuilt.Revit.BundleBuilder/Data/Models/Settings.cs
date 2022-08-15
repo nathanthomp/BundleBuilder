@@ -49,6 +49,22 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         private static int _maxPanelsPerLevel = 1000;
         public static int MaxPanelsPerLevel { get => _maxPanelsPerLevel; set => _maxPanelsPerLevel = value; }
 
+        // Plate Settings //
+        private static int _numberOfLevels2x4 = 6;
+        public static int NumberOfLevels2x4 { get => _numberOfLevels2x4; set => _numberOfLevels2x4 = value; }
+
+        private static int _numberOfLevels2x6 = 4;
+        public static int NumberOfLevels2x6 { get => _numberOfLevels2x6; set => _numberOfLevels2x6 = value; }
+
+        private static int _numberOfLevels2x8 = 3;
+        public static int NumberOfLevels2x8 { get => _numberOfLevels2x8; set => _numberOfLevels2x8 = value; }
+
+        private static int _numberOfLevels2x10 = 3;
+        public static int NumberOfLevels2x10 { get => _numberOfLevels2x10; set => _numberOfLevels2x10 = value; }
+
+        private static int _numberOfLevels2x12 = 3;
+        public static int NumberOfLevels2x12 { get => _numberOfLevels2x12; set => _numberOfLevels2x12 = value; }
+
 
 
     }

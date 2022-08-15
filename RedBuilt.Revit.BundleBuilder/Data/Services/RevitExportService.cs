@@ -28,6 +28,17 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
         /// <param name="doc">revit document</param>
         public static void Export(Document doc)
         {
+            // Determine whether there are RB Fields, and if not, create them
+            //bool foundRBFields = false;
+            //List<Parameter> parameters = new List<Parameter>();
+            //if (Project.Panels[0].BasicWall.LookupParameter("RB Bundle") != null)
+            //{
+            //    foundRBFields = true;
+            //    GlobalParameter parameter = new GlobalParameter(doc, "RB Bundle", ParameterType[]);
+
+
+            //}
+
             using (Transaction transaction = new Transaction(doc, "BundleBuilder"))
             {
                 // Start the Transaction
@@ -37,7 +48,13 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                 {
                     #region RB Fields
 
+                    // Get element and add RB Fields if not already created
                     Element basicWall = panel.BasicWall;
+                    //if (!foundRBFields)
+                    //{
+                    //    foreach (Parameter parameter in parameters)
+                    //        basicWall.Parameters.Insert(parameter);
+                    //}
 
                     // Change RB Bundle parameter to panel bundle number
                     basicWall.LookupParameter("RB Bundle")?.Set(panel.Bundle.Number.ToString());
