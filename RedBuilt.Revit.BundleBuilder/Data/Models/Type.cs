@@ -10,6 +10,8 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
     {
         public string Name { get; }
         public string Symbol { get; }
+        public static string TypeFamily { get; }
+        public static Plate Plate { get; }
 
         public Type(string panelName)
         {

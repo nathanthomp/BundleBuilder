@@ -46,7 +46,6 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         {
             BasicWall = basicWall;
             Name = new Name(basicWall.LookupParameter("Mark").AsString());
-            Type = new Type(Name.FullName);
             _toBundle = true;
         }
 
@@ -59,9 +58,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         {
             BasicWall = basicWall;
             StructWall = structWall;
-            StructWall = structWall;
             Name = new Name(structWall.Name);
-            Type = new Type(Name.FullName);
             _toBundle = true;
         }
 

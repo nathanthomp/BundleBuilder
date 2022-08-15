@@ -14,6 +14,12 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         public string WidthString { get; }
         public string PlateMaterial { get; }
 
+
+        public static double StudSize { get; set; }
+
+
+
+
         public Plate(double plateWidth, string plateMaterial)
         {
             Width = plateWidth;

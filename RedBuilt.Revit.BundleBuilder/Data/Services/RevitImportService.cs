@@ -8,6 +8,7 @@ using Panel = RedBuilt.Revit.BundleBuilder.Data.Models.Panel;
 using RedBuilt.Revit.BundleBuilder.Application.Sort;
 using RedBuilt.Revit.BundleBuilder.Data.Models;
 using System.Windows;
+using Type = RedBuilt.Revit.BundleBuilder.Data.Models.Type;
 
 namespace RedBuilt.Revit.BundleBuilder.Data.Services
 {
@@ -181,6 +182,12 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                 else
                     panel = new Panel(basicWall);
 
+                // Get panel type
+                // 1. Get the name of type of this panel
+                // 2. if the job does not already have type of this panel, add it
+                // 
+                panel.Type = new Type(panel.Name.FullName);
+
                 // Fill in fields for panel
                 foreach (string paramName in ParamNames)
                 {
@@ -229,6 +236,13 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                     double temp = panel.Width.AsDouble;
                     panel.Width = new Width(panel.Height.AsDouble);
                     panel.Height = new Height(temp);
+                }
+
+                if (panel.Plate.Description == null)
+                {
+                    // Plate warning
+                    ErrorMessage = String.Format("Unviable Setup: Plate is extremely large on panel {0}.", panel.Name.FullName);
+                    return false;
                 }
 
                 panels.Add(panel);

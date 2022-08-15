@@ -82,6 +82,19 @@ namespace RedBuilt.Revit.BundleBuilder.Views
             System.Diagnostics.Process.Start(filePath);
         }
 
+        private void Modify_Click(object sender, RoutedEventArgs e)
+        {
+            ModifyModal mm = new ModifyModal();
+
+            //mm.dataComboBox.ItemsSource;
+
+            mm.ShowDialog();
+        }
+
+        public void RefreshView()
+        {
+            createdBundles.Refresh();
+        }
 
     }
 }

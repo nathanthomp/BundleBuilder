@@ -185,6 +185,9 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
             // Export the bundle preview
             BundleReport.CreateHtml();
 
+            // Correct bundle numbers
+            BundleTools.CorrectBundleNumbers();
+
             // Update current view
             _navigationState.CurrentViewModel = _createViewModel();
         }

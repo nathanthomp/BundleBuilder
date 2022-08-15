@@ -23,7 +23,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
         /// <param name="bundle">bundle to change number</param>
         /// <param name="destBundleNumber">new bundle number</param>
         public static void ProcessModification(Bundle bundle, int destBundleNumber)
-        { 
+        {
             bundle.Number = destBundleNumber;
             Update();
         }

@@ -80,7 +80,18 @@
                          Text="{Binding MaxPanelsPerLevel, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                          ToolTip="{Binding ErrorCollection[MaxPanelsPerLevel]}"/>
 
-
+                <!-- Plate Settings -->
+                <TextBlock Text="Plate Settings:" Grid.Column="0" Grid.Row="10" TextAlignment="Right" Margin="0,30,0,0"/>
+                <TextBlock Text="2x4 - Number of panels tall" Grid.Column="1" Grid.Row="11" Margin="10" TextAlignment="Right"/>
+                <TextBox x:Name="PanelsTall2x4" Grid.Column="2" Grid.Row="11" Margin="20,10"/>
+                <TextBlock Text="2x6 - Number of panels tall" Grid.Column="1" Grid.Row="11" Margin="10" TextAlignment="Right"/>
+                <TextBox x:Name="PanelsTall2x6" Grid.Column="2" Grid.Row="11" Margin="20,10"/>
+                <TextBlock Text="2x8 - Number of panels tall" Grid.Column="1" Grid.Row="11" Margin="10" TextAlignment="Right"/>
+                <TextBox x:Name="PanelsTall2x8" Grid.Column="2" Grid.Row="11" Margin="20,10"/>
+                <TextBlock Text="2x10 - Number of panels tall" Grid.Column="1" Grid.Row="11" Margin="10" TextAlignment="Right"/>
+                <TextBox x:Name="PanelsTall2x10" Grid.Column="2" Grid.Row="11" Margin="20,10"/>
+                <TextBlock Text="2x12 - Number of panels tall" Grid.Column="1" Grid.Row="11" Margin="10" TextAlignment="Right"/>
+                <TextBox x:Name="PanelsTall2x12" Grid.Column="2" Grid.Row="11" Margin="20,10"/>
 
             </Grid>
         </ScrollViewer>

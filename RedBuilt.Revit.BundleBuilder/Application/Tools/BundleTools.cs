@@ -100,7 +100,8 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Tools
                     case "1000":
                         return 2;
                     case "2x12":
-                        return 2;
+                        // Change back for default
+                        return 3;
                     case "1200":
                         return 2;
                     default:
@@ -137,6 +138,7 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Tools
                 counter++;
             }
         }
+
 
     }
 }

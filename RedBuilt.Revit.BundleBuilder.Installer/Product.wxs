@@ -18,9 +18,13 @@
 			/>
 
 		<!-- Downgrade error message -->
-		<MajorUpgrade 
+		<MajorUpgrade
 			DowngradeErrorMessage="A newer version of BundleBuilder is already installed." 
 			/>
+
+		<!--<InstallExecuteSequence>
+			<RemoveExistingProducts Before="InstallInitialize" />
+		</InstallExecuteSequence>-->
 		
 		<!-- Include .cab file into .msi file -->
 		<MediaTemplate 

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RedBuilt.Revit.BundleBuilder.Application.Solve
 {
@@ -23,6 +24,10 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
         /// <param name="panelList">list of panels to bundle together</param>
         public static void Solve(string type, string plate, List<Panel> panelList)
         {
+            Bundle bundle;
+            double[] bundleWidthBounds;
+            double[] bundleLengthBounds;
+            List<Bundle> bundles = new List<Bundle>();
             List<Panel> panelListCopy = new List<Panel>(panelList);
             int numberOfLevels = BundleTools.GetNumberOfLevels(type, plate);
 
@@ -31,13 +36,13 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
                 #region Establish Bundle
 
                 // Establish Bundle
-                Bundle bundle = new Bundle(Project.CurrentBundleNumber, numberOfLevels)
+                bundle = new Bundle(Project.CurrentBundleNumber, numberOfLevels)
                 {
                     Type = type,
                     Plate = plate
                 };
-                double[] bundleWidthBounds = new double[2];
-                double[] bundleLengthBounds = new double[2];
+                bundleWidthBounds = new double[2];
+                bundleLengthBounds = new double[2];
 
                 // Fill in Bundle with Levels
                 for (int i = numberOfLevels; i > 0; i--)
@@ -330,11 +335,130 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
                 bundle.Length = bundle.Levels.Max(x => x.Length);
                 bundle.NumberOfLevels = bundle.Levels.Count;
 
-                Project.Bundles.Add(bundle);
+                bundles.Add(bundle);
                 Project.CurrentBundleNumber++;
 
                 #endregion
             }
+
+            #region Relocate Straglers
+
+            // Once all panels are bundled
+            // 1. Locate bundles with empty levels
+            // 2. Remove panels in empty level, place in list
+            // 3. Remove empty levels, remove empty bundles
+            // 4. bundle those panels
+
+
+            // Determine if there are enough panels to recreate a bundle
+            int numberOfBundlesWithEmptyLevels = 0;
+            List<int> bundleNums = new List<int>();
+            foreach (Bundle bundleToRemove in bundles)
+                if (BundleTools.NumberOfEmptyLevels(bundleToRemove) > 0)
+                {
+                    numberOfBundlesWithEmptyLevels++;
+                    bundleNums.Add(bundleToRemove.Number);
+                }
+                    
+
+            if (numberOfBundlesWithEmptyLevels > 1)
+            {
+                List<Bundle> bundlesWithEmptyLevels = new List<Bundle>();
+                List<Panel> panelsToRelocate = new List<Panel>();
+
+                // Find the bundle that needs to be removed
+                for (int i = 0; i < bundleNums.Count; i++)
+                {
+                    Bundle bundleToRemove = bundles.Where(x => x.Number == bundleNums[i]).FirstOrDefault();
+                    
+
+                    // Empty the panels in bundle into panelsToRelocate
+                    for (int j = 0; j < bundleToRemove.Levels.Count; j++)
+                    {
+                        Level level = bundleToRemove.Levels[j];
+
+                        for (int k = 0; k < level.Panels.Count; k++)
+                        {
+                            Panel panel = level.Panels[k];
+                            panelsToRelocate.Add(panel);
+                        }
+                    }
+
+                    bundles.Remove(bundleToRemove);
+                }
+
+                while (panelsToRelocate.Count > 0)
+                {
+                    // Bundles with empty levels have been removed
+                    // Establish Bundle
+                    bundle = new Bundle(Project.CurrentBundleNumber, numberOfLevels)
+                    {
+                        Type = type,
+                        Plate = plate
+                    };
+                    bundleWidthBounds = new double[2];
+                    bundleLengthBounds = new double[2];
+
+                    // Fill in Bundle with Levels
+                    for (int i = numberOfLevels; i > 0; i--)
+                    {
+                        Level level = new Level(i);
+                        bundle.Add(level);
+                        level.Bundle = bundle;
+                    }
+
+                    // Find the biggest panel and place it in the bottom level
+                    // correct the order of panels in panel list
+                    panelsToRelocate = Sort.PanelNameSort.Sort(panelsToRelocate);
+
+                    //// Pick largest panel remaining and remove it
+                    //Panel maxPanel = panelsToRelocate.OrderByDescending(x => x.Area).First();
+                    //panelsToRelocate.Remove(maxPanel);
+
+                    //// Place largest panel at the bottom of the bundle
+                    //bundle.Levels[numberOfLevels - 1].Add(maxPanel);
+                    //maxPanel.Column = 1;
+                    //maxPanel.Depth = 1;
+
+                    //// Update bounds for bottom most level
+                    //bundleWidthBounds = BundleTools.CreateWidthBounds(bundle.Levels[numberOfLevels - 1]);
+                    //bundleLengthBounds = BundleTools.CreateLengthBounds(bundle.Levels[numberOfLevels - 1]);
+
+                    // Starting at lowest level and going up
+                    for (int i = numberOfLevels; i > 0; i--)
+                    {
+                        if (panelsToRelocate.Count > 0)
+                        {
+                            // Pick biggest panel and place
+                            Panel maxPanel = panelsToRelocate.OrderByDescending(x => x.Area).First();
+                            bundle.Levels[i - 1].Add(maxPanel);
+                            panelsToRelocate.Remove(maxPanel);
+
+                            // remove that panel from list
+                        }
+
+
+                    }
+                    
+
+
+
+
+
+
+
+
+
+
+                    bundles.Add(bundle);
+                }
+
+
+            }
+
+            #endregion
+
+            Project.Bundles.AddRange(bundles);
         }
     }
 }
