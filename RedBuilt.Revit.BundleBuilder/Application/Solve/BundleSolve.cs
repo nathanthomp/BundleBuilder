@@ -464,32 +464,75 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Solve
         public static void SolveParapet(string plate, List<Panel> panelList)
         {
             Bundle bundle;
+            double[] bundleWidthBounds;
+            double[] bundleLengthBounds;
+            List<Bundle> bundles = new List<Bundle>();
+            List<Panel> panelListCopy = new List<Panel>(panelList);
+            int numberOfLevels = BundleTools.GetNumberOfLevels("Parapet", plate);
 
-            //while (panelList.Count > 0)
-            //{
-            //    // Establish Bundle
-            //    bundle = new Bundle(Project.CurrentBundleNumber, 6)
-            //    {
-            //        Type = "Parapet",
-            //        Plate = plate
-            //    };
-            //    bundleWidthBounds = new double[2];
-            //    bundleLengthBounds = new double[2];
+            panelListCopy = panelListCopy.OrderByDescending(x => x.Area).ToList();
 
-            //    // Fill in Bundle with Levels
-            //    for (int i = numberOfLevels; i > 0; i--)
-            //    {
-            //        Level level = new Level(i);
-            //        bundle.Add(level);
-            //        level.Bundle = bundle;
-            //    }
+            while (panelListCopy.Count > 0)
+            {
+                // Establish Bundle
+                bundle = new Bundle(Project.CurrentBundleNumber,numberOfLevels)
+                {
+                    Type = "Parapet",
+                    Plate = plate
+                };
+                bundleWidthBounds = new double[2];
+                bundleLengthBounds = new double[2];
 
+                // Fill in Bundle with Levels
+                for (int i = numberOfLevels; i > 0; i--)
+                {
+                    Level level = new Level(i);
+                    bundle.Add(level);
+                    level.Bundle = bundle;
+                }
 
+                for (int i = 1; i <= numberOfLevels; i++)
+                {
+                    Level level = bundle.Levels.Where(x => x.Number == i).First();
 
+                    if (panelListCopy.Count > 0)
+                    {
+                        Panel panel = panelListCopy.First();
 
+                        if (level.Add(panel))
+                        {
+                            panelListCopy.Remove(panel);
+                            panel.Column = 1;
+                            panel.Depth = 1;
+                        }
+                        else
+                            throw new Exception("Cannot add panel to level");
+                    }
 
+                }
 
-            //}
+                // Fill in bundle information
+                double height = 0, weight = 0;
+                foreach (Level levelInBundle in bundle.Levels)
+                {
+                    height += levelInBundle.Height;
+                    weight += levelInBundle.Weight;
+                }
+
+                // Add sticker
+                height += 3;
+
+                bundle.Height = height;
+                bundle.Weight = weight;
+                bundle.Width = bundle.Levels.Max(x => x.Width);
+                bundle.Length = bundle.Levels.Max(x => x.Length);
+                bundle.NumberOfLevels = bundle.Levels.Count;
+
+                bundles.Add(bundle);
+                Project.CurrentBundleNumber++;
+
+            }
+            Project.Bundles.AddRange(bundles);
         }
     }
 }
