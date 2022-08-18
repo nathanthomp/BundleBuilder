@@ -24,7 +24,14 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                     Level level = LevelTools.GetLevelFromName(moveObject);
                     Bundle currentBundle = level.Bundle;
 
-                    Bundle destinationBundle = Project.Bundles.Where(x => x.Number == bundleDest).First();
+                    
+                    Bundle destinationBundle = Project.Bundles.Where(x => x.Number == bundleDest)?.First();
+                    if (destinationBundle == null)
+                    {
+                        destinationBundle = new Bundle(bundleDest);
+                        Project.Bundles.Add(destinationBundle);
+                    }
+                        
 
                     currentBundle.Remove(level);
                     LevelTools.CorrectLevelNumbers(currentBundle);
@@ -58,8 +65,14 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                     Level currentLevel = panel.Level;
                     Bundle currentBundle = panel.Bundle;
 
-                    Bundle destinationBundle = Project.Bundles.Where(x => x.Number == bundleDest).First();
-                    Level destinationLevel = destinationBundle.Levels.Where(x => x.Number == levelDest).First();
+                    
+                    
+
+                    Bundle destinationBundle = Project.Bundles.Where(x => x.Number == bundleDest)?.First();
+                    if (destinationBundle == null)
+                    {
+                        destinationBundle = new Bundle(bundleDest);
+                    }
 
                     currentLevel.Remove(panel);
                     if (currentLevel.Panels.Count == 0)
@@ -73,16 +86,56 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                         }
                     }
 
-                    // Add new panel to new level or existing level
                     if (newLevel)
                     {
                         Level level = new Level(levelDest);
+                        level.Add(panel);
+                        panel.Depth = 1;
+                        panel.Column = 1;
+
+                        panel.Bundle = destinationBundle;
+
+                        List<Level> levelsToIncrease = new List<Level>();
+                        levelsToIncrease = destinationBundle.Levels.Where(x => x.Number > levelDest || x.Number == levelDest).ToList();
+                        foreach (Level levelToIncrease in levelsToIncrease)
+                            levelToIncrease.Number += 1;
+
                         destinationBundle.Add(level);
+
                         LevelTools.CorrectLevelNumbers(destinationBundle);
                     }
                     else
                     {
+                        if (levelDest > destinationBundle.Levels.Count)
+                        {
+                            ErrorMessage = "Cannot find a location to place " + moveObject;
+                            return false;
+                        }
+
+                        Level destinationLevel = destinationBundle.Levels.Where(x => x.Number == levelDest).First();
+
+                        if (destinationLevel.Panels.Max(x => x.Depth) > 1)
+                        {
+                            ErrorMessage = "Cannot add to level with a depth of 2.";
+                            return false;
+                        }
+
+                        panel.Depth = 1;
+                        panel.Column = destinationLevel.Panels.Max(x => x.Column) + 1;
                         destinationLevel.Add(panel);
+                    }
+
+
+                    // take the remaining panels in the level
+                    // for (number of panels left)
+                    //  take smallest and make it the first column
+
+                    List<Panel> currentLevelPanelsCopy = new List<Panel>(currentLevel.Panels);
+                    for (int i = 1; i <= currentLevelPanelsCopy.Count; i++)
+                    {
+                        Panel remainingPanel = currentLevelPanelsCopy.OrderBy(x => x.Width).Min();
+                        remainingPanel.Column = i;
+                        currentLevelPanelsCopy.Remove(remainingPanel);
                     }
 
 
