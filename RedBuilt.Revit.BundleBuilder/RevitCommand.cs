@@ -2,6 +2,7 @@
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using RedBuilt.Revit.BundleBuilder.Data.Services;
+using RedBuilt.Revit.BundleBuilder.Data.States;
 using RedBuilt.Revit.BundleBuilder.Views;
 using System;
 using System.Collections.Generic;
@@ -24,9 +25,13 @@ namespace RedBuilt.Revit.BundleBuilder
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
             UIApplication uiApp = commandData.Application;
+            ProjectState.UIApp = uiApp;
             UIDocument uiDoc = uiApp.ActiveUIDocument;
+            ProjectState.UIDoc = uiDoc;
             Autodesk.Revit.ApplicationServices.Application app = uiApp.Application;
+            ProjectState.App = app;
             Document doc = uiDoc.Document;
+            ProjectState.Doc = doc;
 
             // Attempt to create data
             if (!RevitImportService.Import(doc))

@@ -33,6 +33,11 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
             NumberOfLevels = bundleNumberOfLevels;
         }
 
+        public Bundle(int bundleNumber)
+        {
+            Number = bundleNumber;
+        }
+
         /// <summary>
         /// Adds a level to this bundle
         /// </summary>
@@ -49,6 +54,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
                 Height += level.Height;
                 if (level.Width > Width)
                     Width = level.Width;
+                NumberOfLevels = Levels.Count;
             }
         }
 
@@ -72,6 +78,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
                     Width = Levels.Max(x => x.Width);
                 else
                     Width = 0;
+                NumberOfLevels = Levels.Count;
             }
         }
 

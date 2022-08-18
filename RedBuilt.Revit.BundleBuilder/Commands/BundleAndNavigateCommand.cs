@@ -59,7 +59,14 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
             // Solve the rest of the list of panels
             foreach (KeyValuePair<string, Dictionary<string, List<Panel>>> typePlateDict in panelsByTypeThenPlate)
                 foreach (KeyValuePair<string, List<Panel>> platePanelsDict in typePlateDict.Value)
-                    BundleSolve.Solve(typePlateDict.Key, platePanelsDict.Key, platePanelsDict.Value);
+                    if (typePlateDict.Key.Equals("Parapet"))
+                    {
+                        BundleSolve.SolveParapet(platePanelsDict.Key, platePanelsDict.Value);
+                    }
+                    else
+                    {
+                        BundleSolve.Solve(typePlateDict.Key, platePanelsDict.Key, platePanelsDict.Value);
+                    }                    
 
             // Remove empty levels in bundle
             for (int i = 0; i < Project.Bundles.Count; i++)

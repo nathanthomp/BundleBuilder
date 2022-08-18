@@ -1,5 +1,6 @@
 ﻿using Autodesk.Revit.DB;
 using RedBuilt.Revit.BundleBuilder.Data.Models;
+using RedBuilt.Revit.BundleBuilder.Data.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,20 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
     public static class RevitExportService
     {
         /// <summary>
+        /// Names of RB fields
+        /// </summary>
+        private static List<string> RBFieldNames = new List<string>()
+        {
+            "RB Bundle",
+            "RB Bundle Level",
+            "RB Bundle Column",
+            "RB Bundle Depth"
+        };
+
+        /// <summary>
         /// FM parameter names and thier guids 
         /// </summary>
-        private static readonly Dictionary<string, Guid> ParameterNameAndGuid = new Dictionary<string, Guid>
+        private static readonly Dictionary<string, Guid> FMParameterNamesAndGuid = new Dictionary<string, Guid>
         {
             { "FM TR Number", new Guid("8d03c405-03b0-4f19-b18d-da8f23c5fd0f")},
             { "FM TR Column Number", new Guid("602730bd-59da-47eb-a04f-819262d6eac4") },
@@ -29,15 +41,6 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
         public static void Export(Document doc)
         {
             // Determine whether there are RB Fields, and if not, create them
-            //bool foundRBFields = false;
-            //List<Parameter> parameters = new List<Parameter>();
-            //if (Project.Panels[0].BasicWall.LookupParameter("RB Bundle") != null)
-            //{
-            //    foundRBFields = true;
-            //    GlobalParameter parameter = new GlobalParameter(doc, "RB Bundle", ParameterType[]);
-
-
-            //}
 
             using (Transaction transaction = new Transaction(doc, "BundleBuilder"))
             {
@@ -48,13 +51,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                 {
                     #region RB Fields
 
-                    // Get element and add RB Fields if not already created
                     Element basicWall = panel.BasicWall;
-                    //if (!foundRBFields)
-                    //{
-                    //    foreach (Parameter parameter in parameters)
-                    //        basicWall.Parameters.Insert(parameter);
-                    //}
 
                     // Change RB Bundle parameter to panel bundle number
                     basicWall.LookupParameter("RB Bundle")?.Set(panel.Bundle.Number.ToString());
@@ -77,16 +74,16 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                     if (structWall != null)
                     {
                         // Change FM TR Number parameter to panel bundle number
-                        structWall.get_Parameter(ParameterNameAndGuid["FM TR Number"]).Set(panel.Bundle.Number.ToString());
+                        structWall.get_Parameter(FMParameterNamesAndGuid["FM TR Number"]).Set(panel.Bundle.Number.ToString());
 
                         // Change FM TR Column Number parameter to panel level index
-                        structWall.get_Parameter(ParameterNameAndGuid["FM TR Column Number"]).Set((panel.Level.Panels.IndexOf(panel) + 1).ToString());
+                        structWall.get_Parameter(FMParameterNamesAndGuid["FM TR Column Number"]).Set((panel.Level.Panels.IndexOf(panel) + 1).ToString());
 
                         // Change FM TR Row Number parameter to panel level number
-                        structWall.get_Parameter(ParameterNameAndGuid["FM TR Row Number"]).Set(panel.Level.Number.ToString());
+                        structWall.get_Parameter(FMParameterNamesAndGuid["FM TR Row Number"]).Set(panel.Level.Number.ToString());
 
                         // Change FM TR Type parameter to "Bundle"
-                        structWall.get_Parameter(ParameterNameAndGuid["FM TR Type"]).Set("Bundle");
+                        structWall.get_Parameter(FMParameterNamesAndGuid["FM TR Type"]).Set("Bundle");
 
                         // Change Comments parameter to panel bundle number
                         structWall.LookupParameter("Comments").Set(panel.Bundle.Number.ToString());
@@ -100,5 +97,51 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                 // The transaction is disposed
             }
         }
+
+        //public static bool CreateParameterBindings()
+        //{
+        //    // Determine if the wall object has RB parameters
+        //    if (Project.Panels[0].BasicWall.LookupParameter("RB Bundle") == null)
+        //    {
+        //        try
+        //        {
+        //            ProjectState.App.SharedParametersFilename = @"C:\ProgramData\RedBuilt\RBRevit\RBRevit_Master_Shared_Parameters.txt";
+
+        //            // Get access to definition file
+        //            DefinitionFile definitionFile = ProjectState.App.OpenSharedParameterFile();
+
+        //            // Create group in the shared parameters file
+        //            DefinitionGroup definitionGroup = definitionFile.Groups.Where(x => x.Name.Equals("RB Data")).First();
+
+        //            // Create catergory set and add walls to it
+        //            CategorySet categorySet = ProjectState.UIApp.Application.Create.NewCategorySet();
+        //            Category category = Category.GetCategory(ProjectState.Doc, BuiltInCategory.OST_Walls);
+        //            categorySet.Insert(category);
+
+        //            // Create instance of instance binding
+        //            InstanceBinding instanceBinding = ProjectState.UIApp.Application.Create.NewInstanceBinding(categorySet);
+
+        //            foreach (string name in RBFieldNames)
+        //            {
+        //                // Create instance definitions in definition group RBFields
+        //                ExternalDefinitionCreationOptions externalDefinitionCreationOptions = new ExternalDefinitionCreationOptions(name, ParameterType.Integer);
+        //                Definition definition = definitionGroup.Definitions.Create(externalDefinitionCreationOptions);
+
+        //                // Insert new parameter
+        //                ProjectState.UIApp.ActiveUIDocument.Document.ParameterBindings.Insert(definition, instanceBinding);
+        //            }
+
+
+        //            return true;
+        //        }
+        //        catch
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    else
+        //        return false;
+
+        //}
     }
 }

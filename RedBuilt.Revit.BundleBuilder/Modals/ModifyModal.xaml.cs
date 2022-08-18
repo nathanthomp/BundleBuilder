@@ -67,8 +67,7 @@ namespace RedBuilt.Revit.BundleBuilder.Modals
             {
                 List<string> panels = new List<string>();
                 foreach (Panel panel in Project.Panels)
-                    if (panel.Level.Panels.Count > 1)
-                        panels.Add(panel.Name.FullName);
+                    panels.Add(panel.Name.FullName);
 
                 panelNames = panels;
             }

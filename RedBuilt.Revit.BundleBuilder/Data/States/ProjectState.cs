@@ -1,4 +1,5 @@
 ﻿using Autodesk.Revit.DB;
+using Autodesk.Revit.UI;
 using RedBuilt.Revit.BundleBuilder.ViewModels;
 using RedBuilt.Revit.BundleBuilder.Views;
 using System;
@@ -12,6 +13,9 @@ namespace RedBuilt.Revit.BundleBuilder.Data.States
     public static class ProjectState
     {
         public static Document Doc;
+        public static UIApplication UIApp;
+        public static UIDocument UIDoc;
+        public static Autodesk.Revit.ApplicationServices.Application App;
 
         public static int CurrentBundleNumber { get; set; } = 1;
 

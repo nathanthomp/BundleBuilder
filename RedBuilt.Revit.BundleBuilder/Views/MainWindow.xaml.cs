@@ -29,7 +29,6 @@ namespace RedBuilt.Revit.BundleBuilder.Views
     {
         public MainWindow(Document doc)
         {
-            ProjectState.Doc = doc;
             ProjectState.MainWindow = this;
 
             NavigationState navigationState = new NavigationState();
