@@ -3,10 +3,10 @@
 	
 	<!-- Define main product -->
 	<Product 
-		Id="19B2244A-D769-46A8-A91D-15F5289E5585" 
+		Id="*" 
 		Name="Revit BundleBuilder Installer" 
 		Language="1033" 
-		Version="1.0.0.0" 
+		Version="1.0.1.0" 
 		Manufacturer="RedBuilt LLC" 
 		UpgradeCode="1adb88d8-6b58-48d3-a6f4-173636afd281">
 
@@ -14,22 +14,17 @@
 		<Package 
 			InstallerVersion="200" 
 			Compressed="yes" 
-			InstallScope="perMachine" 
-			/>
+			InstallScope="perMachine"/>
 
-		<!-- Downgrade error message -->
+		<!-- Update -->
 		<MajorUpgrade
-			DowngradeErrorMessage="A newer version of BundleBuilder is already installed." 
-			/>
-
-		<!--<InstallExecuteSequence>
-			<RemoveExistingProducts Before="InstallInitialize" />
-		</InstallExecuteSequence>-->
+			Schedule="afterInstallInitialize"
+			DowngradeErrorMessage="A newer version of BundleBuilder is already installed."
+			AllowSameVersionUpgrades="yes"/>
 		
 		<!-- Include .cab file into .msi file -->
 		<MediaTemplate 
-			EmbedCab="yes" 
-			/>
+			EmbedCab="yes"/>
 
 		<!-- Define components -->
 		<Feature 
