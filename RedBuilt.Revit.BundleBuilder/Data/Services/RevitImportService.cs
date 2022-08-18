@@ -9,6 +9,8 @@ using RedBuilt.Revit.BundleBuilder.Application.Sort;
 using RedBuilt.Revit.BundleBuilder.Data.Models;
 using System.Windows;
 using Type = RedBuilt.Revit.BundleBuilder.Data.Models.Type;
+using RedBuilt.Revit.BundleBuilder.Data.States;
+using System.IO;
 
 namespace RedBuilt.Revit.BundleBuilder.Data.Services
 {
@@ -71,6 +73,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
             "Assembly Length",
             "Assembly Depth",
             "Assembly Area",
+            "Framing Member Mass"
         };
 
         /// <summary>
@@ -108,23 +111,47 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
             if (structWallElements.Count > 0)
                 hasStructWalls = true;
 
-            if (!hasBasicWalls && !hasStructWalls)
+            if (!hasBasicWalls)
             {
                 // No walls found
                 ErrorMessage = "Unviable Setup: Cannot find wall elements.";
                 return false;
             }
 
-            Parameter p = basicWallElements.First().LookupParameter("RB Bundle");
-            if (p != null)
-                hasRBFields = true;
+            Parameter a = basicWallElements.First().LookupParameter("RB Bundle");
+            Parameter b = basicWallElements.First().LookupParameter("RB Bundle Level");
+            Parameter c = basicWallElements.First().LookupParameter("RB Bundle Column");
+            Parameter d = basicWallElements.First().LookupParameter("RB Bundle Depth");
+
+            //if (a != null && b != null && c != null && d != null)
+            //    hasRBFields = true;
+
+            // Make list of parameters to create
+            List<string> parametersToCreate = new List<string>();
+            if (a == null)
+                parametersToCreate.Add("RB Bundle");
+            if (b == null)
+                parametersToCreate.Add("RB Bundle Level");
+            if (c == null)
+                parametersToCreate.Add("RB Bundle Column");
+            if (d == null)
+                parametersToCreate.Add("RB Bundle Depth");
+
 
             // Gate - assuming panel data is correct,
             // ensure that there is a viable option to export to revit
-            if (!hasStructWalls && !hasRBFields)
+            if (!hasRBFields)
             {
-                // Only basic walls && no RB Fields = BAD
-                ErrorMessage = "Unviable Setup: Cannot find wall elements and wall fields that will work with BundleBuilder.";
+                // Create RB Fields
+                CreateSharedParameters(basicWallElements, parametersToCreate);
+
+                //ErrorMessage = "Unviable Setup: Cannot find RB fields";
+                //return false;
+            }
+
+            if (!hasStructWalls)
+            {
+                ErrorMessage = "Unviable Setup: Cannot find wall assemblies.";
                 return false;
             }
 
@@ -174,13 +201,10 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                             structWallMatch = structWall;
                             hasMatch = true;
                         }
-                            
-                // If there is a match, add both to constructor,
-                // otherwise just add basic wall
-                if (hasMatch)
-                    panel = new Panel(basicWall, structWallMatch);
-                else
-                    panel = new Panel(basicWall);
+                
+                // Create the panel
+                panel = new Panel(basicWall, structWallMatch);
+
 
                 // Get panel type
                 // 1. Get the name of type of this panel
@@ -191,7 +215,11 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                 // Fill in fields for panel
                 foreach (string paramName in ParamNames)
                 {
-                    double paramValue = GetParameterAsDouble(basicWall, paramName);
+                    double paramValue = 0;
+                    if (paramName.Equals("Framing Member Mass"))
+                        paramValue = GetParameterAsDouble(structWallMatch, paramName);
+                    else
+                        paramValue = GetParameterAsDouble(basicWall, paramName);
 
                     if (paramValue == 0)
                     {
@@ -213,6 +241,9 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
                             break;
                         case "Assembly Area":
                             panel.Area = Math.Round(paramValue);
+                            break;
+                        case "Framing Member Mass":
+                            panel.Weight = Math.Round(paramValue);
                             break;
                     }
                 }
@@ -255,6 +286,57 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Services
             Project.Panels = panels;
 
             return true;
+        }
+
+        private static void CreateSharedParameters(List<Element> wallElements, List<string> parameterNames)
+        {
+            Category category = ProjectState.Doc.Settings.Categories.get_Item(BuiltInCategory.OST_Walls);
+            CategorySet categorySet = ProjectState.App.Create.NewCategorySet();
+            categorySet.Insert(category);
+
+            string originalFile = ProjectState.App.SharedParametersFilename;
+            string tempFile = @"C:\ProgramData\RedBuilt\RBRevit\RBRevit_Temp_Bundle_Parameters.txt";
+
+            using (File.Create(tempFile)) { }
+
+            try
+            {
+                ProjectState.App.SharedParametersFilename = tempFile;
+
+                DefinitionFile sharedParametersFile = ProjectState.App.OpenSharedParameterFile();
+
+                DefinitionGroup rbGroup = sharedParametersFile.Groups.Create("RB");
+
+                // Bind to all generic wall objects
+                InstanceBinding instanceBinding = ProjectState.App.Create.NewInstanceBinding(categorySet);
+
+                Element element = wallElements[0];
+
+                using (Transaction transaction = new Transaction(ProjectState.Doc))
+                {
+                    transaction.Start("Add Shared Parameters");
+
+                    foreach (string parameterName in parameterNames)
+                    {
+                        // Definition options
+                        ExternalDefinitionCreationOptions options = new ExternalDefinitionCreationOptions(parameterName, ParameterType.Text);
+
+                        // Create definition
+                        ExternalDefinition externalDefinition = rbGroup.Definitions.Create(options) as ExternalDefinition;
+
+                        // Insert parameters
+                        ProjectState.Doc.ParameterBindings.Insert(externalDefinition, instanceBinding);
+                    }
+
+                    transaction.Commit();
+                }
+            }
+            catch { }
+            finally
+            {
+                ProjectState.App.SharedParametersFilename = originalFile;
+                File.Delete(tempFile);
+            }
         }
 
         /// <summary>
