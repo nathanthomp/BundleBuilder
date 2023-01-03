@@ -34,9 +34,13 @@ namespace RedBuilt.Revit.BundleBuilder
             ProjectState.Doc = doc;
 
             // Attempt to create data
-            if (!RevitImportService.Import(doc))
+            try
             {
-                message = RevitImportService.ErrorMessage;
+                RevitImportService.Import(doc);
+            }
+            catch (Exception ex)
+            {
+                message = RevitImportService.ErrorMessage + ": " + ex.Message;
                 return Result.Failed;
             }
 
