@@ -38,7 +38,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
         private static double _lengthMargin = .33;
         public static double LengthMargin { get => _lengthMargin; set => _lengthMargin = value; }
 
-        private static double _maxBundleWidth = 102.0;
+        private static double _maxBundleWidth = 97.0;
         public static double MaxBundleWidth { get => _maxBundleWidth; set => _maxBundleWidth = value; }
 
         private static double _maxBundleLength = 288.0;
