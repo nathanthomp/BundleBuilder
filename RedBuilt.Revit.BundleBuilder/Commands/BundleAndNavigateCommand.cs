@@ -92,6 +92,7 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
                     bundle.Levels[j].Number = counter;
                     counter++;
                 }
+                bundle.Number = i + 1;
             }
 
             // Correct the depth and column numbers
