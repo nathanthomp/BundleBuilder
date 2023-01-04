@@ -17,6 +17,11 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Reports
         /// </summary>
         public static void CreateHtml()
         {
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+
             StreamWriter sw = new StreamWriter(filePath);
 
             CreateFileHeader(sw);
