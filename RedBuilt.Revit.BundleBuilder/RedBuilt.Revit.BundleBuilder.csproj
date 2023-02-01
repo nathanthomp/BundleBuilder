@@ -158,11 +158,16 @@
     <Compile Include="Application\Tools\DimensionTools.cs" />
     <Compile Include="Application\Tools\LevelTools.cs" />
     <Compile Include="Application\Tools\PanelTools.cs" />
+    <Compile Include="BundleBuilderSettings.cs" />
     <Compile Include="Commands\BundleAndNavigateCommand.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\ExportCommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Commands\RestartAndNavigateCommand.cs" />
+    <Compile Include="Components\Bundle.cs" />
+    <Compile Include="Components\Member.cs" />
+    <Compile Include="Components\Project.cs" />
+    <Compile Include="Components\Wall.cs" />
     <Compile Include="Data\Models\Bundle.cs" />
     <Compile Include="Data\Models\Height.cs" />
     <Compile Include="Data\Models\Level.cs" />
@@ -194,6 +199,7 @@
     </Compile>
     <Compile Include="ExternalApplication.cs" />
     <Compile Include="ExternalCommands.cs" />
+    <Compile Include="Services\RevitImportService.cs" />
     <Compile Include="ViewModels\ExportViewModel.cs" />
     <Compile Include="Views\ExportView.xaml.cs">
       <DependentUpon>ExportView.xaml</DependentUpon>
