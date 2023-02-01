@@ -192,7 +192,7 @@
     <Compile Include="Modals\ModifyPanelModal.xaml.cs">
       <DependentUpon>ModifyPanelModal.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RevitApp.cs" />
+    <Compile Include="ExternalApplication.cs" />
     <Compile Include="RevitCommand.cs" />
     <Compile Include="ViewModels\ExportViewModel.cs" />
     <Compile Include="Views\ExportView.xaml.cs">
