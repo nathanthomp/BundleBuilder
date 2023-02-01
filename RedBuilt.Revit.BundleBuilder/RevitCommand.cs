@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RedBuilt.Revit.BundleBuilder
 {
@@ -63,6 +64,16 @@ namespace RedBuilt.Revit.BundleBuilder
                 message = "The following error occured: " + ex.Message;
                 return Result.Failed;
             }
+        }
+    }
+
+    [Transaction(TransactionMode.Manual)]
+    public class Version : IExternalCommand
+    {
+        public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
+        {
+            MessageBox.Show("BundleBuilder Revision: " + ProjectState.Version);
+            return Result.Succeeded;
         }
     }
 }

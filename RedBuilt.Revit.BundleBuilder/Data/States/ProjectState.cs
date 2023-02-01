@@ -23,7 +23,7 @@ namespace RedBuilt.Revit.BundleBuilder.Data.States
 
         public static MainWindow MainWindow;
 
-        public static readonly string Version = "1.0";
+        public static readonly string Version = "1.2";
 
         public static bool CanBundle { get; set; } = true;
 

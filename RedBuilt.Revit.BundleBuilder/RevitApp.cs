@@ -50,12 +50,23 @@ namespace RedBuilt.Revit.BundleBuilder
                 ribbonPanel = application.CreateRibbonPanel("Bundle");
             }
 
-            // Create push button
-            PushButtonData pushButtonData = new PushButtonData("bundlebutton", "BundleBuilder", assemblyPath, "RedBuilt.Revit.BundleBuilder.RevitCommand");
-            PushButton pushButton = ribbonPanel.AddItem(pushButtonData) as PushButton;
+            // Create pull down button
+            PulldownButtonData data = new PulldownButtonData("Options", "BundleBuilder");
             
-            pushButton.ToolTip = "Custom Build Bundles";
-            pushButton.LargeImage = GetEmbeddedImage("RedBuilt.Revit.BundleBuilder.Resources.BundleBuilder.ico");
+            RibbonItem item = ribbonPanel.AddItem(data);
+            PulldownButton optionsButton = item as PulldownButton;
+            
+            optionsButton.AddPushButton(new PushButtonData("bundlebutton", "BundleBuilder", assemblyPath, "RedBuilt.Revit.BundleBuilder.RevitCommand"));
+            optionsButton.AddPushButton(new PushButtonData("versionbutton", "Version", assemblyPath, "RedBuilt.Revit.BundleBuilder.Version"));
+
+            // Create push button
+            // PushButtonData pushButtonData = new PushButtonData("bundlebutton", "BundleBuilder", assemblyPath, "RedBuilt.Revit.BundleBuilder.RevitCommand");
+
+
+            // PushButton pushButton = ribbonPanel.AddItem(pushButtonData) as PushButton;
+
+            optionsButton.ToolTip = "Custom Build Bundles";
+            optionsButton.LargeImage = GetEmbeddedImage("RedBuilt.Revit.BundleBuilder.Resources.BundleBuilder.ico");
 
             return Result.Succeeded;
         }

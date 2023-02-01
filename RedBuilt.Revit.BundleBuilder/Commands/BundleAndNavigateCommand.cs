@@ -96,11 +96,11 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
             }
 
             // Correct the depth and column numbers
-            for (int i = 0; i < Project.Bundles.Count; i++)
+            for (int i = 0; i < Project.Bundles.Count; i++) // foreach bundle
             {
                 Bundle bundle = Project.Bundles[i];
 
-                for (int j = bundle.NumberOfLevels - 1; j >= 0; j--)
+                for (int j = bundle.NumberOfLevels - 1; j >= 0; j--) // foreach level in bundle
                 {
                     Level level = bundle.Levels[j];
 
@@ -113,7 +113,8 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
                             Panel panel = level.Panels.First();
                             panel.Depth = 1;
                             panel.Column = 1;
-                        } else
+                        }
+                        else
                         {
                             // Correct depth if level has more than 1 depth
                             List<Panel> depthPanels1 = level.Panels.Where(x => x.Depth == 1).ToList();
@@ -172,13 +173,14 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
                             }
                         }
                     }
-                    else
+                    else // there is one or 0 depths
                     {
                         // Correct column if level has 1 depth
 
                         // Take all panels and sort smallest to largest
                         List<Panel> panelsCopy = new List<Panel>(level.Panels);
                         int numberOfColumns = panelsCopy.Count;
+
                         while (panelsCopy.Count > 0)
                         {
                             for (int k = 0; k < numberOfColumns; k++)
@@ -194,7 +196,7 @@ namespace RedBuilt.Revit.BundleBuilder.Commands
                                 panelsCopy.Remove(panel);
                             }
                         }
-
+                        
                     }
                 }
             }

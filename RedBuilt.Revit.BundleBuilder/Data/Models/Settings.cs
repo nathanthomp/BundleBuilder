@@ -10,7 +10,8 @@ namespace RedBuilt.Revit.BundleBuilder.Data.Models
     {
         // Project Settings //
 
-        private static List<Panel> _startingPanels = Project.Panels.Where(x => x.Type.Name.Equals("Exterior")).ToList();
+        // This needs to be any panel on the outside of the building
+        private static List<Panel> _startingPanels = Project.Panels.Where(x => x.Type.Name.Equals("Exterior") || x.Type.Name.Equals("Steel")).ToList();
 
         public static string StartingPanel = _startingPanels[0].ToString();
         public static List<string> StartingPanels = _startingPanels.Select(x => x.ToString()).ToList();

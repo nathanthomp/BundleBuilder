@@ -16,8 +16,8 @@ namespace RedBuilt.Revit.BundleBuilder.Application.Sort
         /// <returns>sorted panels</returns>
         public static List<Panel> Sort(List<Panel> panelList)
         {
-            List<Panel> extPanels = panelList.Where(x => x.Type.Name.Equals("Exterior")).ToList();
-            List<Panel> otherPanels = panelList.Where(x => !x.Type.Name.Equals("Exterior")).ToList();
+            List<Panel> extPanels = panelList.Where(x => x.Type.Name.Equals("Exterior") || x.Type.Name.Equals("Steel")).ToList();
+            List<Panel> otherPanels = panelList.Where(x => !x.Type.Name.Equals("Exterior") && !x.Type.Name.Equals("Steel")).ToList();
 
             List<Panel> result = new List<Panel>();
 
