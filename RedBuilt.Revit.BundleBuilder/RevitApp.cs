@@ -59,12 +59,6 @@ namespace RedBuilt.Revit.BundleBuilder
             optionsButton.AddPushButton(new PushButtonData("bundlebutton", "BundleBuilder", assemblyPath, "RedBuilt.Revit.BundleBuilder.RevitCommand"));
             optionsButton.AddPushButton(new PushButtonData("versionbutton", "Version", assemblyPath, "RedBuilt.Revit.BundleBuilder.Version"));
 
-            // Create push button
-            // PushButtonData pushButtonData = new PushButtonData("bundlebutton", "BundleBuilder", assemblyPath, "RedBuilt.Revit.BundleBuilder.RevitCommand");
-
-
-            // PushButton pushButton = ribbonPanel.AddItem(pushButtonData) as PushButton;
-
             optionsButton.ToolTip = "Custom Build Bundles";
             optionsButton.LargeImage = GetEmbeddedImage("RedBuilt.Revit.BundleBuilder.Resources.BundleBuilder.ico");
 
