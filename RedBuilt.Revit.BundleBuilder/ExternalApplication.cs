@@ -44,8 +44,8 @@ namespace RedBuilt.Revit.BundleBuilder
             RibbonItem item = ribbonPanel.AddItem(data);
             PulldownButton optionsButton = item as PulldownButton;
             
-            optionsButton.AddPushButton(new PushButtonData("Bundle", "Bundle", assemblyPath, "RedBuilt.Revit.BundleBuilder.BundleCommand"));
-            optionsButton.AddPushButton(new PushButtonData("Version", "Version", assemblyPath, "RedBuilt.Revit.BundleBuilder.VersionCommand"));
+            optionsButton.AddPushButton(new PushButtonData("Bundle", "Bundle", assemblyPath, typeof(BundleCommand).FullName));
+            optionsButton.AddPushButton(new PushButtonData("Version", "Version", assemblyPath, typeof(VersionCommand).FullName));
             optionsButton.ToolTip = "Custom Build Bundles";
             optionsButton.LargeImage = GetEmbeddedImage("RedBuilt.Revit.BundleBuilder.Resources.BundleBuilder.ico");
         }
