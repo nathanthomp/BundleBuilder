@@ -147,111 +147,14 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\Reports\BundlePrintsReport.cs" />
-    <Compile Include="Application\Reports\BundleReport.cs" />
-    <Compile Include="Application\Reports\TestReport.cs" />
-    <Compile Include="Application\Solve\BundleSolve.cs" />
-    <Compile Include="Application\Sort\PanelNameSort.cs" />
-    <Compile Include="Application\Sort\PanelPreferenceSort.cs" />
-    <Compile Include="Application\Sort\PanelTypeAndPlateSort.cs" />
-    <Compile Include="Application\Tools\BundleTools.cs" />
-    <Compile Include="Application\Tools\DimensionTools.cs" />
-    <Compile Include="Application\Tools\LevelTools.cs" />
-    <Compile Include="Application\Tools\PanelTools.cs" />
     <Compile Include="BundleBuilderSettings.cs" />
-    <Compile Include="Commands\BundleAndNavigateCommand.cs" />
-    <Compile Include="Commands\Command.cs" />
-    <Compile Include="Commands\ExportCommand.cs" />
-    <Compile Include="Commands\NavigateCommand.cs" />
-    <Compile Include="Commands\RestartAndNavigateCommand.cs" />
     <Compile Include="Components\Bundle.cs" />
     <Compile Include="Components\Member.cs" />
     <Compile Include="Components\Project.cs" />
     <Compile Include="Components\Wall.cs" />
-    <Compile Include="Data\Models\Bundle.cs" />
-    <Compile Include="Data\Models\Height.cs" />
-    <Compile Include="Data\Models\Level.cs" />
-    <Compile Include="Data\Models\Name.cs" />
-    <Compile Include="Data\Models\Panel.cs" />
-    <Compile Include="Data\Models\Plate.cs" />
-    <Compile Include="Data\Models\Project.cs" />
-    <Compile Include="Data\Models\Settings.cs" />
-    <Compile Include="Data\Models\Truck.cs" />
-    <Compile Include="Data\Models\Type.cs" />
-    <Compile Include="Data\Models\Width.cs" />
-    <Compile Include="Data\Services\DataService.cs" />
-    <Compile Include="Data\Services\ModifyService.cs" />
-    <Compile Include="Data\Services\RevitExportService.cs" />
-    <Compile Include="Data\Services\RevitImportService.cs" />
-    <Compile Include="Data\States\NavigationState.cs" />
-    <Compile Include="Data\States\ProjectState.cs" />
-    <Compile Include="Modals\ModifyBundleModal.xaml.cs">
-      <DependentUpon>ModifyBundleModal.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modals\ModifyLevelModal.xaml.cs">
-      <DependentUpon>ModifyLevelModal.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modals\ModifyModal.xaml.cs">
-      <DependentUpon>ModifyModal.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modals\ModifyPanelModal.xaml.cs">
-      <DependentUpon>ModifyPanelModal.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ExternalApplication.cs" />
     <Compile Include="ExternalCommands.cs" />
     <Compile Include="Services\RevitImportService.cs" />
-    <Compile Include="ViewModels\ExportViewModel.cs" />
-    <Compile Include="Views\ExportView.xaml.cs">
-      <DependentUpon>ExportView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SettingsView.xaml.cs">
-      <DependentUpon>SettingsView.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Modals\ModifyBundleModal.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modals\ModifyLevelModal.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modals\ModifyModal.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modals\ModifyPanelModal.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\BundleView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ExportView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="Commands\ActionCommand.cs" />
-    <Compile Include="ViewModels\ObservableObject.cs" />
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\SettingsViewModel.cs" />
-    <Compile Include="ViewModels\ViewModel.cs" />
-    <Compile Include="ViewModels\BundleViewModel.cs" />
-    <Compile Include="Views\BundleView.xaml.cs">
-      <DependentUpon>BundleView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="Views\SettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -285,7 +188,6 @@
     <None Include="RedBuiltBundleBuilder.Addin" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Documents\test.html" />
     <EmbeddedResource Include="Resources\BundleBuilder.ico" />
     <Resource Include="Resources\BundleBuilder.png" />
     <Content Include="Resources\RedBuilt.svg" />
