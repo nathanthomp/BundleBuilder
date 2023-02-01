@@ -15,7 +15,7 @@ namespace RedBuilt.Revit.BundleBuilder
 {
     [Transaction(TransactionMode.Manual)]
     public class RevitCommand : IExternalCommand
-    {
+    { 
         /// <summary>
         /// Revit plugin interaction logic
         /// </summary>
