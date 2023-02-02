@@ -1,6 +1,8 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using RedBuilt.Revit.BundleBuilder.Components;
+using RedBuilt.Revit.BundleBuilder.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -80,8 +82,66 @@ namespace RedBuilt.Revit.BundleBuilder
 
         public static Result ProcessBundle(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-            message = "Not implemented";
-            return Result.Failed;
+            RevitImportService importer;
+            try
+            {
+                importer = new RevitImportService();
+            }
+            catch (Exception ex)
+            {
+                message = "Cannot Import Data From Revit: " + ex.Message;
+                return Result.Failed;
+            }
+
+            var project = new Project(importer.JobName, importer.JobId, importer.JobLocation, importer.Walls);
+            //var project = new Project("test", "test", "test", new Queue<Components.Wall>());
+            
+            // Start the UI
+            var form = new BundleBuilderForm();
+            form.ShowDialog();
+
+            project.Bundle();
+
+            // Close the UI
+            form.Close();
+
+            RevitExportService revitExporter = new RevitExportService();
+            try
+            {
+                revitExporter.Export();
+            }
+            catch (Exception ex)
+            {
+                message = "Cannot Export Data to Revit: " + ex.Message;
+                return Result.Failed;
+            } 
+            finally
+            {
+                // Revert data added to Revit
+                revitExporter.Restore();
+            }
+
+            FileExportService fileExporter = new FileExportService();
+            try
+            {
+                fileExporter.Export();
+            }
+            catch (Exception ex)
+            {
+                message = "Cannot Export Files: " + ex.Message;
+                return Result.Failed;
+            }
+            finally
+            {
+                // Delete all files
+                fileExporter.Restore();
+                // Revert data added to Revit
+                revitExporter.Restore();
+            }
+
+            // Clear any cache and anything that could still be stored within revit
+
+            return Result.Succeeded;
         }
 
         public static Result ProcessVersion(ExternalCommandData commandData, ref string message, ElementSet elements)
