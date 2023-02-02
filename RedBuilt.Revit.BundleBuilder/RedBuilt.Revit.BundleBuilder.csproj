@@ -147,6 +147,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BundleBuilderForm.xaml.cs">
+      <DependentUpon>BundleBuilderForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BundleBuilderSettings.cs" />
     <Compile Include="Components\Bundle.cs" />
     <Compile Include="Components\Member.cs" />
@@ -186,7 +189,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Page Include="BundleBuilderForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
   <ItemGroup>
     <None Include="RedBuiltBundleBuilder.Addin" />
   </ItemGroup>
