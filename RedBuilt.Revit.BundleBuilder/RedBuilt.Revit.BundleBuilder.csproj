@@ -154,6 +154,9 @@
     <Compile Include="Components\Wall.cs" />
     <Compile Include="ExternalApplication.cs" />
     <Compile Include="ExternalCommands.cs" />
+    <Compile Include="Services\FileExportService.cs" />
+    <Compile Include="Services\IExportService.cs" />
+    <Compile Include="Services\RevitExportService.cs" />
     <Compile Include="Services\RevitImportService.cs" />
   </ItemGroup>
   <ItemGroup>
