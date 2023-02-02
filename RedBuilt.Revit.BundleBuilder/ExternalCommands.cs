@@ -1,12 +1,10 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using RedBuilt.Revit.BundleBuilder.Data.Services;
-using RedBuilt.Revit.BundleBuilder.Data.States;
-using RedBuilt.Revit.BundleBuilder.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,7 +14,7 @@ namespace RedBuilt.Revit.BundleBuilder
     public enum CommandKind
     {
         BUNDLE,
-        REVISION
+        VERSION
     }
 
     [Transaction(TransactionMode.Manual)]
@@ -43,7 +41,7 @@ namespace RedBuilt.Revit.BundleBuilder
         {
             try
             {
-                return CommandHelper.Process(commandData, ref message, elements, CommandKind.REVISION);
+                return CommandHelper.Process(commandData, ref message, elements, CommandKind.VERSION);
             }
             catch (Exception ex)
             {
@@ -73,8 +71,8 @@ namespace RedBuilt.Revit.BundleBuilder
             {
                 case CommandKind.BUNDLE:
                     return ProcessBundle(commandData, ref message, elements);
-                case CommandKind.REVISION:
-                    return ProcessRevision(commandData, ref message, elements);
+                case CommandKind.VERSION:
+                    return ProcessVersion(commandData, ref message, elements);
                 default: 
                     return Result.Cancelled;
             }
@@ -86,10 +84,18 @@ namespace RedBuilt.Revit.BundleBuilder
             return Result.Failed;
         }
 
-        public static Result ProcessRevision(ExternalCommandData commandData, ref string message, ElementSet elements)
+        public static Result ProcessVersion(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-            message = "Not implemented";
-            return Result.Failed;
+            try
+            {
+                var version = typeof(ExternalApplication).Assembly.GetName().Version;
+                MessageBox.Show("BundleBuilder Version: " + version);
+            } 
+            catch
+            {
+                MessageBox.Show("BundleBuilder Version: x.x.x.x");
+            }
+            return Result.Succeeded;
         }
 
         public static bool IsVersionCompatible(ExternalCommandData commandData)
