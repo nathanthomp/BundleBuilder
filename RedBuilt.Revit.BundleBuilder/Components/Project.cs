@@ -6,7 +6,26 @@ using System.Threading.Tasks;
 
 namespace RedBuilt.Revit.BundleBuilder.Components
 {
-    internal class Project
+    public class Project
     {
+        public string Name { get; private set; }
+        public string Id { get; private set; }
+        public string Location { get; private set; }
+        public Queue<Wall> Walls { get; private set; }
+        public Queue<Bundle> Bundles { get; private set; }
+        
+        public Project(string name, string id, string location, Queue<Wall> walls)
+        {
+            this.Name = name;
+            this.Id = id;
+            this.Location = location;
+            this.Walls = walls;
+        }
+
+        public void Bundle()
+        {
+            throw new Exception("Not Implemented");
+        }
+
     }
 }

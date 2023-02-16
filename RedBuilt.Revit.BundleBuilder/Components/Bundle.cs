@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RedBuilt.Revit.BundleBuilder.Components
 {
-    internal class Bundle
+    public class Bundle
     {
     }
 }

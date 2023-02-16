@@ -85,7 +85,7 @@ namespace RedBuilt.Revit.BundleBuilder
             RevitImportService importer;
             try
             {
-                importer = new RevitImportService();
+                importer = new RevitImportService(s_doc);
             }
             catch (Exception ex)
             {
@@ -93,14 +93,12 @@ namespace RedBuilt.Revit.BundleBuilder
                 return Result.Failed;
             }
 
-            var project = new Project(importer.JobName, importer.JobId, importer.JobLocation, importer.Walls);
+            var project = new Project(importer.ProjectName, importer.ProjectId, importer.ProjectLocation, importer.Walls);
             //var project = new Project("test", "test", "test", new Queue<Components.Wall>());
             
             // Start the UI
-            var form = new BundleBuilderForm();
+            var form = new BundleBuilderForm(project);
             form.ShowDialog();
-
-            project.Bundle();
 
             // Close the UI
             form.Close();
@@ -114,7 +112,7 @@ namespace RedBuilt.Revit.BundleBuilder
             {
                 message = "Cannot Export Data to Revit: " + ex.Message;
                 return Result.Failed;
-            } 
+            }
             finally
             {
                 // Revert data added to Revit

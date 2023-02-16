@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RedBuilt.Revit.BundleBuilder.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,12 @@ namespace RedBuilt.Revit.BundleBuilder
     /// </summary>
     public partial class BundleBuilderForm : Window
     {
-        public BundleBuilderForm()
+        public Project Project { get; private set; }
+
+        public BundleBuilderForm(Project project)
         {
             InitializeComponent();
+            this.Project = project;
         }
     }
 }

@@ -6,7 +6,21 @@ using System.Threading.Tasks;
 
 namespace RedBuilt.Revit.BundleBuilder.Services
 {
-    public class FileExportService
+    public class FileExportService : IExportService
     {
+        public FileExportService()
+        {
+            throw new Exception("Not Implemented");
+        }
+
+        public void Export()
+        {
+            throw new Exception("Not Implemented");
+        }
+
+        public void Restore()
+        {
+            throw new Exception("Not Implemented");
+        }
     }
 }
